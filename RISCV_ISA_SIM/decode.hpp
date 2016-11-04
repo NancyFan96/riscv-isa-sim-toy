@@ -45,59 +45,57 @@
 /* ------- RV64I BASE INTEGER INSTRUCTION SET -------*/
 class instruction {
 public:
+    ins inst;
+    xcode opcode;           // inst[0-6]
     insType optype;
-    union INST{
-        ins instRead;
-        union DECODE{
-            struct insR{
-                xcode opcode;   // inst[0-6]
-                regID rd;       // inst[7-11]
-                xcode funct3;   // inst[12-14]
-                regID rs1;      // inst[15-19]
-                regID rs2;      // inst[20-24]
-                xcode funct7;   // inst[25-31]
-            };
-            struct insI{
-                xcode opcode;   // inst[0-6]
-                regID rd;       // inst[7-11]
-                xcode funct3;   // inst[12-14]
-                regID rs1;      // inst[15-19]
-                imm immediate;  // inst[20-31], imm[0-11]
-            };
-            struct insS{
-                xcode opcode;   // inst[0-6]
-                imm immediate0;// inst[7-11], imm[0-4]
-                xcode funct3;   // inst[12-14]
-                regID rs1;      // inst[15-19]
-                regID rs2;      // inst[20-24]
-                imm immediate1; // inst[25-31], imm[5-11]
-            };
-            struct insSB{
-                xcode opcode;   // inst[0-6]
-                imm immediate0;// inst[7-11], imm[11|0-4]
-                xcode funct3;   // inst[12-14]
-                regID rs1;      // inst[15-19]
-                regID rs2;      // inst[20-24]
-                imm immediate1; // inst[25-31],imm[5-10|12]
-            };
-            struct insU{
-                xcode opcode;   // inst[0-6]
-                regID rd;       // inst[7-11]
-                imm immediate;  // inst[12-31], imm[12-31]
-            };
-            struct insUJ{
-                xcode opcode;   // inst[0-6]
-                regID rd;       // inst[7-11]
-                imm immediate;  // inst[12-31], imm[12-19|11|1-10|20]
-            };
-        }insX;
-        operator ins () const { return instRead; }
-        operator DECODE () const { return insX; }
-    }inst;
+    byte tag;               // bit0 set if immediate is valid,
+                            // bit1 set if func3 is valid,
+                            // bit2 sit if func7 is valid
+    xcode func3;            // inst[12-14]
+    xcode func7;            // inst[25-31]
+    imm immediate;
+    union DECODE{
+        struct insR{
+            regID rd;       // inst[7-11]
+            //xcode funct3;   // inst[12-14]
+            regID rs1;      // inst[15-19]
+            regID rs2;      // inst[20-24]
+            //xcode funct7;   // inst[25-31]
+        };
+        struct insI{
+            regID rd;       // inst[7-11]
+            //xcode funct3;   // inst[12-14]
+            regID rs1;      // inst[15-19]
+            //imm immediate0;  // inst[20-31], imm[0-11]
+        };
+        struct insS{
+            //imm immediate0;// inst[7-11], imm[0-4]
+            //xcode funct3;   // inst[12-14]
+            regID rs1;      // inst[15-19]
+            regID rs2;      // inst[20-24]
+            //imm immediate1; // inst[25-31], imm[5-11]
+        };
+        struct insSB{
+            //imm immediate0;// inst[7-11], imm[11|0-4]
+            //xcode funct3;   // inst[12-14]
+            regID rs1;      // inst[15-19]
+            regID rs2;      // inst[20-24]
+            //imm immediate1; // inst[25-31],imm[5-10|12]
+        };
+        struct insU{
+            regID rd;       // inst[7-11]
+            //imm immediate0;  // inst[12-31], imm[12-31]
+        };
+        struct insUJ{
+            regID rd;       // inst[7-11]
+            //imm immediate0;  // inst[12-31], imm[12-19|11|1-10|20]
+        };
+    }insX;
 public:
+    instruction();
     bool getType();         // if success return true, else return false
-    bool getIMM();          // if 
-    
+    bool getIMM();          // (set immediate) Notice need swith, AND BE CAREFUL OF IMM BIT ORDER
+    bool decode();          // set rx, (func3), (func7), (and call getIMM)
 };
 /* ------- END define riscv instruction  ------- */
 

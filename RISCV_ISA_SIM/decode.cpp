@@ -9,8 +9,8 @@
 #include "decode.hpp"
 
 bool instruction::getType(){
-    xcode op = (ins)inst&OPCODE;
-    switch(op)
+    opcode = inst&OPCODE;
+    switch(opcode)
     {
     case 0x33: // b0110011
         optype =  R_TYPE;
