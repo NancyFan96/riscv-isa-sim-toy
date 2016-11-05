@@ -86,6 +86,12 @@ public:
     bool getIMM(ins inst);          // (set immediate) Notice need switch, AND BE CAREFUL OF IMM BIT ORDER
     bool decode(ins inst);          // set rx, (func3), (func7), (and call getIMM)
     void execute();
+    void execute_R();
+    void execute_I();
+    void execute_S();
+    void execute_SB();
+    void execute_U();
+    void execute_UJ();
 };
 /* ------- END define riscv instruction  ------- */
 

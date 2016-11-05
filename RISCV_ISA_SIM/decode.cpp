@@ -146,3 +146,29 @@ bool instruction::decode(ins inst){
             
     }
 }
+
+// only valid instruction will enter this function
+void instruction::execute(){
+    switch(optype)
+    {
+        case R_TYPE:
+            execute_R();
+            break;
+        case I_TYPE:
+            execute_I();
+            break;
+        case S_TYPE:
+            execute_S();
+            break;
+        case SB_TYPE:
+            execute_SB();
+            break;
+        case U_TYPE:
+            execute_U();
+            break;
+        case UJ_TYPE:
+            execute_UJ();
+            break;
+        default:;
+    }
+}

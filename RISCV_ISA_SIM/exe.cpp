@@ -138,10 +138,14 @@ int main(int argc, char * argv[]){
     }
     
     while(sim_regs.getPC()<= EXIT_POINT){
-    ins inst = fetch();
-    instruction fetched_inst;
-    fetched_inst.decode(inst);
-    fetched_inst.execute();
+        ins inst = fetch();
+        instruction fetched_inst;
+        if(fetched_inst.decode(inst) == true){
+            fetched_inst.execute();
+        }
+        else{
+            cout << "DECODE ERROR!" << endl;
+        }
     }
     
     if(exit_program() == true){
