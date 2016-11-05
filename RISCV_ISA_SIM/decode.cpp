@@ -18,6 +18,22 @@ instruction::instruction()
     immediate = 0;
 }
 
+void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs2){
+    printf("instruction:\t %s %d %d %d\n", inst_name, rd, rs1, rs2);
+}
+void instruction::print_ins(const char* inst_name, regID r1, regID r2, imm imm0){
+    printf("instruction:\t %s %d %d %d\n", inst_name, r1, r2, imm0);
+}
+void instruction::print_ins(const char* inst_name, regID rx, imm imm0){
+    printf("instruction:\t %s %d %d\n", inst_name, rx, imm0);
+}
+void instruction::print_ins(const char* inst_name, regID rx){
+    printf("instruction:\t %s %d\n", inst_name, rx);
+}
+void instruction::print_ins(const char* inst_name){
+    printf("instruction:\t %s\n", inst_name);
+}
+
 bool instruction::getType(ins inst){
     opcode = inst&OPCODE;
     switch(opcode)

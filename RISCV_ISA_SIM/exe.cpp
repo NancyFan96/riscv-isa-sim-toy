@@ -68,7 +68,7 @@ bool load_program(char const *file_name)
     memAddress program_entry_offset=(memAddress)(sec_header->sh_addr);                  //runtime virtual address aka. program entry address 0x10000
     //unsigned int code_size=(unsigned int)sec_header->sh_size;
     //EXIT_POINT = program_entry_offset+code_size;                                       //set EXIT_POINT
-    memAddress*  cur_p_mem=sim_mem.get_memory_p_address(program_entry_offset);        //copy segment from program entry offset
+    byte*  cur_p_mem=sim_mem.get_memory_p_address(program_entry_offset);        //copy segment from program entry offset
     
     
     Elf64_Half seg_num=elf_header->e_phnum;//number of segments
@@ -83,7 +83,7 @@ bool load_program(char const *file_name)
         unsigned char* seg_in_file=(unsigned char*)elf_header+seg_header->p_offset;
         Elf64_Xword seg_size_in_mem=seg_header->p_memsz;//segment size
         memcpy(cur_p_mem,seg_in_file,seg_size_in_mem);//copy segment to sim_mem
-        cur_p_mem=(memAddress*)((byte*)cur_p_mem + seg_size_in_mem);
+        cur_p_mem =(byte*)cur_p_mem + seg_size_in_mem;
         
         //printf("segment size is: %ld\n",seg_size_in_mem);
         

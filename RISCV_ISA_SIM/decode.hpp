@@ -19,6 +19,11 @@
 #include "system.h"
 #endif
 
+#ifndef register_hpp
+#define register_hpp
+#include "register.hpp"
+#endif
+
 #endif /* decode_hpp */
 
 /* define some useful function to decode the instruction */
@@ -93,7 +98,13 @@ public:
     void execute_UJ();
     
     bool Is_exit();
+    void print_ins(const char* inst_name, regID rd, regID rs1, regID rs2);
+    void print_ins(const char* inst_name, regID r1, regID r2, imm imm0);
+    void print_ins(const char* inst_name, regID rx, imm imm0);
+    void print_ins(const char* inst_name, regID rx);
+    void print_ins(const char* inst_name);
 };
+
 /* ------- END define riscv instruction  ------- */
 
 
