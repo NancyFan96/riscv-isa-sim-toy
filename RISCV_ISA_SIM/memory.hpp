@@ -33,8 +33,8 @@
 /* ------- define memory ------- */
 class memory {
 public:
-    unsigned long int size = MEM_SIZE;
-    memAddress * mem_zero;
+    unsigned long int size = MEM_SIZE;  // byte
+    memAddress * mem_zero;              // 32bit
     //bool OUT_OF_MEM = false;
     
 public:

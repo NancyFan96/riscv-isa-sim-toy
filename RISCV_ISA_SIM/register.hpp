@@ -59,7 +59,7 @@
 
 class registers {
 public:
-    reg64 PC;
+    byte* PC;
     reg64 rrx[32];
     
 public:

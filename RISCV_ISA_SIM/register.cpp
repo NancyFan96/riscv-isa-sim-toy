@@ -22,7 +22,7 @@ void registers::readReg(){
         if(i == 7 || i == 15 || i== 23 || i== 31)
             printf("\n");
     }
-    printf("PC: %lu\n",PC);
+    printf("PC: %lu\n",(reg64)PC);
 }
 
 reg64 registers::readReg(regID regDst){
@@ -43,13 +43,15 @@ bool registers::writeReg(regID regDst, reg64 value){
 }
 
 reg32 registers::getPC(){
-    return (reg32)PC;
+    reg32 PC_value =(reg32)(unsigned long)PC;
+    return PC_value;
 }
 
 bool registers::setPC(reg32 newPC){
     //need PC range
+    reg64 new_PC_value = (unsigned long)newPC;
     if(newPC <= EXIT_POINT){
-        PC = (reg64)newPC;
+        PC = (byte *)new_PC_value;
         return true;
     }
     else{
@@ -60,6 +62,5 @@ bool registers::setPC(reg32 newPC){
 
 // PC to next instruction
 void registers::incPC(){
-    //need PC range
-    PC += sizeof(ins);
+    PC += 4;
 }
