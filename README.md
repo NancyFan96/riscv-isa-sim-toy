@@ -6,6 +6,10 @@
 
 要求实现RISCV64I 的模拟器
 
+## LOGs
+
+3.2 commit, fix memory and pointer conflic, change the struct of instruction and add a function to tell the END of a prog
+
 ## 作业要求
 
 完成 RISC-V R64IFM(64 位基本集+浮点扩展+乘除扩展)ISA 的模拟,需完成:
