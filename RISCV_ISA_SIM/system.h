@@ -14,22 +14,24 @@
 
 #define RRXLEN 64		// the rrx registers are all 64 bits wide
 
+
 typedef unsigned long int   dword;
 typedef unsigned int	 	word;
 typedef unsigned short	 	halfword;
 typedef unsigned char       byte;
 
-typedef unsigned long int	regPC;
 typedef unsigned long int	reg64;
 typedef unsigned int	 	reg32;
 typedef unsigned short int  reg16;
 typedef unsigned char       reg8;
 typedef unsigned char       regID;
 
-typedef unsigned int 		ins;
-typedef long int      imm;
+typedef unsigned int  ins;
+typedef unsigned int  imm;
 typedef unsigned char xcode;
 typedef unsigned char insType;
 
 typedef unsigned int memAddress;
+
+static unsigned int EXIT_POINT;
 

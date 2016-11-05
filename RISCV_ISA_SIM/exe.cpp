@@ -17,31 +17,31 @@ using namespace std;
 static registers sim_regs;
 static memory   sim_mem;
 
-ins fetch(){
-    reg32 PC = sim_regs.getPC();                         // 64bit
-    PC = sim_mem.get_memory_address(PC);
-    ins inst = sim_mem.get_memory_32(PC);
+void help()
+{
+    printf("This is a simulator to execute riscv ELF!\n");
+    printf("    Usage: ./exeute filename\n\n");
+    printf("Multiple ELFs is NOT supported!\n");
     
-    return inst;
 }
 
 bool load_program(char const *file_name)
 {
-    /*读入ELF文件*/
+    /*-----------read ELF file-----------*/
     FILE * file_in=NULL;
     unsigned long file_size;
     
-    file_in=fopen(file_name,"rb");//二进制读文件
+    file_in=fopen(file_name,"rb");
     if (file_in==NULL) {
         printf("cannot open the file : %s \n",file_name);
         return false;
     }
-    fseek(file_in,0,SEEK_END);//定位文件指针到文件末
-    file_size=ftell(file_in);//获得当前文件指针到文件头的位置，即文件大小
-    fseek(file_in,0,SEEK_SET);//重新将文件指针定位到文件头
+    fseek(file_in,0,SEEK_END);                                              //set file pointer to the end of file
+    file_size=ftell(file_in);                                               //get file size
+    fseek(file_in,0,SEEK_SET);                                              //set file pointer to the begining of file
     
     unsigned char* file_buffer;
-    file_buffer=(unsigned char*)malloc(sizeof(unsigned char)*file_size);//read file into file_buffer
+    file_buffer=(unsigned char*)malloc(sizeof(unsigned char)*file_size);    //read file into file_buffer
     if(fread(file_buffer,sizeof(char),file_size,file_in)<file_size)
     {
         printf("fail to read the entire file!\n");
@@ -53,55 +53,78 @@ bool load_program(char const *file_name)
         printf("read file successfully!\n");
     }
     
-    /*将segment拷贝到模拟器定义的内存*/
+    /*copy segments in ELF file to simulator memory*/
+    
     //define data type
     Elf64_Ehdr* elf_header;
     elf_header=(Elf64_Ehdr*)file_buffer;
     Elf64_Shdr* sec_header=(Elf64_Shdr*)((unsigned char*)elf_header+elf_header->e_shoff);
     Elf64_Half sec_header_entry_size=elf_header->e_shentsize;
-    sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size); //定位到序号为1的section(.text)
-    memAddress program_entry_offset=(memAddress)(sec_header->sh_addr);          //代码段在运行时的虚拟地址，即程序入口地址0x10000
-    sim_regs.setPC(program_entry_offset);                                       //set PC register
-    
-    memAddress cur_mem=sim_mem.get_memory_address(program_entry_offset);//从偏移0x10000处开始存放segment的二进制内容
+    sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size);         //locate to section .text
+    memAddress program_entry_offset=(memAddress)(sec_header->sh_addr);                  //runtime virtual address aka. program entry address 0x10000
+    unsigned int code_size=(unsigned int)sec_header->sh_size;
+    EXIT_POINT = program_entry_offset+code_size;                                       //set EXIT_POINT
+    memAddress*  cur_p_mem=sim_mem.get_memory_p_address(program_entry_offset);        //copy segment from program entry offset
     
     
     Elf64_Half seg_num=elf_header->e_phnum;//number of segments
     
     //printf("number of segments: %u :\n",seg_num);
     
-    Elf64_Phdr* seg_header = (Elf64_Phdr*)((unsigned char*)elf_header + elf_header->e_phoff);//根据segment header offset定位到第一个entry
+    Elf64_Phdr* seg_header = (Elf64_Phdr*)((unsigned char*)elf_header + elf_header->e_phoff);//locate to the first entry of program header table
     Elf64_Half  seg_header_entry_size=elf_header->e_phentsize;//Program header table entry size
     
-    for(int cnt=0;cnt<seg_num;++cnt)//读取各个segment的信息；一个程序一般只有一个segment
+    for(int cnt=0;cnt<seg_num;++cnt)//copy each segment
     {
-        unsigned char* seg_in_file=(unsigned char*)elf_header+seg_header->p_offset;//指向二进制文件里要复制到内存中的segment内容
-        Elf64_Xword seg_size_in_mem=seg_header->p_memsz;//segment的大小
-        memAddress * p_cur=(memAddress* )cur_mem;
-        memcpy(p_cur,seg_in_file,seg_size_in_mem);//copy segment to sim_mem
-        cur_mem+=seg_size_in_mem;//指针指向拷贝后空的内存开始处
+        unsigned char* seg_in_file=(unsigned char*)elf_header+seg_header->p_offset;
+        Elf64_Xword seg_size_in_mem=seg_header->p_memsz;//segment size
+        memcpy(cur_p_mem,seg_in_file,seg_size_in_mem);//copy segment to sim_mem
+        cur_p_mem=(memAddress*)((byte*)cur_p_mem + seg_size_in_mem);
         
         //printf("segment size is: %ld\n",seg_size_in_mem);
         
-        seg_header=(Elf64_Phdr*)((unsigned char*)seg_header+seg_header_entry_size);//定位到下一个segment entry
+        seg_header=(Elf64_Phdr*)((unsigned char*)seg_header+seg_header_entry_size);//next segment entry
         
     }
     printf("end of segment copy\n");
     
-    fclose(file_in);//关闭打开的ELF文件
-    free(file_buffer);//释放存放ELF文件的内存
+    fclose(file_in);//close ELF file
+    free(file_buffer);//free buffer
+    
+    /* ---- init regs ------*/
+    sim_regs.setPC(program_entry_offset);                                       //set PC register
+    sim_regs.writeReg(zero, 0);
+    sim_regs.writeReg(sp, STACK_TOP);
+    //sim_regs.writeReg(gp, <#reg64 value#>);
+    
+    
+    
+
     return true;
 }
 
+// Unfinished!!
 bool exit_program(){
-    return false;
+    free(sim_mem.mem_zero);
+    return true;
+}
+
+ins fetch(){
+    reg32 PC = sim_regs.getPC();              // 32bit
+    ins inst = sim_mem.get_memory_32(PC);
+    sim_regs.incPC();
+    return inst;
 }
 
 
 int main(int argc, char * argv[]){
     /*--------- prase ---------*/
-    const char * file_name;
-    
+    if(argc != 2 || strcmp(argv[1],"help") == 0)
+    {
+        help();
+        return 0;
+    }
+    const char * file_name = argv[1];
     
     /*---------END prase ---------*/
     
@@ -114,10 +137,12 @@ int main(int argc, char * argv[]){
         return -1;
     }
     
+    while(sim_regs.getPC()<= EXIT_POINT){
     ins inst = fetch();
     instruction fetched_inst;
     fetched_inst.decode(inst);
     fetched_inst.execute();
+    }
     
     if(exit_program() == true){
         cout << "EXIT "<< file_name<< " BYE!"<< endl;

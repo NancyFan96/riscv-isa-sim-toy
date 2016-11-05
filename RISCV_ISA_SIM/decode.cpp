@@ -22,32 +22,38 @@ bool instruction::getType(ins inst){
     opcode = inst&OPCODE;
     switch(opcode)
     {
-        case 0x33: // b0110011
+        case 0x33:      // b0110011
             optype =  R_TYPE;
+            tag = 6;    // b110
             return true;
             
-        case 0x67: // b1100111
-        case 0x03: // b0000011
-        case 0x13: // b0010011
-        case 0x73: // b1110011
+        case 0x67:      // b1100111
+        case 0x03:      // b0000011
+        case 0x13:      // b0010011
+        case 0x73:      // b1110011
             optype =  I_TYPE;
+            tag = 3;    // b011
             return true;
             
-        case 0x23: // b0100011
+        case 0x23:      // b0100011
             optype =  S_TYPE;
+            tag = 3;    // b011
             return true;
             
-        case 0x63: // b1100011
+        case 0x63:      // b1100011
             optype =  SB_TYPE;
+            tag = 3;    // b011
             return true;
             
-        case 0x37: // b0110111
-        case 0x17: // b0010111
+        case 0x37:      // b0110111
+        case 0x17:      // b0010111
             optype =  U_TYPE;
+            tag = 1;    // b001
             return true;
             
-        case 0x6F: // b1101111
+        case 0x6F:      // b1101111
             optype =  UJ_TYPE;
+            tag = 1;    // b001
             return true;
             
         default:
@@ -95,6 +101,10 @@ bool instruction::getIMM(ins inst){
 }
 
 bool instruction::decode(ins inst){
+    if(getType(inst) != true || getIMM(inst) != true){
+        printf("DECODE ERROR in FIRST STAGE! Oops!\n");
+        return false;
+    }
     switch(optype)
     {
             /* rs2,rs1,rd,func7,func3*/
