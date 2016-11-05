@@ -30,6 +30,6 @@ typedef unsigned int  ins;
 typedef unsigned int  imm;
 typedef unsigned char xcode;
 typedef unsigned char insType;
-
 typedef unsigned int memAddress;
+
 

@@ -74,3 +74,5 @@ public:
 };
 /* ------- END define registers file ------- */
 
+static registers sim_regs;
+

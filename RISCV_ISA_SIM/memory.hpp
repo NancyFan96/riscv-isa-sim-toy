@@ -51,3 +51,6 @@ public:
     reg8  get_memory_8(memAddress offset);
     
 };
+
+static memory   sim_mem;
+

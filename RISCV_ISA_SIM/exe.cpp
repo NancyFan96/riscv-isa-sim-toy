@@ -18,8 +18,6 @@
 
 using namespace std;
 
-static registers sim_regs;
-static memory   sim_mem;
 
 void help()
 {
