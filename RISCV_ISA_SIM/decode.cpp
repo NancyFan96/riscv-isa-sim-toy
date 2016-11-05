@@ -61,7 +61,7 @@ bool instruction::getType(ins inst){
     }
 }
 
-bool instruction::getIMM(ins inst){
+bool instruction::setIMM(ins inst){
     switch(optype)
     {
             /*R type
@@ -101,7 +101,7 @@ bool instruction::getIMM(ins inst){
 }
 
 bool instruction::decode(ins inst){
-    if(getType(inst) != true || getIMM(inst) != true){
+    if(getType(inst) != true || setIMM(inst) != true){
         printf("DECODE ERROR in FIRST STAGE! Oops!\n");
         return false;
     }
@@ -147,6 +147,30 @@ bool instruction::decode(ins inst){
     }
 }
 
+imm instruction:: getImm(){
+    if(tag&1)   return immediate;
+    else{
+        printf("Warning: Invalid immediate in instruction is used!\n");
+        return immediate;
+    }
+}
+
+xcode instruction:: getfunc3(){
+    if(tag&2)   return func3;
+    else{
+        printf("Warning: Invalid func3 in instruction is used!\n");
+        return func3;
+    }
+}
+xcode instruction:: getfunc7(){
+    if(tag&4)   return func7;
+    else{
+        printf("Warning: Invalid func7 in instruction is used!\n");
+        return func7;
+    }
+}
+
+
 // only valid instruction will enter this function
 void instruction::execute(){
     switch(optype)
@@ -172,3 +196,13 @@ void instruction::execute(){
         default:;
     }
 }
+
+void instruction::execute_I(){
+    
+}
+
+
+
+
+
+
