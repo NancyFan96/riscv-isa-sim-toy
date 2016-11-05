@@ -32,3 +32,4 @@ typedef unsigned char xcode;
 typedef unsigned char insType;
 
 typedef unsigned int memAddress;
+

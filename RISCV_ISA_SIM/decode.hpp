@@ -27,7 +27,7 @@
 /*  position:  31...       y  ...   x ...  210  */
 /*  for all k if (31>=x>=k>=y>=0), bit(k) = 1,  */
 /*                      otherwise, bit(k) = 0   */
-#define ONES(x,y)       (ins) (((1<<(x+1))-1)-((1<<y)-1))
+#define ONES(x,y)       (reg32) (((1<<(x+1))-1)-((1<<y)-1))
 
 /* masks */                                          // bit LEN
 #define OPCODE     ONES(6,0)      // 7
@@ -37,6 +37,8 @@
 #define RS1        ONES(19,15)    // 5
 #define RS2        ONES(24,20)    // 5
 #define SHAMT      ONES(25,20)    // 6, RV64I
+#define IMM_SIGN(inst)   ((inst>>31)&1)               // sign of immediate
+
 /*------------------------- END define useful functions --------------------------*/
 
 
@@ -45,57 +47,45 @@
 /* ------- RV64I BASE INTEGER INSTRUCTION SET -------*/
 class instruction {
 public:
-    ins inst;
     xcode opcode;           // inst[0-6]
     insType optype;
     byte tag;               // bit0 set if immediate is valid,
-                            // bit1 set if func3 is valid,
-                            // bit2 sit if func7 is valid
+    // bit1 set if func3 is valid,
+    // bit2 sit if func7 is valid
     xcode func3;            // inst[12-14]
     xcode func7;            // inst[25-31]
     imm immediate;
     union DECODE{
         struct insR{
             regID rd;       // inst[7-11]
-            //xcode funct3;   // inst[12-14]
             regID rs1;      // inst[15-19]
             regID rs2;      // inst[20-24]
-            //xcode funct7;   // inst[25-31]
-        };
+        }insr;
         struct insI{
             regID rd;       // inst[7-11]
-            //xcode funct3;   // inst[12-14]
             regID rs1;      // inst[15-19]
-            //imm immediate0;  // inst[20-31], imm[0-11]
-        };
+        }insi;
         struct insS{
-            //imm immediate0;// inst[7-11], imm[0-4]
-            //xcode funct3;   // inst[12-14]
             regID rs1;      // inst[15-19]
             regID rs2;      // inst[20-24]
-            //imm immediate1; // inst[25-31], imm[5-11]
-        };
+        }inss;
         struct insSB{
-            //imm immediate0;// inst[7-11], imm[11|0-4]
-            //xcode funct3;   // inst[12-14]
             regID rs1;      // inst[15-19]
             regID rs2;      // inst[20-24]
-            //imm immediate1; // inst[25-31],imm[5-10|12]
-        };
+        }inssb;
         struct insU{
             regID rd;       // inst[7-11]
-            //imm immediate0;  // inst[12-31], imm[12-31]
-        };
+        }insu;
         struct insUJ{
             regID rd;       // inst[7-11]
-            //imm immediate0;  // inst[12-31], imm[12-19|11|1-10|20]
-        };
+        }insuj;
     }insX;
 public:
     instruction();
-    bool getType();         // if success return true, else return false
-    bool getIMM();          // (set immediate) Notice need swith, AND BE CAREFUL OF IMM BIT ORDER
-    bool decode();          // set rx, (func3), (func7), (and call getIMM)
+    bool getType(ins inst);         // if success return true, else return false
+    bool getIMM(ins inst);          // (set immediate) Notice need switch, AND BE CAREFUL OF IMM BIT ORDER
+    bool decode(ins inst);          // set rx, (func3), (func7), (and call getIMM)
+    void execute();
 };
 /* ------- END define riscv instruction  ------- */
 

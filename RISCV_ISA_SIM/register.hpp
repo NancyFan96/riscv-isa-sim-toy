@@ -9,8 +9,15 @@
 #ifndef register_hpp
 #define register_hpp
 
+#ifndef stdio
+#define stdio
 #include <stdio.h>
+#endif
+
+#ifndef system_h
+#define system_h
 #include "system.h"
+#endif
 
 #endif /* register_hpp */
 
@@ -55,13 +62,13 @@ public:
     
 public:
     registers();
-    reg64 readReg();                                // if success return true, else return -1
-    reg64 readReg(regID regDst);                    // if success return true, else return -1
+    reg64 readReg();          // for debug                      //
+    reg64 readReg(regID regDst);                    //
     bool writeReg(regID regDst, reg64 value);       // if success return true, else return false
-    bool writeReg(regID regDst, regID regSrc);      // if success return true, else return false
-    reg64 getPC();                                  // if success return true, else return -1
-    bool setPC(reg64 newPC);                        // if success return true, else return false
-    bool incPC();                                   // if success return true, else return false
+    //bool writeReg(regID regDst, regID regSrc);      // if success return true, else return false
+    reg32 getPC();                                  //
+    bool setPC(reg32 newPC);                        // if success return true, else return false
+    bool incPC();                                   // PC to next instruction, if success return true, else return false
 };
 /* ------- END define registers file ------- */
 

@@ -9,12 +9,18 @@
 #ifndef memory_hpp
 #define memory_hpp
 
+#ifndef stdio
+#define stdio
 #include <stdio.h>
-#include "system.h"
+#endif
 
+#ifndef system_h
+#define system_h
+#include "system.h"
+#endif
 #endif /* memory_hpp */
 
-#define MEM_SIZE 1<<27           // 0x0800 0000
+#define MEM_SIZE 1<<27           // 0x0800 0000, 128M
 #define STACK_BOTTOM 0x6000000   // bottom address of stack
 
 
@@ -23,17 +29,19 @@ class memory {
 public:
     unsigned long int size = MEM_SIZE;
     memAddress * mem_zero;
-    bool OUT_OF_MEM = false;
+    //bool OUT_OF_MEM = false;
     
 public:
     memory();
-    bool  set_memory_reg8(memAddress addr, reg8 value);         // if success return true, else return false
-    bool  set_memory_reg16(memAddress addr, reg16 value);      // if success return true, else return false
-    bool  set_memory_reg32(memAddress addr, reg32 value);      // if success return true, else return false
-    bool  set_memory_reg64(memAddress addr, reg64 value);      // if success return true, else return false
-    reg64 get_memory_reg64(memAddress addr);                   // if success return true, else return -1
-    reg32 get_memory_reg32(memAddress addr);                   // if success return true, else return -1
-    reg16 get_memory_reg16(memAddress addr);                   // if success return true, else return -1
-    reg8  get_memory_reg8(memAddress addr);                    // if success return true, else return -1
+    memAddress get_memory_address(memAddress offset);           // return mem_zero + offset, offset is directly from ELF
+    memAddress get_memory_offset(memAddress my_mem_addr);       // return my_mem_address - offset
+    bool  set_memory_8(memAddress addr, reg8 value);         // if success return true, else return false
+    bool  set_memory_16(memAddress addr, reg16 value);      // if success return true, else return false
+    bool  set_memory_32(memAddress addr, reg32 value);      // if success return true, else return false
+    bool  set_memory_64(memAddress addr, reg64 value);      // if success return true, else return false
+    reg64 get_memory_64(memAddress addr);
+    reg32 get_memory_32(memAddress addr);
+    reg16 get_memory_16(memAddress addr);
+    reg8  get_memory_8(memAddress addr);
     
 };
