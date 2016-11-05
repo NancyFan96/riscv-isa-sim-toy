@@ -10,22 +10,22 @@
 
 memory::memory()//initiaiize
 {
-    mem_zero=(memAddress*)malloc(sizeof(char)*size);
+    mem_zero=(byte *)malloc(sizeof(char)*size);
 }
 
-memAddress* memory::get_memory_p_address(memAddress offset)
+byte* memory::get_memory_p_address(memAddress offset)
 {
     return (mem_zero+offset);
 }
 
-memAddress memory::get_memory_offset(memAddress *my_mem_Paddr){
+memAddress memory::get_memory_offset(byte *my_mem_Paddr){
     return (memAddress)(my_mem_Paddr-mem_zero); // 64bit - 64bit
 }
 
 
 bool  memory::set_memory_8(memAddress addr, reg8 value)
 {
-    memAddress* v_addr=get_memory_p_address(addr);
+    byte* v_addr=get_memory_p_address(addr);
     if(v_addr==NULL)
     {
         printf("invalid memory address\n");
@@ -38,7 +38,7 @@ bool  memory::set_memory_8(memAddress addr, reg8 value)
 }
 bool  memory::set_memory_16(memAddress addr, reg16 value)
 {
-    memAddress* v_addr=get_memory_p_address(addr);
+    byte* v_addr=get_memory_p_address(addr);
     if(v_addr==NULL)
     {
         printf("invalid memory address\n");
@@ -51,7 +51,7 @@ bool  memory::set_memory_16(memAddress addr, reg16 value)
 }
 bool  memory::set_memory_32(memAddress addr, reg32 value)
 {
-    memAddress* v_addr=get_memory_p_address(addr);
+    byte* v_addr=get_memory_p_address(addr);
     if(v_addr==NULL)
     {
         printf("invalid memory address\n");
@@ -64,7 +64,7 @@ bool  memory::set_memory_32(memAddress addr, reg32 value)
 }
 bool  memory::set_memory_64(memAddress addr, reg64 value)
 {
-    memAddress* v_addr=get_memory_p_address(addr);
+    byte* v_addr=get_memory_p_address(addr);
     if(v_addr==NULL)
     {
         printf("unvalid memory address\n");
@@ -76,7 +76,7 @@ bool  memory::set_memory_64(memAddress addr, reg64 value)
 }
 reg64 memory::get_memory_64(memAddress addr)
 {
-    memAddress* v_addr=get_memory_p_address(addr);
+    byte* v_addr=get_memory_p_address(addr);
     if(v_addr==NULL)
     {
         printf("invalid memory address\n");
@@ -89,7 +89,7 @@ reg64 memory::get_memory_64(memAddress addr)
 reg32 memory::get_memory_32(memAddress addr)
 {
     {
-        memAddress* v_addr=get_memory_p_address(addr);
+        byte* v_addr=get_memory_p_address(addr);
         if(v_addr==NULL)
         {
             printf("invalid memory address\n");
@@ -103,7 +103,7 @@ reg32 memory::get_memory_32(memAddress addr)
 reg16 memory::get_memory_16(memAddress addr)
 {
     {
-        memAddress* v_addr=get_memory_p_address(addr);
+        byte* v_addr=get_memory_p_address(addr);
         if(v_addr==NULL)
         {
             printf("invalid memory address\n");
@@ -117,7 +117,7 @@ reg16 memory::get_memory_16(memAddress addr)
 reg8  memory::get_memory_8(memAddress addr)
 {
     {
-        memAddress* v_addr=get_memory_p_address(addr);
+        byte* v_addr=get_memory_p_address(addr);
         if(v_addr==NULL)
         {
             printf("invalid memory address\n");

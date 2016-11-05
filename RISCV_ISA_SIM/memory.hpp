@@ -34,13 +34,13 @@
 class memory {
 public:
     unsigned long int size = MEM_SIZE;  // byte
-    memAddress * mem_zero;              // 32bit
+    byte * mem_zero;                    // 8bit
     //bool OUT_OF_MEM = false;
     
 public:
     memory();
-    memAddress* get_memory_p_address(memAddress offset);           // return mem_zero + offset, offset is directly from ELF
-    memAddress get_memory_offset(memAddress *my_mem_Paddr);       // return my_mem_address - offset
+    byte* get_memory_p_address(memAddress offset);           // return mem_zero + offset, offset is directly from ELF
+    memAddress get_memory_offset(byte *my_mem_Paddr);       // return my_mem_address - offset
     bool  set_memory_8(memAddress addr, reg8 value);         // if success return true, else return false
     bool  set_memory_16(memAddress addr, reg16 value);      // if success return true, else return false
     bool  set_memory_32(memAddress addr, reg32 value);      // if success return true, else return false

@@ -50,14 +50,13 @@ reg32 registers::getPC(){
 bool registers::setPC(reg32 newPC){
     //need PC range
     reg64 new_PC_value = (unsigned long)newPC;
-    if(newPC <= EXIT_POINT){
-        PC = (byte *)new_PC_value;
-        return true;
-    }
-    else{
-        printf("PC invalid! Oops!\n");
-        return false;
-    }
+    PC = (byte *)new_PC_value;
+    return true;
+
+    //else{
+    //    printf("PC invalid! Oops!\n");
+    //   return false;
+    //}
 }
 
 // PC to next instruction

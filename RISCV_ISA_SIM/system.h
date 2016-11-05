@@ -33,5 +33,3 @@ typedef unsigned char insType;
 
 typedef unsigned int memAddress;
 
-static unsigned int EXIT_POINT;
-

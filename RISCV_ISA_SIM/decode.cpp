@@ -24,7 +24,7 @@ bool instruction::getType(ins inst){
     {
         case 0x33:      // b0110011
             optype =  R_TYPE;
-            tag = 6;    // b110
+            tag = 62;   // b111110 | 32+16+8+4+2
             return true;
             
         case 0x67:      // b1100111
@@ -32,28 +32,28 @@ bool instruction::getType(ins inst){
         case 0x13:      // b0010011
         case 0x73:      // b1110011
             optype =  I_TYPE;
-            tag = 3;    // b011
+            tag = 27;    // b011011 | 16+8+2+1
             return true;
             
         case 0x23:      // b0100011
             optype =  S_TYPE;
-            tag = 3;    // b011
+            tag = 51;    // b110011 | 32+16+2+1
             return true;
             
         case 0x63:      // b1100011
             optype =  SB_TYPE;
-            tag = 3;    // b011
+            tag = 51;    // b110011
             return true;
             
         case 0x37:      // b0110111
         case 0x17:      // b0010111
             optype =  U_TYPE;
-            tag = 1;    // b001
+            tag = 9;    // b001001 | 8+1
             return true;
             
         case 0x6F:      // b1101111
             optype =  UJ_TYPE;
-            tag = 1;    // b001
+            tag = 9;    // b001001
             return true;
             
         default:
@@ -111,35 +111,35 @@ bool instruction::decode(ins inst){
         case R_TYPE:
             func3 = ((inst&FUNCT3) >> 12);
             func7 = ((inst&FUNCT7) >> 25);
-            insX.insr.rd = ((inst&RD) >> 7);
-            insX.insr.rs1 = ((inst&RS1) >> 15);
-            insX.insr.rs2 = ((inst&RS2) >> 20);
+            rd = ((inst&RD) >> 7);
+            rs1 = ((inst&RS1) >> 15);
+            rs2 = ((inst&RS2) >> 20);
             return true;
             /*rs1,func3,rd*/
         case I_TYPE:
             func3 = ((inst&FUNCT3) >> 12);
-            insX.insi.rd = ((inst&RD) >> 7);
-            insX.insi.rs1 = ((inst&RS1) >> 15);
+            rd = ((inst&RD) >> 7);
+            rs1 = ((inst&RS1) >> 15);
             return true;
             /*rs2,rs1,func3*/
         case S_TYPE:
             func3 = ((inst&FUNCT3) >> 12);
-            insX.inss.rs1 = ((inst&RS1) >> 15);
-            insX.inss.rs2 = ((inst&RS2) >> 20);
+            rs1 = ((inst&RS1) >> 15);
+            rs2 = ((inst&RS2) >> 20);
             return true;
             /*rs2,rs1,func3*/
         case SB_TYPE:
             func3 = ((inst&FUNCT3) >> 12);
-            insX.inssb.rs1 = ((inst&RS1) >> 15);
-            insX.inssb.rs2 = ((inst&RS2) >> 20);
+            rs1 = ((inst&RS1) >> 15);
+            rs2 = ((inst&RS2) >> 20);
             return true;
             /*rd*/
         case U_TYPE:
-            insX.insu.rd = ((inst&RD) >> 7);
+            rd = ((inst&RD) >> 7);
             return true;
             /*rd*/
         case UJ_TYPE:
-            insX.insuj.rd = ((inst&RD) >> 7);
+            rd = ((inst&RD) >> 7);
             return true;
         default:
             return false;
@@ -169,7 +169,36 @@ xcode instruction:: getfunc7(){
         return func7;
     }
 }
+regID instruction:: getrd(){
+    if(tag&8)   return rd;
+    else{
+        printf("Warning: Invalid rd in instruction is used!\n");
+        return rd;
+    }
+}
 
+regID instruction:: getrs1(){
+    if(tag&16)   return rd;
+    else{
+        printf("Warning: Invalid rs1 in instruction is used!\n");
+        return rs1;
+    }
+}
+
+regID instruction:: getrs2(){
+    if(tag&32)   return rd;
+    else{
+        printf("Warning: Invalid rs2 in instruction is used!\n");
+        return rs2;
+    }
+}
+
+bool instruction::Is_exit(){
+    // EXIT FLAG is J to itself
+    if(opcode == 111 && rd == 0 && immediate == -2) //b1101111 | 64+32+15 = 96+15 = 111
+        return true;
+    return false;
+}
 
 // only valid instruction will enter this function
 void instruction::execute(){
@@ -197,9 +226,31 @@ void instruction::execute(){
     }
 }
 
-void instruction::execute_I(){
+void instruction::execute_R(){
+    // contain opcode, func3, rd, rs1, imm
     
 }
+void instruction::execute_I(){
+    // contain opcode, func3, rd, rs1, imm
+    
+}
+void instruction::execute_S(){
+    // contain opcode, func3, rd, rs1, imm
+    
+}
+void instruction::execute_SB(){
+    // contain opcode, func3, rd, rs1, imm
+    
+}
+void instruction::execute_U(){
+    // contain opcode, func3, rd, rs1, imm
+    
+}
+void instruction::execute_UJ(){
+    // contain opcode, func3, rd, rs1, imm
+    
+}
+
 
 
 

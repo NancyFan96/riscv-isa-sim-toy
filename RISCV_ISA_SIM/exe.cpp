@@ -6,10 +6,14 @@
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
 
-#include "exe.hpp"
 #include <iostream>
 #include <stdlib.h>
 #include <cstring>
+#include "system.h"
+#include "register.hpp"
+#include "memory.hpp"
+#include "decode.hpp"
+#include "exe.hpp"
 
 
 using namespace std;
@@ -62,8 +66,8 @@ bool load_program(char const *file_name)
     Elf64_Half sec_header_entry_size=elf_header->e_shentsize;
     sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size);         //locate to section .text
     memAddress program_entry_offset=(memAddress)(sec_header->sh_addr);                  //runtime virtual address aka. program entry address 0x10000
-    unsigned int code_size=(unsigned int)sec_header->sh_size;
-    EXIT_POINT = program_entry_offset+code_size;                                       //set EXIT_POINT
+    //unsigned int code_size=(unsigned int)sec_header->sh_size;
+    //EXIT_POINT = program_entry_offset+code_size;                                       //set EXIT_POINT
     memAddress*  cur_p_mem=sim_mem.get_memory_p_address(program_entry_offset);        //copy segment from program entry offset
     
     
@@ -137,10 +141,14 @@ int main(int argc, char * argv[]){
         return -1;
     }
     
-    while(sim_regs.getPC()<= EXIT_POINT){
+    //reg32 lastPC = -1;
+    //reg32 curPC = -1;
+    while(1){
         ins inst = fetch();
         instruction fetched_inst;
         if(fetched_inst.decode(inst) == true){
+            if(fetched_inst.Is_exit())
+                break;
             fetched_inst.execute();
         }
         else{
