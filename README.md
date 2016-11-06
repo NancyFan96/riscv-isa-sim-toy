@@ -8,6 +8,10 @@
 
 ## LOGs
 
+4.1 commit, memAddress==>64bit unsigned, get/setPC use reg64, imm==>64bit signed
+
+	add some signed type named signed8/16/32/64
+
 4th commit, finish excute in decode
 
 3.2 commit, fix memory and pointer conflic, change the struct of instruction and add a function to tell the END of a prog
