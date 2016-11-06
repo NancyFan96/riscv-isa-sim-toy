@@ -68,8 +68,8 @@ public:
     reg64 readReg(regID regDst);                    //
     bool writeReg(regID regDst, reg64 value);       // if success return true, else return false
     //bool writeReg(regID regDst, regID regSrc);      // if success return true, else return false
-    reg32 getPC();                                  //
-    bool setPC(reg32 newPC);                        // if success return true, else return false
+    reg64 getPC();                                  //
+    bool setPC(reg64 newPC);                        // if success return true, else return false
     void incPC();                                   // PC to next instruction
 };
 /* ------- END define registers file ------- */

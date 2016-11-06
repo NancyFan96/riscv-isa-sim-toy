@@ -42,15 +42,12 @@ bool registers::writeReg(regID regDst, reg64 value){
     
 }
 
-reg32 registers::getPC(){
-    reg32 PC_value =(reg32)(unsigned long)PC;
-    return PC_value;
+reg64 registers::getPC(){
+    return (reg64)PC;
 }
 
-bool registers::setPC(reg32 newPC){
-    //need PC range
-    reg64 new_PC_value = (unsigned long)newPC;
-    PC = (byte *)new_PC_value;
+bool registers::setPC(reg64 newPC){
+    PC = (byte *)newPC;
     return true;
 
     //else{

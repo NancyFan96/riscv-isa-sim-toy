@@ -116,7 +116,7 @@ bool exit_program(){
 }
 
 ins fetch(){
-    reg32 PC = sim_regs.getPC();              // 32bit
+    memAddress PC = sim_regs.getPC();              // 32bit
     ins inst = sim_mem.get_memory_32(PC);
     sim_regs.incPC();
     return inst;
