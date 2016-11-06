@@ -26,8 +26,13 @@ typedef unsigned short int  reg16;
 typedef unsigned char       reg8;
 typedef unsigned char       regID;
 
+typedef signed long int signed64;
+typedef signed int signed32;
+typedef signed short int signed16;
+typedef signed char signed8;
+
 typedef unsigned int  ins;
-typedef unsigned int  imm;
+typedef int  imm;
 typedef unsigned char xcode;
 typedef unsigned char insType;
 typedef unsigned int memAddress;

@@ -33,6 +33,7 @@
 #define SB_TYPE  3
 #define U_TYPE   4
 #define UJ_TYPE  5
+#define SCALL    6
 
 /*          create a binary MASK like           */
 /*     value:  000... 00000111...1111000...000  */
@@ -50,8 +51,7 @@
 #define RS2        ONES(24,20)    // 5
 #define SHAMT      ONES(25,20)    // 6, RV64I
 #define IMM_SIGN(inst)   ((inst>>31)&1)               // sign of immediate
-#define VALID_IMM (tag&1)
-#define VALID_FUNC3
+
 
 /*------------------------- END define useful functions --------------------------*/
 
@@ -64,19 +64,19 @@ public:
     xcode opcode;           // inst[0-6]
     insType optype;
     byte tag;               // bit0 set if immediate is valid,
-                            // bit1 set if func3 is valid,
-                            // bit2 set if func7 is valid，
-                            // bit3 set if rd is valid
-                            // bit4 set if rs1 is valid
-                            // bit5 set if rs2 is valid
+    // bit1 set if func3 is valid,
+    // bit2 set if func7 is valid，
+    // bit3 set if rd is valid
+    // bit4 set if rs1 is valid
+    // bit5 set if rs2 is valid
     imm immediate;
     xcode func3;            // inst[12-14]
     xcode func7;            // inst[25-31]
     regID rd;               // inst[7-11]
     regID rs1;              // inst[15-19]
     regID rs2;              // inst[20-24]
-
- public:
+    
+public:
     instruction();
     bool getType(ins inst);         // if success return true, else return false
     bool setIMM(ins inst);          // (set immediate) Notice need switch, AND BE CAREFUL OF IMM BIT ORDER
@@ -90,12 +90,12 @@ public:
     inline regID getrs2();
     
     void execute();
+    void execute_R64();
     void execute_R();
     void execute_I();
-    void execute_S();
-    void execute_SB();
-    void execute_U();
-    void execute_UJ();
+    void execute_SX();
+    void execute_UX();
+    void execute_O();
     
     bool Is_exit();
     void print_ins(const char* inst_name, regID rd, regID rs1, regID rs2);
@@ -103,8 +103,11 @@ public:
     void print_ins(const char* inst_name, regID rx, imm imm0);
     void print_ins(const char* inst_name, regID rx);
     void print_ins(const char* inst_name);
+    
 };
 
 /* ------- END define riscv instruction  ------- */
 
+static bool verbose = false;
+static bool debug = false;
 

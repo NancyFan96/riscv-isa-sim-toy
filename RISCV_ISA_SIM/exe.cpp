@@ -15,15 +15,19 @@
 #include "decode.hpp"
 #include "exe.hpp"
 
-
 using namespace std;
 
+#ifdef GDB
+static memAddress breakpoint;
+static bool ONESTEP = false;
+#endif
 
 void help()
 {
     printf("This is a simulator to execute riscv ELF!\n");
-    printf("    Usage: ./exeute filename\n\n");
-    printf("Multiple ELFs is NOT supported!\n");
+    printf("    Usage: ./exe <filename> [--verbose|--debug]\n");
+    printf("           ./exe --help\n");
+    printf("Multiple ELFs is NOT supported!\n\n");
     
 }
 
@@ -121,10 +125,21 @@ ins fetch(){
 
 int main(int argc, char * argv[]){
     /*--------- prase ---------*/
-    if(argc != 2 || strcmp(argv[1],"help") == 0)
+    if(argc < 2 || strcmp(argv[1],"--help") == 0)
     {
         help();
         return 0;
+    }
+    if(argc == 3) {
+#ifdef GDB
+        if (strcmp(argv[2], "--debug") == 0){
+            printf("Debug mode\n\n");
+            breakpoint = sim_regs.getPC();
+            verbose = 1;
+        }
+#endif
+        if (strcmp(argv[2], "--verbose") == 0)
+            verbose = 1;
     }
     const char * file_name = argv[1];
     
