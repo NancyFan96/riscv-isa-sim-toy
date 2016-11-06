@@ -8,6 +8,8 @@
 
 ## LOGs
 
+4th commit, finish excute in decode
+
 3.2 commit, fix memory and pointer conflic, change the struct of instruction and add a function to tell the END of a prog
 
 ## 作业要求
