@@ -22,7 +22,7 @@ void registers::readReg(){
         if(i == 7 || i == 15 || i== 23 || i== 31)
             printf("\n");
     }
-    printf("PC: %lu\n",(reg64)PC);
+    printf("PC: %lu\n\n",(reg64)PC);
 }
 
 reg64 registers::readReg(regID regDst){
