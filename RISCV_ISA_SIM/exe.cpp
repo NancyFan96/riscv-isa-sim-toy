@@ -22,6 +22,9 @@ static memAddress breakpoint;
 static bool ONESTEP = false;
 #endif
 
+bool verbose = false;
+bool debug = false;
+
 void help()
 {
     printf("This is a simulator to execute riscv ELF!\n");
@@ -135,11 +138,11 @@ int main(int argc, char * argv[]){
         if (strcmp(argv[2], "--debug") == 0){
             printf("Debug mode\n\n");
             breakpoint = sim_regs.getPC();
-            verbose = 1;
+            verbose = true;
         }
 #endif
         if (strcmp(argv[2], "--verbose") == 0)
-            verbose = 1;
+            verbose = true;
     }
     const char * file_name = argv[1];
     

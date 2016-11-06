@@ -280,12 +280,14 @@ void instruction::execute_O()
     {
         case 0x37://LUI
             sim_regs.writeReg(getrd(),immediate);
+            if(verbose) print_ins("LUI", getrd(), immediate);
             break;
         case 0x17://AUIPC
             reg32 newPC;
             newPC = (reg32)(sim_regs.getPC()+immediate);
             sim_regs.setPC(newPC);
             sim_regs.writeReg(getrd(),(reg64)newPC);
+            if(verbose) print_ins("AUIPC", getrd(), immediate);
             break;
         default:;
     }
@@ -297,33 +299,41 @@ void instruction::execute_R()
         switch(getfunc3()){
             case 0x00: //b000 add
                 sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1())+sim_regs.readReg(getrs2()));
+                if(verbose) print_ins("ADD", getrd(), getrs1(), getrs2());
                 break;
             case 0x01: //b001 sll
                 sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) << (sim_regs.readReg(getrs2())&0x3f));
-                break;
+                if(verbose) print_ins("SLL", getrd(), getrs1(), getrs2());
+               break;
             case 0x02: //b010 slt
                 if((long int)sim_regs.readReg(getrs1()) < (long int)sim_regs.readReg(getrs2()))
                     sim_regs.writeReg(getrd(), 1);
                 else
                     sim_regs.writeReg(getrd(), 0);
+                if(verbose) print_ins("SLT", getrd(), getrs1(), getrs2());
                 break;
             case 0x03: //b011 sltu
                 if(sim_regs.readReg(getrs1()) < sim_regs.readReg(getrs2()))
                     sim_regs.writeReg(getrd(), 1);
                 else
                     sim_regs.writeReg(getrd(), 0);
+                if(verbose) print_ins("SLTU", getrd(), getrs1(), getrs2());
                 break;
             case 0x04: //b100 xor
                 sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) ^ sim_regs.readReg(getrs2()));
+                if(verbose) print_ins("XOR", getrd(), getrs1(), getrs2());
                 break;
             case 0x05: //b101 srl
                 sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) >> (sim_regs.readReg(getrs2())&0x3f));
+                if(verbose) print_ins("SRL", getrd(), getrs1(), getrs2());
                 break;
             case 0x06: //b110 or
                 sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) | sim_regs.readReg(getrs2()));
+                if(verbose) print_ins("OR", getrd(), getrs1(), getrs2());
                 break;
             case 0x07: //b111 and
                 sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) & sim_regs.readReg(getrs2()));
+                if(verbose) print_ins("AND", getrd(), getrs1(), getrs2());
                 break;
             default:
                 printf("undefined instruction with opcode=011 0011, func7=0\n");
@@ -334,9 +344,11 @@ void instruction::execute_R()
         switch(getfunc3()){
             case 0x00: //b000 sub
                 sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) - sim_regs.readReg(getrs2()));
+                if(verbose) print_ins("SUB", getrd(), getrs1(), getrs2());
                 break;
             case 0x05: //b101 sra
                 sim_regs.writeReg(getrd(), (long)(sim_regs.readReg(getrs1())) >> (sim_regs.readReg(getrs2())&0x3f));
+                if(verbose) print_ins("SRA", getrd(), getrs1(), getrs2());
                 break;
             default:
                 printf("undefined instruction with opcode=011 0011, func7=0x20\n");
@@ -352,12 +364,15 @@ void instruction::execute_R64()
         switch(getfunc3()){
             case 0x00: //b000 addw
                 sim_regs.writeReg(getrd(), (int)sim_regs.readReg(getrs1()) + (int)sim_regs.readReg(getrs2()) );
+                if(verbose) print_ins("ADDW", getrd(), getrs1(), getrs2());
                 break;
             case 0x01: //b001 sllw
                 sim_regs.writeReg(getrd(), (int)sim_regs.readReg(getrs1()) << (sim_regs.readReg(getrs2())&0x3f));
+                if(verbose) print_ins("ALLW", getrd(), getrs1(), getrs2());
                 break;
             case 0x05: //b101 srlw
                 sim_regs.writeReg(getrd(), (int)sim_regs.readReg(getrs1()) >> (sim_regs.readReg(getrs2())&0x3f));
+                if(verbose) print_ins("ARLW", getrd(), getrs1(), getrs2());
                 break;
             default:
                 printf("undefined instruction with opcode =011 1011, func7=0\n");
@@ -368,9 +383,11 @@ void instruction::execute_R64()
         switch(getfunc3()){
             case 0x00: //b000 subw
                 sim_regs.writeReg(getrd(), (int)sim_regs.readReg(getrs1()) - (int)sim_regs.readReg(getrs2()) );
+                if(verbose) print_ins("SUBW", getrd(), getrs1(), getrs2());
                 break;
             case 0x05: //b101 sraw
                 sim_regs.writeReg(getrd(), (int)(sim_regs.readReg(getrs1())) >> (sim_regs.readReg(getrs2())&0x3f));
+                if(verbose) print_ins("SRAW", getrd(), getrs1(), getrs2());
                 break;
             default:
                 printf("undefined instruction with opcode = 011 1011, func7=0x20\n");
@@ -388,6 +405,7 @@ void instruction::execute_I(){
             sim_regs.writeReg(getrd(), sim_regs.getPC()); //PC+4?
             newPC = (reg32)(sim_regs.getPC()+immediate*2);
             sim_regs.setPC(newPC);
+            if(verbose) print_ins("JAL", getrd(), immediate);
             break;
         case 0x67: // b110 0111
             // JALR rd, rs1, imm
@@ -395,6 +413,7 @@ void instruction::execute_I(){
                 case 0:
                     sim_regs.writeReg(getrd(), sim_regs.getPC());
                     sim_regs.setPC((reg32)((sim_regs.readReg(getrs1())+immediate)&~1));
+                    if(verbose) print_ins("JALR", getrd(), getrs1(), immediate);
                     break;
                 default:
                     printf("Undefined instruction with opcode = 110 0111\n");
@@ -409,34 +428,41 @@ void instruction::execute_I(){
                 case 0:             // LB rd, rs1, imm
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
+                    if(verbose) print_ins("LB", getrd(), getrs1(), immediate);
                     break;
                 case 1:             // LH rd, rs1, imm
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
+                    if(verbose) print_ins("LH", getrd(), getrs1(), immediate);
                     break;
                 case 2:             // LW rd, rs1, imm
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
+                    if(verbose) print_ins("LW", getrd(), getrs1(), immediate);
                     break;
                 case 4:             // LBU rd, rs1, imm
                     immediate = immediate & ~ONES(63, 12);
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
+                    if(verbose) print_ins("LBU", getrd(), getrs1(), immediate);
                     break;
                 case 5:             // LHU rd, rs1, imm
                     immediate = immediate & ~ONES(63, 12);
                     mem_addr =  sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
+                    if(verbose) print_ins("LHU", getrd(), getrs1(), immediate);
                     break;
                 case 6:             // LWU rd, rs1, imm
                     immediate = immediate & ~ONES(63, 12);
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
+                    if(verbose) print_ins("LWU", getrd(), getrs1(), immediate);
                     break;
                 case 3:             // LD rd, rs1, imm
                     immediate = immediate & ~ONES(63, 12);
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_64(mem_addr));
+                    if(verbose) print_ins("LD", getrd(), getrs1(), immediate);
                     break;
                 default:
                     printf("Undefined instruction with opcode = 000 0011\n");
@@ -452,6 +478,7 @@ void instruction::execute_I(){
                 case 0:             // ADDI rd, rs1, imm
                     ALUZ64 = sim_regs.readReg(getrs1())+immediate;
                     sim_regs.writeReg(getrd(), ALUZ64);
+                    if(verbose) print_ins("ADDI", getrd(), getrs1(), immediate);
                     break;
                 case 2:             // SLTI rd, rs1, imm
                     if(sim_regs.readReg(getrs1())<immediate)
@@ -459,6 +486,7 @@ void instruction::execute_I(){
                     else
                         ALUZ64 = 0;
                     sim_regs.writeReg(getrd(), ALUZ64);
+                    if(verbose) print_ins("SLTI", getrd(), getrs1(), immediate);
                     break;
                 case 3:             // SLTIU rd, rs1, imm
                     if(sim_regs.readReg(getrs1())<(reg64)immediate)
@@ -466,31 +494,42 @@ void instruction::execute_I(){
                     else
                         ALUZ64 = 0;
                     sim_regs.writeReg(getrd(), ALUZ64);
+                    if(verbose) print_ins("SLTIU", getrd(), getrs1(), immediate);
                     break;
                 case 4:             // XORI rd, rs1, imm
                     ALUZ64 = sim_regs.readReg(getrs1())^immediate;
                     sim_regs.writeReg(getrd(), ALUZ64);
+                    if(verbose) print_ins("XORI", getrd(), getrs1(), immediate);
                     break;
                 case 6:             // ORI rd, rs1, imm
                     ALUZ64 = sim_regs.readReg(getrs1())|immediate;
                     sim_regs.writeReg(getrd(), ALUZ64);
+                    if(verbose) print_ins("ORI", getrd(), getrs1(), immediate);
                     break;
                 case 7:             // ANDI rd, rs1, imm
                     ALUZ64 = sim_regs.readReg(getrs1())&immediate;
                     sim_regs.writeReg(getrd(), ALUZ64);
+                    if(verbose) print_ins("ANDI", getrd(), getrs1(), immediate);
                     break;
                 case 1:             // SLLI rd, rs1, shamt
                     shamt = immediate & ONES(5, 0);
                     ALUZ64 = sim_regs.readReg(getrs1()) << shamt;
                     sim_regs.writeReg(getrd(), ALUZ64);
+                    if(verbose) print_ins("SLLI", getrd(), getrs1(), shamt);
                     break;
                 case 5:             // SRLI, SRAI rd, rs1, shamt
                     shamt = immediate & ONES(5, 0);
                     if(immediate & ~ONES(5,0))  //SRAI
                         ALUZ64 = ((signed64)sim_regs.readReg(getrs1())) >> shamt;
-                    else                        // SRLI
+                    else                       // SRLI
                         ALUZ64 = sim_regs.readReg(getrs1()) >> shamt;
                     sim_regs.writeReg(getrd(), ALUZ64);
+                    if(verbose){
+                        if(immediate & ~ONES(5,0))
+                            print_ins("SRAI", getrd(), getrs1(), shamt);
+                        else
+                            print_ins("SRLI", getrd(), getrs1(), shamt);
+                    }
                     break;
                 default:
                     printf("Undefined instruction with opcode = 001 0011\n");
@@ -504,12 +543,14 @@ void instruction::execute_I(){
                 case 0:             // ADDIW rd, rs1, imm
                     ALUZ32 = (signed32)sim_regs.readReg(getrs1())+(signed32)immediate;
                     sim_regs.writeReg(getrd(), ALUZ32);
+                    if(verbose) print_ins("ADDIW", getrd(), getrs1(), shamt);
                     break;
                 case 1:             // SLLIW rd, rs1, shamt
                     shamt = immediate & ONES(4, 0);
                     ALUZ32 = ((signed32)sim_regs.readReg(getrs1())) << shamt;
                     sim_regs.writeReg(getrd(), ALUZ32);
-                    break;
+                    if(verbose) print_ins("SLLIW", getrd(), getrs1(), shamt);
+                   break;
                 case 5:             // SRLIW, SRAIW rd, rs1, shamt
                     shamt = immediate & ONES(4, 0);
                     if(immediate & ~ONES(4,0)) //SRAIW
@@ -517,6 +558,12 @@ void instruction::execute_I(){
                     else                       //SRLIW
                         ALUZ32 = ((reg32)sim_regs.readReg(getrs1())) >> shamt;
                     sim_regs.writeReg(getrd(), ALUZ32);
+                    if(verbose){
+                        if(immediate & ~ONES(4,0))
+                            print_ins("SRAIW", getrd(), getrs1(), shamt);
+                        else
+                            print_ins("SRLIW", getrd(), getrs1(), shamt);
+                    }
                     break;
                 default:
                     printf("Undefined instruction with opcode = 001 1011\n");
@@ -532,21 +579,25 @@ void instruction::execute_SX(){
     memAddress mem_addr;
     switch(getfunc3())
     {
-        case 0://SB
-            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-            sim_mem.set_memory_8(mem_addr, (reg8)getrd());
+        case 0://SB rs1, rs2, imm
+            mem_addr = (signed64)sim_regs.readReg(getrs2())+ immediate;
+            sim_mem.set_memory_8(mem_addr, (reg8)getrs1());
+            if(verbose) print_ins("SB", getrs1(), getrs2(), immediate);
             break;
         case 1://SH
-            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-            sim_mem.set_memory_16(mem_addr, (reg16)getrd());
+            mem_addr = (signed64)sim_regs.readReg(getrs2())+ immediate;
+            sim_mem.set_memory_16(mem_addr, (reg16)getrs1());
+            if(verbose) print_ins("SH", getrs1(), getrs2(), immediate);
             break;
         case 2://SW
-            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-            sim_mem.set_memory_32(mem_addr, (reg32)getrd());
+            mem_addr = (signed64)sim_regs.readReg(getrs2())+ immediate;
+            sim_mem.set_memory_32(mem_addr, (reg32)getrs1());
+            if(verbose) print_ins("SW", getrs1(), getrs2(), immediate);
             break;
         case 3://SD
-            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-            sim_mem.set_memory_64(mem_addr, (reg64)getrd());
+            mem_addr = (signed64)sim_regs.readReg(getrs2())+ immediate;
+            sim_mem.set_memory_64(mem_addr, (reg64)getrs1());
+            if(verbose) print_ins("SD", getrs1(), getrs2(), immediate);
             break;
     }
     
@@ -556,36 +607,40 @@ void instruction::execute_UX(){
     switch(getfunc3())
     {
         case 0://BEQ
-            if(getrs1() == getrs2())
+            if((signed64)getrs1() == (signed64)getrs2())
             {
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate);
                 sim_regs.setPC(newPC);
             }
+            if(verbose) print_ins("BEQ", getrs1(), getrs2(), immediate);
             break;
         case 1://BNE
-            if(getrs1() != getrs2())
+            if((signed64)getrs1() != (signed64)getrs2())
             {
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate);
                 sim_regs.setPC(newPC);
             }
+            if(verbose) print_ins("BNE", getrs1(), getrs2(), immediate);
             break;
         case 4://BLT
-            if((long)getrs1() < (long)getrs2())
+            if((signed64)getrs1() < (signed64)getrs2())
             {
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate);
                 sim_regs.setPC(newPC); 
             }
+            if(verbose) print_ins("BLT", getrs1(), getrs2(), immediate);
             break;
         case 5://BGE
-            if((long)getrs1() >= (long)getrs2())
+            if((signed64)getrs1() >= (signed64)getrs2())
             {
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate);
                 sim_regs.setPC(newPC); 
             }
+            if(verbose) print_ins("BGE", getrs1(), getrs2(), immediate);
             break;
         case 6://BLTU
             if(getrs1() < getrs2())
@@ -594,6 +649,7 @@ void instruction::execute_UX(){
                 newPC = (reg32)(sim_regs.getPC()+immediate);
                 sim_regs.setPC(newPC); 
             }
+            if(verbose) print_ins("BLTU", getrs1(), getrs2(), immediate);
             break;
         case 7://BGEU
             if(getrs1() >= getrs2())
@@ -602,6 +658,7 @@ void instruction::execute_UX(){
                 newPC = (reg32)(sim_regs.getPC()+immediate);
                 sim_regs.setPC(newPC); 
             }
+            if(verbose) print_ins("BGEU", getrs1(), getrs2(), immediate);
             break;
         default:;
     }

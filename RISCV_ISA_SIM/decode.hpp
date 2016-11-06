@@ -108,6 +108,6 @@ public:
 
 /* ------- END define riscv instruction  ------- */
 
-static bool verbose = false;
-static bool debug = false;
+extern bool verbose;
+extern bool debug;
 
