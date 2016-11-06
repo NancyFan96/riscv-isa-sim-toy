@@ -36,11 +36,11 @@ void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs
     sim_regs.readReg();
 }
 void instruction::print_ins(const char* inst_name, regID r1, regID r2, imm imm0){
-    printf("instruction:\t %s %d, %d, %d\n", inst_name, r1, r2, imm0);
+    printf("instruction:\t %s %d, %d, %ld\n", inst_name, r1, r2, imm0);
     sim_regs.readReg();
 }
 void instruction::print_ins(const char* inst_name, regID rx, imm imm0){
-    printf("instruction:\t %s %d, %d\n", inst_name, rx, imm0);
+    printf("instruction:\t %s %d, %ld\n", inst_name, rx, imm0);
     sim_regs.readReg();
 }
 void instruction::print_ins(const char* inst_name, regID rx){
@@ -108,33 +108,34 @@ bool instruction::setIMM(ins inst){
             /*R type
              no immediate*/
         case R_TYPE:
+        case SCALL:
             return true;
             /*I type
              31----------20 imm[0]~imm[11]
              shamt SRAI SRLI SLLI*/
         case I_TYPE:
-            immediate = (inst&ONES(31,20) >> 20) | (IMM_SIGN(inst)*ONES(31,11));
+            immediate = (inst&ONES(31,20) >> 20) | (IMM_SIGN(inst)*ONES(63,11));
             return true;
             /*S type
              31-----25-------------11---7
              imm[11]~imm[5]        imm[4]~imm[0]*/
         case S_TYPE:
-            immediate = (inst&ONES(11,7) >> 7) | (inst&ONES(31,25) >> 20) | (IMM_SIGN(inst)*ONES(31,11));
+            immediate = (inst&ONES(11,7) >> 7) | (inst&ONES(31,25) >> 20) | (IMM_SIGN(inst)*ONES(63,11));
             return true;
             /*SB type
              31 imm[12] 30----25 imm[10]~imm[5] 11----8 imm[4]~imm[1] 7 imm[11]*/
         case SB_TYPE:
-            immediate = (((inst&ONES(11,8))>>7) | ((inst&ONES(30,25))>>20) | ((inst&ONES(7,7))<<4) | (IMM_SIGN(inst)*ONES(31,12)));
+            immediate = (((inst&ONES(11,8))>>7) | ((inst&ONES(30,25))>>20) | ((inst&ONES(7,7))<<4) | (IMM_SIGN(inst)*ONES(63,12)));
             return true;
             /*U type
              31----12 imm[31]~imm[12]*/
         case U_TYPE:
-            immediate = (inst&ONES(31,12));
+            immediate = (inst&ONES(63,12));
             return true;
             /*UJ type
              31 imm[20] 30----21 imm[10]~imm[1] 20 imm[11] 19----12 imm[19]~imm[12]*/
         case UJ_TYPE:
-            immediate = (((inst&ONES(30,21))>>20) | ((inst&ONES(20,20))>>9) | (inst&ONES(19,12)) | (IMM_SIGN(inst)*ONES(31,20)));
+            immediate = (((inst&ONES(30,21))>>20) | ((inst&ONES(20,20))>>9) | (inst&ONES(19,12)) | (IMM_SIGN(inst)*ONES(63,20)));
             return true;
         default:
             return false;
@@ -278,7 +279,7 @@ void instruction::execute_O()
     switch(opcode)
     {
         case 0x37://LUI
-            sim_regs.writeReg(getrd(),(reg64)immediate);
+            sim_regs.writeReg(getrd(),immediate);
             break;
         case 0x17://AUIPC
             reg32 newPC;
@@ -329,7 +330,7 @@ void instruction::execute_R()
                 break;
         }
     }
-    else if(opcode==0x33 && getfunc7()==0x20){
+    else if(getfunc7()==0x20){
         switch(getfunc3()){
             case 0x00: //b000 sub
                 sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) - sim_regs.readReg(getrs2()));
@@ -344,6 +345,7 @@ void instruction::execute_R()
     }
 }
 
+// opcode = 3B
 void instruction::execute_R64()
 {
     if(getfunc7()==0x00){
@@ -384,17 +386,15 @@ void instruction::execute_I(){
         case 0x6F: //JAL rd,imm
             reg32 newPC;
             sim_regs.writeReg(getrd(), sim_regs.getPC()); //PC+4?
-            newPC = (reg32)(sim_regs.getPC()+immediate);
+            newPC = (reg32)(sim_regs.getPC()+immediate*2);
             sim_regs.setPC(newPC);
             break;
         case 0x67: // b110 0111
             // JALR rd, rs1, imm
             switch (getfunc3()){
-                    reg32 newPC;
                 case 0:
                     sim_regs.writeReg(getrd(), sim_regs.getPC());
-                    newPC = (reg32)((sim_regs.readReg(getrs1())+immediate)&~1);
-                    sim_regs.setPC(newPC);
+                    sim_regs.setPC((reg32)((sim_regs.readReg(getrs1())+immediate)&~1));
                     break;
                 default:
                     printf("Undefined instruction with opcode = 110 0111\n");
@@ -407,35 +407,35 @@ void instruction::execute_I(){
             memAddress mem_addr;
             switch (getfunc3()) {
                 case 0:             // LB rd, rs1, imm
-                    mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+                    mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
                     break;
                 case 1:             // LH rd, rs1, imm
-                    mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+                    mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
                     break;
                 case 2:             // LW rd, rs1, imm
-                    mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+                    mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
                     break;
                 case 4:             // LBU rd, rs1, imm
-                    immediate = immediate & ~ONES(31, 12);
-                    mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+                    immediate = immediate & ~ONES(63, 12);
+                    mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
                     break;
                 case 5:             // LHU rd, rs1, imm
-                    immediate = immediate & ~ONES(31, 12);
-                    mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+                    immediate = immediate & ~ONES(63, 12);
+                    mem_addr =  sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
                     break;
                 case 6:             // LWU rd, rs1, imm
-                    immediate = immediate & ~ONES(31, 12);
-                    mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+                    immediate = immediate & ~ONES(63, 12);
+                    mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
                     break;
                 case 3:             // LD rd, rs1, imm
-                    immediate = immediate & ~ONES(31, 12);
-                    mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+                    immediate = immediate & ~ONES(63, 12);
+                    mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_64(mem_addr));
                     break;
                 default:
@@ -461,32 +461,35 @@ void instruction::execute_I(){
                     sim_regs.writeReg(getrd(), ALUZ64);
                     break;
                 case 3:             // SLTIU rd, rs1, imm
-                    if(sim_regs.readReg(getrs1())<(reg64)(unsigned int)immediate)
+                    if(sim_regs.readReg(getrs1())<(reg64)immediate)
                         ALUZ64 = 1;
                     else
                         ALUZ64 = 0;
                     sim_regs.writeReg(getrd(), ALUZ64);
                     break;
                 case 4:             // XORI rd, rs1, imm
-                    ALUZ64 = sim_regs.readReg(getrs1())^immediate; // 符号扩展
+                    ALUZ64 = sim_regs.readReg(getrs1())^immediate;
                     sim_regs.writeReg(getrd(), ALUZ64);
                     break;
                 case 6:             // ORI rd, rs1, imm
-                    ALUZ64 = sim_regs.readReg(getrs1())|immediate; // 符号扩展
+                    ALUZ64 = sim_regs.readReg(getrs1())|immediate;
                     sim_regs.writeReg(getrd(), ALUZ64);
                     break;
                 case 7:             // ANDI rd, rs1, imm
-                    ALUZ64 = sim_regs.readReg(getrs1())&immediate; // 符号扩展
+                    ALUZ64 = sim_regs.readReg(getrs1())&immediate;
                     sim_regs.writeReg(getrd(), ALUZ64);
                     break;
-                case 1:             // SLLI rd, rs1, shamt ?
+                case 1:             // SLLI rd, rs1, shamt
                     shamt = immediate & ONES(5, 0);
                     ALUZ64 = sim_regs.readReg(getrs1()) << shamt;
                     sim_regs.writeReg(getrd(), ALUZ64);
                     break;
-                case 5:             // SRLI, SRAI rd, rs1, shamt ?
+                case 5:             // SRLI, SRAI rd, rs1, shamt
                     shamt = immediate & ONES(5, 0);
-                    ALUZ64 = sim_regs.readReg(getrs1()) >> shamt;
+                    if(immediate & ~ONES(5,0))  //SRAI
+                        ALUZ64 = ((signed64)sim_regs.readReg(getrs1())) >> shamt;
+                    else                        // SRLI
+                        ALUZ64 = sim_regs.readReg(getrs1()) >> shamt;
                     sim_regs.writeReg(getrd(), ALUZ64);
                     break;
                 default:
@@ -499,17 +502,20 @@ void instruction::execute_I(){
             signed32 ALUZ32;
             switch (getfunc3()) {
                 case 0:             // ADDIW rd, rs1, imm
-                    ALUZ32 = (int)sim_regs.readReg(getrs1())+immediate;
+                    ALUZ32 = (signed32)sim_regs.readReg(getrs1())+(signed32)immediate;
                     sim_regs.writeReg(getrd(), ALUZ32);
                     break;
                 case 1:             // SLLIW rd, rs1, shamt
                     shamt = immediate & ONES(4, 0);
-                    ALUZ32 = ((int)sim_regs.readReg(getrs1())) << shamt;
+                    ALUZ32 = ((signed32)sim_regs.readReg(getrs1())) << shamt;
                     sim_regs.writeReg(getrd(), ALUZ32);
                     break;
                 case 5:             // SRLIW, SRAIW rd, rs1, shamt
                     shamt = immediate & ONES(4, 0);
-                    ALUZ32 = ((int)sim_regs.readReg(getrs1())) >> shamt;
+                    if(immediate & ~ONES(4,0)) //SRAIW
+                        ALUZ32 = (int)((signed32)sim_regs.readReg(getrs1()) >> shamt);
+                    else                       //SRLIW
+                        ALUZ32 = ((reg32)sim_regs.readReg(getrs1())) >> shamt;
                     sim_regs.writeReg(getrd(), ALUZ32);
                     break;
                 default:
@@ -527,19 +533,19 @@ void instruction::execute_SX(){
     switch(getfunc3())
     {
         case 0://SB
-            mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
             sim_mem.set_memory_8(mem_addr, (reg8)getrd());
             break;
         case 1://SH
-            mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
             sim_mem.set_memory_16(mem_addr, (reg16)getrd());
             break;
         case 2://SW
-            mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
             sim_mem.set_memory_32(mem_addr, (reg32)getrd());
             break;
         case 3://SD
-            mem_addr = (reg32)sim_regs.readReg(getrs1())+ immediate;
+            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
             sim_mem.set_memory_64(mem_addr, (reg64)getrd());
             break;
     }

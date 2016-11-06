@@ -32,9 +32,9 @@ typedef signed short int signed16;
 typedef signed char signed8;
 
 typedef unsigned int  ins;
-typedef int  imm;
+typedef signed long int  imm;
 typedef unsigned char xcode;
 typedef unsigned char insType;
-typedef unsigned int memAddress;
+typedef unsigned long int memAddress;
 
 
