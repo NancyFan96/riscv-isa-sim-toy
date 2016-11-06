@@ -8,6 +8,11 @@
 
 ## LOGs
 
+tt, tiny, try用spike执行时有warning
+
+	warning: only got 1127219200 bytes of target mem (wanted 4294967296)
+
+
 4.1 commit, memAddress==>64bit unsigned, get/setPC use reg64, imm==>64bit signed
 
 	add some signed type named signed8/16/32/64
