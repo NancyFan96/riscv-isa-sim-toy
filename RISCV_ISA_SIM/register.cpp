@@ -18,7 +18,7 @@ registers::registers(){
 void registers::readReg(){
     for(int i = 0;i<32;i++)
     {
-        printf("rrx %d :%lu\t",i ,rrx[i]);
+        printf("rrx%d: %lu\t",i ,rrx[i]);
         if(i == 7 || i == 15 || i== 23 || i== 31)
             printf("\n");
     }
