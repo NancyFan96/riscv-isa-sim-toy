@@ -8,6 +8,15 @@
 
 ## LOGs
 
+TO DO:
+
+* start PC from \<main\>
+* complete ecall to realize exit, printf and so on
+* need to realize MALLOC
+* try to get some bonus
+
+5.1 commit: fixed some bugs in decode like &, >>的优先级,指令含义，手癌等
+
 tt, tiny, try用spike执行时有warning
 
 	warning: only got 1127219200 bytes of target mem (wanted 4294967296)
