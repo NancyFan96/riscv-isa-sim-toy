@@ -10,7 +10,8 @@
 
 TO DO:
 
-* start PC from \<main\>
+* start PC from \<main\>?
+* complete static variable init > THIS TWO are both about SYMBOL TABLE
 * complete ecall to realize exit, printf and so on
 * need to realize MALLOC
 * try to get some bonus
