@@ -18,6 +18,8 @@
 #include "memory.hpp"
 #endif
 
+#include <string.h>
+
 instruction::instruction()
 {
     opcode = 0;
@@ -40,7 +42,7 @@ void instruction::print_ins(const char* inst_name, regID r1, regID r2, imm imm0)
     sim_regs.readReg();
 }
 void instruction::print_ins(const char* inst_name, regID rx, imm imm0){
-    printf("instruction:\t %s %d, %ld\n", inst_name, rx, imm0);
+    printf("instruction:\t %s %d, 0x%lx\n", inst_name, rx, imm0);
     sim_regs.readReg();
 }
 void instruction::print_ins(const char* inst_name, regID rx){
@@ -114,28 +116,29 @@ bool instruction::setIMM(ins inst){
              31----------20 imm[0]~imm[11]
              shamt SRAI SRLI SLLI*/
         case I_TYPE:
-            immediate = (inst&ONES(31,20) >> 20) | (IMM_SIGN(inst)*ONES(63,11));
+            immediate = ((inst&ONES(31,20)) >> 20) | (IMM_SIGN(inst)*ONES(63, 11));
+            printf("0x%lx\n", immediate);
             return true;
             /*S type
              31-----25-------------11---7
              imm[11]~imm[5]        imm[4]~imm[0]*/
         case S_TYPE:
-            immediate = (inst&ONES(11,7) >> 7) | (inst&ONES(31,25) >> 20) | (IMM_SIGN(inst)*ONES(63,11));
+            immediate = ((inst&ONES(11,7)) >> 7) | ((inst&ONES(31,25)) >> 20) | (IMM_SIGN(inst)*ONES(63, 11));
             return true;
             /*SB type
              31 imm[12] 30----25 imm[10]~imm[5] 11----8 imm[4]~imm[1] 7 imm[11]*/
         case SB_TYPE:
-            immediate = (((inst&ONES(11,8))>>7) | ((inst&ONES(30,25))>>20) | ((inst&ONES(7,7))<<4) | (IMM_SIGN(inst)*ONES(63,12)));
+            immediate = ((inst&ONES(11,8))>>7) | ((inst&ONES(30,25))>>20) | ((inst&ONES(7,7))<<4)| (IMM_SIGN(inst)*ONES(63, 12));
             return true;
             /*U type
              31----12 imm[31]~imm[12]*/
         case U_TYPE:
-            immediate = (inst&ONES(63,12));
+            immediate = (inst&ONES(31,12))| (IMM_SIGN(inst)*ONES(63, 31));
             return true;
             /*UJ type
              31 imm[20] 30----21 imm[10]~imm[1] 20 imm[11] 19----12 imm[19]~imm[12]*/
         case UJ_TYPE:
-            immediate = (((inst&ONES(30,21))>>20) | ((inst&ONES(20,20))>>9) | (inst&ONES(19,12)) | (IMM_SIGN(inst)*ONES(63,20)));
+            immediate = ((inst&ONES(30,21))>>20) | ((inst&ONES(20,20))>>9) | (inst&ONES(19,12))| (IMM_SIGN(inst)*ONES(63, 20));
             return true;
         default:
             return false;
@@ -220,7 +223,7 @@ regID instruction:: getrd(){
 }
 
 regID instruction:: getrs1(){
-    if(tag&16)   return rd;
+    if(tag&16)   return rs1;
     else{
         printf("Warning: Invalid rs1 in instruction is used!\n");
         return rs1;
@@ -228,7 +231,7 @@ regID instruction:: getrs1(){
 }
 
 regID instruction:: getrs2(){
-    if(tag&32)   return rd;
+    if(tag&32)   return rs2;
     else{
         printf("Warning: Invalid rs2 in instruction is used!\n");
         return rs2;
@@ -595,8 +598,8 @@ void instruction::execute_SX(){
             if(verbose) print_ins("SW", getrs1(), getrs2(), immediate);
             break;
         case 3://SD
-            mem_addr = (signed64)sim_regs.readReg(getrs2())+ immediate;
-            sim_mem.set_memory_64(mem_addr, (reg64)getrs1());
+            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
+            sim_mem.set_memory_64(mem_addr, (reg64)getrs2());
             if(verbose) print_ins("SD", getrs1(), getrs2(), immediate);
             break;
     }
