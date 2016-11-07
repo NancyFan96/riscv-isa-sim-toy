@@ -34,7 +34,7 @@ bool registers::writeReg(regID regDst, reg64 value){
         return false;
     if(regDst == 0)
     {
-        printf("Warning: $zero was tried to be written\n");
+        //printf("Warning: $zero was tried to be written\n");
         return true;
     }
     rrx[regDst] = value;

@@ -161,7 +161,7 @@ int main(int argc, char * argv[]){
     //reg32 curPC = -1;
     while(1){
         ins inst = fetch();
-        printf("%x\n", inst);
+        printf("%x\n", inst);//debug
         instruction fetched_inst;
         if(fetched_inst.decode(inst) == true){
             if(fetched_inst.Is_exit())
@@ -170,6 +170,7 @@ int main(int argc, char * argv[]){
         }
         else{
             cout << "DECODE ERROR!" << endl;
+            return -1;
         }
     }
     

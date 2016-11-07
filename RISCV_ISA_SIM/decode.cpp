@@ -117,7 +117,6 @@ bool instruction::setIMM(ins inst){
              shamt SRAI SRLI SLLI*/
         case I_TYPE:
             immediate = ((inst&ONES(31,20)) >> 20) | (IMM_SIGN(inst)*ONES(63, 11));
-            printf("0x%lx\n", immediate);
             return true;
             /*S type
              31-----25-------------11---7
@@ -462,7 +461,6 @@ void instruction::execute_I(){
                     if(verbose) print_ins("LWU", getrd(), getrs1(), immediate);
                     break;
                 case 3:             // LD rd, rs1, imm
-                    immediate = immediate & ~ONES(63, 12);
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_64(mem_addr));
                     if(verbose) print_ins("LD", getrd(), getrs1(), immediate);
