@@ -156,11 +156,11 @@ bool load_program(char const *file_name)
     /* ---- init regs ------*/
     if((byte *)main_virtual_address==NULL)
         printf("main virtual address invalid!\n");
-    sim_regs.setPC(main_virtual_address);                                       //set PC register
-    //sim_regs.setPC(program_entry_offset);
+    //sim_regs.setPC(main_virtual_address);                                       //set PC register
+    sim_regs.setPC(program_entry_offset);
     sim_regs.writeReg(zero, 0);
     sim_regs.writeReg(sp, STACK_TOP);
-    sim_regs.writeReg(ra, 65604); //0x10044
+    //sim_regs.writeReg(ra, 65604); //0x10044
     printf("sp = %lx\n", sim_regs.readReg(sp));
     
     

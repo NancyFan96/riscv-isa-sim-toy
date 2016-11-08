@@ -249,6 +249,7 @@ void instruction::execute(){
         if(sim_regs.readReg(a7) == 64 && sim_regs.readReg(a3) == 0){
             // write
         }
+        return;
     }
     switch(opcode){
             /*---- RV32I-----*/
