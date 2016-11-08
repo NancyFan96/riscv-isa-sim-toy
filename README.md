@@ -10,11 +10,13 @@
 
 TO DO:
 
-* start PC from \<main\>?
-* complete static variable init > THIS TWO are both about SYMBOL TABLE
-* complete ecall to realize exit, printf and so on
-* need to realize MALLOC
-* try to get some bonus
+* start PC from \<main\>√
+* complete static variable init (已经实现?)> THIS TWO are both about SYMBOL TABLE
+* complete ecall to realize exit√, printf\* and so on
+* need to realize MALLOC\* (已经实现？)
+* try to get some bonus（gdb? M extension）
+
+5.2 commit: fixed some bugs, j,branch,store指令语义错(当前PC)，store手癌存了寄存器编号
 
 5.1 commit: fixed some bugs in decode like &, >>的优先级,指令含义，手癌等
 
