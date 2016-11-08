@@ -10,7 +10,7 @@
 
 TO DO:
 
-* start PC from \<main\>√
+* start PC from \<main\>【错误】==> 必须从entry point开始，否则mac下可以，linux下segmemtation fault
 * complete static variable init (已经实现?)> THIS TWO are both about SYMBOL TABLE
 * complete ecall to realize exit√, printf\* and so on
 * need to realize MALLOC\* (已经实现？)
