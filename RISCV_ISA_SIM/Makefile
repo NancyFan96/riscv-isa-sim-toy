@@ -1,9 +1,13 @@
 CC = g++
 PROC = exe
 
-all: $(PROC)
+SRC=	exe.cpp memory.cpp register.cpp decode.cpp
+HDR=	system.h exe.hpp memory.hpp register.hpp decode.hpp
 
-exe: exe.cpp exe.hpp decode.cpp decode.hpp memory.cpp memory.hpp register.cpp register.hpp system.h
+
+all: 	$(PROC)
+
+exe: 	$(SRC) $(HDR)
 	$(CC) -o $(PROC) *.cpp
 
 

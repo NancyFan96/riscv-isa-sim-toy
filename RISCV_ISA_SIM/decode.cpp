@@ -48,7 +48,7 @@ void instruction::print_ins(const char* inst_name){
 }
 
 bool instruction::getType(ins inst){
-    if(inst == 0x00000073){
+    if(inst == 0x73){
         optype = SCALL;
         tag = 0;
         return true;
@@ -144,6 +144,8 @@ bool instruction::decode(ins inst){
     }
     switch(optype)
     {
+        case SCALL:
+            return true;
             /* rs2,rs1,rd,func7,func3*/
         case R_TYPE:
             func3 = ((inst&FUNCT3) >> 12);
@@ -230,15 +232,22 @@ regID instruction:: getrs2(){
     }
 }
 
-bool instruction::Is_exit(){
-    // EXIT FLAG is J to itself
-    if(opcode == 111 && rd == 0 && immediate == -2) //b1101111 | 64+32+15 = 96+15 = 111
-        return true;
-    return false;
-}
 
 // only valid instruction will enter this function
 void instruction::execute(){
+    if(optype == SCALL){
+        if(sim_regs.readReg(a7) == 93 && sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
+            // exit_program
+            _exit = true;
+            print_ins("Prog Exited!");
+        }
+        if(sim_regs.readReg(a7) == 63 && sim_regs.readReg(a3) == 0){
+            // read
+        }
+        if(sim_regs.readReg(a7) == 64 && sim_regs.readReg(a3) == 0){
+            // write
+        }
+    }
     switch(opcode){
             /*---- RV32I-----*/
         case 0x23:      // b0100011,SB,SH,SW,SD
@@ -395,7 +404,7 @@ void instruction::execute_I(){
         case 0x6F: //JAL rd,imm
             reg32 newPC;
             sim_regs.writeReg(getrd(), sim_regs.getPC()); //PC+4?
-            newPC = (reg32)(sim_regs.getPC()+immediate*2);
+            newPC = (reg32)(sim_regs.getPC()+immediate-4);
             sim_regs.setPC(newPC);
             if(verbose) print_ins("JAL", getrd(), immediate);
             break;

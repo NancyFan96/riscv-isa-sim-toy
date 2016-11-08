@@ -1,400 +1,559 @@
 spid = 2, sp = 0
 read file successfully!
 end of segment copy
-sp = 0
+main found!
+main virtual address is:10164
 sp = 7ffffff
 EXCUTE ./test/tt...
 sp = 7ffffff
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
 rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10000
+PC: 0x10164
 
-2197
-instruction:	 AUIPC 3, 0x2000
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x12004	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+fe010113
+instruction:	 ADDI 2, 2, -32
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
 rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10004
+PC: 0x10168
 
-d3018193
-instruction:	 ADDI 3, 3, -720
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+813c23
+instruction:	 SD 2, 8, 24
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
 rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10008
+PC: 0x1016c
 
-1297
-instruction:	 AUIPC 5, 0x1000
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 69644	rrx6: 0	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+2010413
+instruction:	 ADDI 8, 2, 32
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1000c
+PC: 0x10170
 
-54028293
-instruction:	 ADDI 5, 5, 1344
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 70988	rrx6: 0	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+100793
+instruction:	 ADDI 15, 0, 1
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 1	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10010
+PC: 0x10174
 
-1317
-instruction:	 AUIPC 6, 0x1000
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 70988	rrx6: 69652	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+fef42623
+instruction:	 SW 8, 15, -20
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 1	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10014
+PC: 0x10178
 
-58830313
-instruction:	 ADDI 6, 6, 1416
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 70988	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+200793
+instruction:	 ADDI 15, 0, 2
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 2	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
+PC: 0x1017c
 
-2b023
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 70988	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+fef42423
+instruction:	 SW 8, 15, -24
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 2	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
+PC: 0x10180
 
-828293
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 70996	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+fec42703
+instruction:	 LW 14, 8, -20
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 2	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
+PC: 0x10184
 
-fe62ece3
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 70996	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+fe842783
+instruction:	 LW 15, 8, -24
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
+PC: 0x10188
 
-828293
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71004	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+f707bb
+instruction:	 ADDW 15, 14, 15
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
+PC: 0x1018c
 
-fe62ece3
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71004	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+fef42623
+instruction:	 SW 8, 15, -20
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
+PC: 0x10190
 
-828293
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71012	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+793
+instruction:	 ADDI 15, 0, 0
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
+PC: 0x10194
 
-fe62ece3
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71012	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+78513
+instruction:	 ADDI 10, 15, 0
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
+PC: 0x10198
 
-828293
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71020	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+1813403
+instruction:	 LD 8, 2, 24
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
+PC: 0x1019c
 
-fe62ece3
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71020	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+2010113
+instruction:	 ADDI 2, 2, 32
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71028	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71028	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71036	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71036	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71044	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71044	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71052	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71052	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71060	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71060	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10024
-
-517
-instruction:	 AUIPC 10, 0x0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 65576	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10028
-
-1c450513
-instruction:	 ADDI 10, 10, 452
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66028	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1002c
-
-178000ef
-instruction:	 JAL 1, 0x178
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66028	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10320
-
-1f00793
-instruction:	 ADDI 15, 0, 31
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66028	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 31	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10324
-
-17059b
-instruction:	 ADDIW 11, 14, 1
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66028	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 31	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10328
-
-4e7d063
-instruction:	 BGE 15, 14, 64
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66028	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 31	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1036c
-
-2049e63
-instruction:	 BNE 9, 0, 60
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66028	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 31	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10370
-
-278793
-instruction:	 ADDI 15, 15, 2
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66028	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 33	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10374
-
-379793
-instruction:	 SLLI 15, 15, 3
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66028	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10378
-
-b52423
-instruction:	 SW 10, 11, 8
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66028	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1037c
-
-f50533
-instruction:	 ADD 10, 10, 15
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66292	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10380
-
-1253023
-instruction:	 SD 10, 18, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66292	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10384
-
-513
-instruction:	 ADDI 10, 0, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10388
-
-2813083
-instruction:	 LD 1, 2, 40
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1038c
-
-2013403
-instruction:	 LD 8, 2, 32
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10390
-
-1813483
-instruction:	 LD 9, 2, 24
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10394
-
-1013903
-instruction:	 LD 18, 2, 16
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10398
-
-813983
-instruction:	 LD 19, 2, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1039c
-
-13a03
-instruction:	 LD 20, 2, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x103a0
-
-3010113
-instruction:	 ADDI 2, 2, 48
-rrx0: 0	rrx1: 0	rrx2: 0x800002f	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x103a4
+PC: 0x101a0
 
 8067
 instruction:	 JALR 0, 1, 0
-rrx0: 0	rrx1: 0	rrx2: 0x800002f	rrx3: 0x11d34	rrx4: 0	rrx5: 71068	rrx6: 71068	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 264	
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x0
+PC: 0x10044
 
-0
-DECODE ERROR in FIRST STAGE! Oops!
-DECODE ERROR!
+1740006f
+instruction:	 JAL 0, 0x174
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101b8
+
+ff010113
+instruction:	 ADDI 2, 2, -16
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101bc
+
+593
+instruction:	 ADDI 11, 0, 0
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101c0
+
+813023
+instruction:	 SD 2, 8, 0
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101c4
+
+113423
+instruction:	 SD 2, 1, 8
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101c8
+
+50413
+instruction:	 ADDI 8, 10, 0
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101cc
+
+22c000ef
+instruction:	 JAL 1, 0x22c
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x103f8
+
+fa010113
+instruction:	 ADDI 2, 2, -96
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x103fc
+
+3413823
+instruction:	 SD 2, 20, 48
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10400
+
+8081ba03
+instruction:	 LD 20, 3, -2040
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10404
+
+3313c23
+instruction:	 SD 2, 19, 56
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10408
+
+9b7
+instruction:	 LUI 19, 0x0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1040c
+
+4913423
+instruction:	 SD 2, 9, 72
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10410
+
+5213023
+instruction:	 SD 2, 18, 64
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10414
+
+3513423
+instruction:	 SD 2, 21, 40
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10418
+
+1713c23
+instruction:	 SD 2, 23, 24
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1041c
+
+1813823
+instruction:	 SD 2, 24, 16
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10420
+
+4113c23
+instruction:	 SD 2, 1, 88
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10424
+
+4813823
+instruction:	 SD 2, 8, 80
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10428
+
+3613023
+instruction:	 SD 2, 22, 32
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1042c
+
+1913423
+instruction:	 SD 2, 25, 8
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10430
+
+1a13023
+instruction:	 SD 2, 26, 0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10434
+
+50913
+instruction:	 ADDI 18, 10, 0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10438
+
+58b93
+instruction:	 ADDI 23, 11, 0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1043c
+
+1f8a0a93
+instruction:	 ADDI 21, 20, 504
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10440
+
+100493
+instruction:	 ADDI 9, 0, 1
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10444
+
+fff00c13
+instruction:	 ADDI 24, 0, -1
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10448
+
+98993
+instruction:	 ADDI 19, 19, 0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1044c
+
+1f8a3b03
+instruction:	 LD 22, 20, 504
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10450
+
+c0b0663
+instruction:	 BEQ 22, 0, 204
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10520
+
+5013403
+instruction:	 LD 8, 2, 80
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10524
+
+4813483
+instruction:	 LD 9, 2, 72
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10528
+
+4013903
+instruction:	 LD 18, 2, 64
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1052c
+
+3813983
+instruction:	 LD 19, 2, 56
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10530
+
+3013a03
+instruction:	 LD 20, 2, 48
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10534
+
+2813a83
+instruction:	 LD 21, 2, 40
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10538
+
+2013b03
+instruction:	 LD 22, 2, 32
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1053c
+
+1813b83
+instruction:	 LD 23, 2, 24
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10540
+
+1013c03
+instruction:	 LD 24, 2, 16
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10544
+
+813c83
+instruction:	 LD 25, 2, 8
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10548
+
+13d03
+instruction:	 LD 26, 2, 0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1054c
+
+6010113
+instruction:	 ADDI 2, 2, 96
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10550
+
+8067
+instruction:	 JALR 0, 1, 0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101d0
+
+8081b503
+instruction:	 LD 10, 3, -2040
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101d4
+
+5853783
+instruction:	 LD 15, 10, 88
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101d8
+
+78463
+instruction:	 BEQ 15, 0, 8
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101e4
+
+75c000ef
+instruction:	 JAL 1, 0x75c
+rrx0: 0	rrx1: 66024	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10940
+
+593
+instruction:	 ADDI 11, 0, 0
+rrx0: 0	rrx1: 66024	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10944
+
+613
+instruction:	 ADDI 12, 0, 0
+rrx0: 0	rrx1: 66024	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10948
+
+693
+instruction:	 ADDI 13, 0, 0
+rrx0: 0	rrx1: 66024	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1094c
+
+5d00893
+instruction:	 ADDI 17, 0, 93
+rrx0: 0	rrx1: 66024	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 93	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10950
+
+73
+instruction:	 Prog Exited!
+rrx0: 0	rrx1: 66024	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 93	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10954
+
+BYE ./test/tt !

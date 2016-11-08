@@ -9,6 +9,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <cstring>
+#include <string.h>
 #include "system.h"
 #include "register.hpp"
 #include "memory.hpp"
@@ -24,6 +25,7 @@ static bool ONESTEP = false;
 
 bool verbose = false;
 bool debug = false;
+bool _exit = false;
 
 void help()
 {
@@ -67,8 +69,9 @@ bool load_program(char const *file_name)
     //define data type
     Elf64_Ehdr* elf_header;
     elf_header=(Elf64_Ehdr*)file_buffer;
-    Elf64_Shdr* sec_header=(Elf64_Shdr*)((unsigned char*)elf_header+elf_header->e_shoff);
+    Elf64_Shdr* sec_header=(Elf64_Shdr*)((unsigned char*)elf_header+elf_header->e_shoff);//locate to first section
     Elf64_Half sec_header_entry_size=elf_header->e_shentsize;
+    
     sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size);         //locate to section .text
     memAddress program_entry_offset=(memAddress)(sec_header->sh_addr);                  //runtime virtual address aka. program entry address 0x10000
     //unsigned int code_size=(unsigned int)sec_header->sh_size;
@@ -97,21 +100,71 @@ bool load_program(char const *file_name)
     }
     printf("end of segment copy\n");
     
+    Elf64_Half  sec_num=elf_header->e_shnum;//number of sections
+    sec_header=(Elf64_Shdr*)((unsigned char*)elf_header+elf_header->e_shoff);//locate to first section
+    sec_header_entry_size=elf_header->e_shentsize;
+    Elf64_Shdr* strtab_sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size*(sec_num-1));//locate to section header of string table
+    Elf64_Off strtab_offset=strtab_sec_header->sh_offset;//read string table offset offset
+    unsigned char* p_strtab=(unsigned char*)elf_header+strtab_offset;//point to the beginning of string table
+    memAddress main_virtual_address; // change
+    
+    for(int cnt=0;cnt<sec_num;++cnt)//for each section
+    {
+        Elf64_Word section_type=sec_header->sh_type;
+        if(section_type==2)//if section type==SYMTAB
+        {
+            Elf64_Off symtab_offset=sec_header->sh_offset;
+            Elf64_Xword   sh_size=sec_header->sh_size;
+            unsigned long int symtab_num=sh_size/sizeof(Elf64_Sym);//number of entries in symbol table
+            Elf64_Sym* p_symtab=(Elf64_Sym*)((unsigned char*)elf_header+symtab_offset);//locate to the first entry
+            for(int entry_cnt=0;entry_cnt<symtab_num;++entry_cnt)//for each entry
+            {
+                Elf64_Word    st_name=p_symtab->st_name;//index to string table
+                Elf64_Addr    st_value=p_symtab->st_value;//virtual address for 'main' entry
+                if(st_name!=0)
+                {
+                    unsigned char* p_name=p_strtab+st_name;
+                    char* test_name=(char*)malloc(sizeof(char)*20);
+                    int name_cnt=0;
+                    while (*p_name!='\0'&&name_cnt<20)
+                    {
+                        test_name[name_cnt]=*p_name;
+                        p_name++;
+                        name_cnt++;
+                    }
+                    test_name[name_cnt]='\0';//get symbol name
+                    if(strcmp(test_name,"main")==0)
+                    {
+                        printf("main found!\n");
+                        printf("main virtual address is:%lx\n",st_value);
+                        main_virtual_address=(memAddress)st_value;//st_value is an unsigned long int
+                        break;
+                    }
+                    
+                }//end of if
+                p_symtab++;
+            }//end of for
+            break;
+        }//end of if
+        sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size);//next section
+    }
+    
+    
+    
     fclose(file_in);//close ELF file
     free(file_buffer);//free buffer
     
     /* ---- init regs ------*/
-    sim_regs.setPC(program_entry_offset);                                       //set PC register
+    if((byte *)main_virtual_address==NULL)
+        printf("main virtual address invalid!\n");
+    sim_regs.setPC(main_virtual_address);                                       //set PC register
     sim_regs.writeReg(zero, 0);
-    printf("sp = %lx\n", sim_regs.readReg(sp));
     sim_regs.writeReg(sp, STACK_TOP);
+    sim_regs.writeReg(ra, 65604); //0x10044
     printf("sp = %lx\n", sim_regs.readReg(sp));
-
-    //sim_regs.writeReg(gp, <#reg64 value#>);
     
     
     
-
     return true;
 }
 
@@ -166,13 +219,17 @@ int main(int argc, char * argv[]){
     //reg32 lastPC = -1;
     //reg32 curPC = -1;
     while(1){
+        //if(sim_regs.getPC()==65604){
+        //    _exit = true;
+        //    break;
+       // }
         ins inst = fetch();
         printf("%x\n", inst);//debug
         instruction fetched_inst;
         if(fetched_inst.decode(inst) == true){
-            if(fetched_inst.Is_exit())
-                break;
             fetched_inst.execute();
+            if(_exit)
+                break;
         }
         else{
             cout << "DECODE ERROR!" << endl;
@@ -181,7 +238,7 @@ int main(int argc, char * argv[]){
     }
     
     if(exit_program() == true){
-        cout << "EXIT "<< file_name<< " BYE!"<< endl;
+        cout << "BYE "<< file_name<< " !"<< endl<< endl;
         return 0;
     }
     else{

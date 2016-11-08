@@ -106,6 +106,22 @@ typedef struct
     Elf64_Xword   p_align;                /* Segment alignment */
 } Elf64_Phdr;
 
+/*symbol table entry*/
+typedef struct
+{
+    /* Symbol name (string tbl index)
+     st_name   This member holds an index into the object file's symbol
+     string table, which holds character representations of the
+     symbol names.  If the value is nonzero, it represents a
+     string table index that gives the symbol name.  Otherwise,
+     the symbol has no name.*/
+    Elf64_Word    st_name;
+    unsigned char st_info;                /* Symbol type and binding */
+    unsigned char st_other;               /* Symbol visibility */
+    Elf64_Section st_shndx;               /* Section index */
+    Elf64_Addr    st_value;               /* Symbol value  This member gives the value of the associated symbol.*/
+    Elf64_Xword   st_size;                /* Symbol size */
+} Elf64_Sym;
 
 #endif /* exe_hpp */
 
