@@ -1,0 +1,24 @@
+spid = 2, sp = 0
+read file successfully!
+end of segment copy
+sp = 0
+sp = 7ffffff
+EXCUTE ./test/tt...
+sp = 7ffffff
+rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10000
+
+2197
+instruction:	 AUIPC 3, 0x2000
+rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x12004	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x12004
+
+0
+DECODE ERROR in FIRST STAGE! Oops!
+DECODE ERROR!

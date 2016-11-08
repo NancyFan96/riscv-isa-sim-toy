@@ -6,7 +6,10 @@
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
 
+#include "system.h"
 #include "register.hpp"
+
+registers sim_regs;
 
 registers::registers(){
     PC = 0;
@@ -18,11 +21,14 @@ registers::registers(){
 void registers::readReg(){
     for(int i = 0;i<32;i++)
     {
-        printf("rrx%d: %lu\t",i ,rrx[i]);
+        if(i == sp||i== gp)
+            printf("rrx%d: 0x%lx\t",i ,rrx[i]);
+        else
+            printf("rrx%d: %lu\t",i ,rrx[i]);
         if(i == 7 || i == 15 || i== 23 || i== 31)
             printf("\n");
     }
-    printf("PC: %lu\n\n",(reg64)PC);
+    printf("PC: 0x%lx\n\n",(reg64)PC);
 }
 
 reg64 registers::readReg(regID regDst){

@@ -9,32 +9,11 @@
 #ifndef exe_hpp
 #define exe_hpp
 
-#ifndef stdio
-#define stdio
-#include <stdio.h>
-#endif
-
-#ifndef system_h
-#define system_h
 #include "system.h"
-#endif
-
-#ifndef decode_hpp
-#define decode_hpp
 #include "decode.hpp"
-#endif
-
-#ifndef register_hpp
-#define register_hpp
 #include "register.hpp"
-#endif
-
-#ifndef memory_hpp
-#define memory_hpp
 #include "memory.hpp"
-#endif
 
-#endif /* exe_hpp */
 
 bool load_program(const char* filename);    // if success return true, else return false
 ins fetch();                        // return instruction and PC inc
@@ -50,8 +29,6 @@ bool exit_program();                        // if success return true, else retu
 //
 //
 
-#ifndef load_program_hpp
-#define load_program_hpp
 
 #include <stdio.h>
 
@@ -130,7 +107,7 @@ typedef struct
 } Elf64_Phdr;
 
 
-#endif /* load_program_hpp */
+#endif /* exe_hpp */
 
 
 /*------------ END define ELF --------------*/

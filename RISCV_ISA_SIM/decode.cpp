@@ -6,19 +6,12 @@
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
 
-#include "decode.hpp"
-
-#ifndef register_hpp
-#define register_hpp
-#include "register.hpp"
-#endif
-
-#ifndef memory_hpp
-#define memory_hpp
-#include "memory.hpp"
-#endif
-
 #include <string.h>
+#include "system.h"
+#include "decode.hpp"
+#include "register.hpp"
+#include "memory.hpp"
+
 
 instruction::instruction()
 {
@@ -428,17 +421,17 @@ void instruction::execute_I(){
             memAddress mem_addr;
             switch (getfunc3()) {
                 case 0:             // LB rd, rs1, imm
-                    mem_addr = sim_regs.readReg(getrs1())+ immediate;
+                    mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
                     if(verbose) print_ins("LB", getrd(), getrs1(), immediate);
                     break;
                 case 1:             // LH rd, rs1, imm
-                    mem_addr = sim_regs.readReg(getrs1())+ immediate;
+                    mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
                     if(verbose) print_ins("LH", getrd(), getrs1(), immediate);
                     break;
                 case 2:             // LW rd, rs1, imm
-                    mem_addr = sim_regs.readReg(getrs1())+ immediate;
+                    mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
                     if(verbose) print_ins("LW", getrd(), getrs1(), immediate);
                     break;

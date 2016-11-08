@@ -9,21 +9,9 @@
 #ifndef memory_hpp
 #define memory_hpp
 
-#ifndef stdio
-#define stdio
 #include <stdio.h>
-#endif
-
-#ifndef stdlib
-#define stdlib
 #include <stdlib.h>
-#endif
-
-#ifndef system_h
-#define system_h
 #include "system.h"
-#endif
-#endif /* memory_hpp */
 
 #define MEM_SIZE 1<<27           // 0x0800 0000, 128M
 #define STACK_BOTTOM 0x6000000   // bottom address of stack
@@ -33,7 +21,7 @@
 /* ------- define memory ------- */
 class memory {
 public:
-    unsigned long int size = MEM_SIZE;  // byte
+    //unsigned long int size = MEM_SIZE;  // byte
     byte * mem_zero;                    // 8bit
     //bool OUT_OF_MEM = false;
     
@@ -52,5 +40,6 @@ public:
     
 };
 
-static memory   sim_mem;
+extern memory sim_mem;
 
+#endif /* memory_hpp */

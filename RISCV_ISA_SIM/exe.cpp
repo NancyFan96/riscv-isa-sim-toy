@@ -103,7 +103,10 @@ bool load_program(char const *file_name)
     /* ---- init regs ------*/
     sim_regs.setPC(program_entry_offset);                                       //set PC register
     sim_regs.writeReg(zero, 0);
+    printf("sp = %lx\n", sim_regs.readReg(sp));
     sim_regs.writeReg(sp, STACK_TOP);
+    printf("sp = %lx\n", sim_regs.readReg(sp));
+
     //sim_regs.writeReg(gp, <#reg64 value#>);
     
     
@@ -148,7 +151,8 @@ int main(int argc, char * argv[]){
     
     /*---------END prase ---------*/
     
-    
+    printf("spid = %d, sp = %lx\n", sp, sim_regs.readReg(sp));
+
     if(load_program(file_name)==true){
         cout << "EXCUTE "<< file_name <<"..." << endl;
     }
@@ -156,7 +160,9 @@ int main(int argc, char * argv[]){
         cout << "LOAD ERROR!" << endl;
         return -1;
     }
-    
+    printf("sp = %lx\n", sim_regs.readReg(sp));
+    sim_regs.readReg();
+
     //reg32 lastPC = -1;
     //reg32 curPC = -1;
     while(1){

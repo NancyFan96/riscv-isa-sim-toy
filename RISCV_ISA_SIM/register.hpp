@@ -14,12 +14,8 @@
 #include <stdio.h>
 #endif
 
-#ifndef system_h
-#define system_h
 #include "system.h"
-#endif
 
-#endif /* register_hpp */
 
 /* ------- define registers file ------- */
 #define zero 0  //	rrx[0]    zero    Hard-wired zero
@@ -74,5 +70,6 @@ public:
 };
 /* ------- END define registers file ------- */
 
-static registers sim_regs;
+extern registers sim_regs;
 
+#endif /* register_hpp */

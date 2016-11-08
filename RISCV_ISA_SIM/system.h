@@ -8,7 +8,13 @@
 
 #ifndef system_h
 #define system_h
-#endif /* system_h */
+
+#ifndef stdio
+#define stdio
+#include <stdio.h>
+#endif
+
+
 
 //THIS IS RISCV R64IFM
 
@@ -38,3 +44,4 @@ typedef unsigned char insType;
 typedef unsigned long int memAddress;
 
 
+#endif /* system_h */

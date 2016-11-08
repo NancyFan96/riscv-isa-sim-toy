@@ -9,22 +9,11 @@
 #ifndef decode_hpp
 #define decode_hpp
 
-#ifndef stdio
-#define stdio
 #include <stdio.h>
-#endif
-
-#ifndef system_h
-#define system_h
 #include "system.h"
-#endif
-
-#ifndef register_hpp
-#define register_hpp
 #include "register.hpp"
-#endif
+#include "memory.hpp"
 
-#endif /* decode_hpp */
 
 /* define some useful function to decode the instruction */
 #define R_TYPE   0
@@ -110,4 +99,8 @@ public:
 
 extern bool verbose;
 extern bool debug;
+extern registers sim_regs;
+extern memory sim_mem;
+
+#endif /* decode_hpp */
 
