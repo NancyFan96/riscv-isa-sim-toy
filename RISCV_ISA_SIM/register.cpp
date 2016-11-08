@@ -21,7 +21,7 @@ registers::registers(){
 void registers::readReg(){
     for(int i = 0;i<32;i++)
     {
-        if(i == sp||i== gp)
+        if(i == sp||i== gp||i == ra)
             printf("rrx%d: 0x%lx\t",i ,rrx[i]);
         else
             printf("rrx%d: %lu\t",i ,rrx[i]);

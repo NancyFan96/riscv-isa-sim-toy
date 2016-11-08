@@ -428,7 +428,7 @@ void instruction::execute_I(){
             // LB, LH, LW, LBU, LHU rd, rs1, imm
             // LWU, LD rd, rs1, imm
             memAddress mem_addr;
-            printf("enter 0x03\n");
+            //printf("enter 0x03\n");
             switch (getfunc3()) {
                 case 0:             // LB rd, rs1, imm
                     mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
@@ -470,7 +470,7 @@ void instruction::execute_I(){
                     if(verbose) print_ins("LWU", getrd(), getrs1(), immediate);
                     break;
                 case 3:             // LD rd, rs1, imm
-                    printf("start this inst..\n");
+                    //printf("start this inst..\n");
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_64(mem_addr));

@@ -6,799 +6,162 @@ main virtual address is:10164
 sp = 7ffffff
 EXCUTE ./test/tt...
 sp = 7ffffff
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
 rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10000
+PC: 0x10164
 
-2197
-start excute
-instruction:	 AUIPC 3, 0x2000
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x12000	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10004
-
-d3018193
+fe010113
 1 fffffffffffff800
 finish decode!
 start excute
 excute-I:
-instruction:	 ADDI 3, 3, -720
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+instruction:	 ADDI 2, 2, -32
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
 rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10008
+PC: 0x10168
 
-1297
-start excute
-instruction:	 AUIPC 5, 0x1000
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 69640	rrx6: 0	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1000c
-
-54028293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 1344
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 70984	rrx6: 0	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10010
-
-1317
-start excute
-instruction:	 AUIPC 6, 0x1000
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 70984	rrx6: 69648	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10014
-
-58830313
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 6, 6, 1416
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 70984	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
-
-2b023
-start excute
-mem_addr = 0x11548
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 70984	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 70992	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-start excute
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 70992	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
-
-2b023
-start excute
-mem_addr = 0x11550
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 70992	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71000	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-start excute
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71000	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
-
-2b023
-start excute
-mem_addr = 0x11558
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71000	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71008	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-start excute
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71008	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
-
-2b023
-start excute
-mem_addr = 0x11560
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71008	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71016	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-start excute
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71016	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
-
-2b023
-start excute
-mem_addr = 0x11568
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71016	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71024	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-start excute
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71024	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
-
-2b023
-start excute
-mem_addr = 0x11570
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71024	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71032	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-start excute
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71032	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
-
-2b023
-start excute
-mem_addr = 0x11578
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71032	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71040	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-start excute
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71040	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
-
-2b023
-start excute
-mem_addr = 0x11580
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71040	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71048	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-start excute
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71048	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
-
-2b023
-start excute
-mem_addr = 0x11588
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71048	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71056	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-start excute
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71056	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10018
-
-2b023
-start excute
-mem_addr = 0x11590
-instruction:	 SD 5, 0, 0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71056	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1001c
-
-828293
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 5, 5, 8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10020
-
-fe62ece3
-start excute
-instruction:	 BLTU 5, 6, -8
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10024
-
-517
-start excute
-instruction:	 AUIPC 10, 0x0
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 65572	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10028
-
-1c450513
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 10, 10, 452
-rrx0: 0	rrx1: 0	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66024	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1002c
-
-178000ef
-start excute
-excute-I:
-instruction:	 JAL 1, 0x178
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66024	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x101a4
-
-50593
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 11, 10, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66024	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x101a8
-
-693
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 13, 0, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66024	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x101ac
-
-613
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 12, 0, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 66024	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x101b0
-
-513
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 10, 0, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x101b4
-
-1300006f
-start excute
-excute-I:
-instruction:	 JAL 0, 0x130
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x102e4
-
-fd010113
-1 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 2, 2, -48
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x102e8
-
-2813023
-start excute
-mem_addr = 0x7ffffef
-instruction:	 SD 2, 8, 32
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x102ec
-
-8081b403
-1 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-enter 0x03
-start this inst..
-mem_addr = 0x11538
-instruction:	 LD 8, 3, -2040
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x102f0
-
-913c23
-start excute
-mem_addr = 0x7ffffe7
-instruction:	 SD 2, 9, 24
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x102f4
-
-50493
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 9, 10, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x102f8
-
-1f843503
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-enter 0x03
-start this inst..
-mem_addr = 0x10fd8
-instruction:	 LD 10, 8, 504
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x102fc
-
-1213823
-start excute
-mem_addr = 0x7ffffdf
-instruction:	 SD 2, 18, 16
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10300
-
-1313423
-start excute
-mem_addr = 0x7ffffd7
-instruction:	 SD 2, 19, 8
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10304
-
-1413023
-start excute
-mem_addr = 0x7ffffcf
-instruction:	 SD 2, 20, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10308
-
-2113423
+813c23
 start excute
 mem_addr = 0x7fffff7
-instruction:	 SD 2, 1, 40
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+instruction:	 SD 2, 8, 24
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
 rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1030c
+PC: 0x1016c
 
-58913
+2010413
 0 fffffffffffff800
 finish decode!
 start excute
 excute-I:
-instruction:	 ADDI 18, 11, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+instruction:	 ADDI 8, 2, 32
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10310
+PC: 0x10170
 
-60a13
+100793
 0 fffffffffffff800
 finish decode!
 start excute
 excute-I:
-instruction:	 ADDI 20, 12, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+instruction:	 ADDI 15, 0, 1
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 1	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10314
+PC: 0x10174
 
-68993
+fef42623
+start excute
+mem_addr = 0x7ffffeb
+instruction:	 SW 8, 15, -20
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 1	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10178
+
+200793
 0 fffffffffffff800
 finish decode!
 start excute
 excute-I:
-instruction:	 ADDI 19, 13, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+instruction:	 ADDI 15, 0, 2
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 2	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10318
+PC: 0x1017c
 
-c050663
+fef42423
 start excute
-instruction:	 BEQ 10, 0, 204
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+mem_addr = 0x7ffffe7
+instruction:	 SW 8, 15, -24
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 2	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x103e4
+PC: 0x10180
 
-20040513
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 10, 8, 512
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x103e8
-
-1ea43c23
-start excute
-mem_addr = 0x10fd8
-instruction:	 SD 8, 10, 504
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x103ec
-
-f31ff06f
-start excute
-excute-I:
-instruction:	 JAL 0, 0xffffffffffffff30
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1031c
-
-852703
-0 fffffffffffff800
+fec42703
+1 fffffffffffff800
 finish decode!
 start excute
 excute-I:
 enter 0x03
-mem_addr = 0x10fe8
-instruction:	 LW 14, 10, 8
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+mem_addr = 0x7ffffeb
+instruction:	 LW 14, 8, -20
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 2	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10320
+PC: 0x10184
 
-1f00793
+fe842783
+1 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+mem_addr = 0x7ffffe7
+instruction:	 LW 15, 8, -24
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 15	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10188
+
+f707bb
+start excute
+instruction:	 ADDW 15, 14, 15
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 30	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1018c
+
+fef42623
+start excute
+mem_addr = 0x7ffffeb
+instruction:	 SW 8, 15, -20
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 30	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10190
+
+793
 0 fffffffffffff800
 finish decode!
 start excute
 excute-I:
-instruction:	 ADDI 15, 0, 31
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 66024	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 31	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+instruction:	 ADDI 15, 0, 0
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10324
+PC: 0x10194
 
-17059b
+78513
 0 fffffffffffff800
 finish decode!
 start excute
 excute-I:
-instruction:	 ADDIW 11, 14, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 31	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+instruction:	 ADDI 10, 15, 0
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 134217727	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10328
+PC: 0x10198
 
-4e7d063
-start excute
-instruction:	 BGE 15, 14, 64
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 31	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10368
-
-70793
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 15, 14, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1036c
-
-2049e63
-start excute
-instruction:	 BNE 9, 0, 60
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 0	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10370
-
-278793
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 15, 15, 2
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 2	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10374
-
-379793
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 SLLI 15, 15, 3
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10378
-
-b52423
-start excute
-mem_addr = 0x10fe8
-instruction:	 SW 10, 11, 8
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69600	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1037c
-
-f50533
-start excute
-instruction:	 ADD 10, 10, 15
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69616	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10380
-
-1253023
-start excute
-mem_addr = 0x10ff0
-instruction:	 SD 10, 18, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 69616	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10384
-
-513
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 10, 0, 0
-rrx0: 0	rrx1: 65584	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10388
-
-2813083
+1813403
 0 fffffffffffff800
 finish decode!
 start excute
@@ -806,99 +169,24 @@ excute-I:
 enter 0x03
 start this inst..
 mem_addr = 0x7fffff7
-instruction:	 LD 1, 2, 40
-rrx0: 0	rrx1: 1	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 69088	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+instruction:	 LD 8, 2, 24
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffdf	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1038c
+PC: 0x1019c
 
-2013403
+2010113
 0 fffffffffffff800
 finish decode!
 start excute
 excute-I:
-enter 0x03
-start this inst..
-mem_addr = 0x7ffffef
-instruction:	 LD 8, 2, 32
-rrx0: 0	rrx1: 1	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+instruction:	 ADDI 2, 2, 32
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10390
-
-1813483
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-enter 0x03
-start this inst..
-mem_addr = 0x7ffffe7
-instruction:	 LD 9, 2, 24
-rrx0: 0	rrx1: 1	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 66024	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10394
-
-1013903
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-enter 0x03
-start this inst..
-mem_addr = 0x7ffffdf
-instruction:	 LD 18, 2, 16
-rrx0: 0	rrx1: 1	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x10398
-
-813983
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-enter 0x03
-start this inst..
-mem_addr = 0x7ffffd7
-instruction:	 LD 19, 2, 8
-rrx0: 0	rrx1: 1	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x1039c
-
-13a03
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-enter 0x03
-start this inst..
-mem_addr = 0x7ffffcf
-instruction:	 LD 20, 2, 0
-rrx0: 0	rrx1: 1	rrx2: 0x7ffffcf	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x103a0
-
-3010113
-0 fffffffffffff800
-finish decode!
-start excute
-excute-I:
-instruction:	 ADDI 2, 2, 48
-rrx0: 0	rrx1: 1	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 0	rrx22: 0	rrx23: 0	
-rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
-PC: 0x103a4
+PC: 0x101a0
 
 8067
 0 fffffffffffff800
@@ -906,10 +194,542 @@ finish decode!
 start excute
 excute-I:
 instruction:	 JALR 0, 1, 0
-rrx0: 0	rrx1: 1	rrx2: 0x7ffffff	rrx3: 0x11d30	rrx4: 0	rrx5: 71064	rrx6: 71064	rrx7: 0	
-rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 1	rrx12: 0	rrx13: 0	rrx14: 0	rrx15: 16	
-rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
 rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10044
+
+1740006f
+start excute
+excute-I:
+instruction:	 JAL 0, 0x174
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffff	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101b8
+
+ff010113
+1 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 2, 2, -16
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101bc
+
+593
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 11, 0, 0
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101c0
+
+813023
+start excute
+mem_addr = 0x7ffffef
+instruction:	 SD 2, 8, 0
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101c4
+
+113423
+start excute
+mem_addr = 0x7fffff7
+instruction:	 SD 2, 1, 8
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101c8
+
+50413
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 8, 10, 0
+rrx0: 0	rrx1: 65604	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x101cc
+
+22c000ef
+start excute
+excute-I:
+instruction:	 JAL 1, 0x22c
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x103f8
+
+fa010113
+1 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 2, 2, -96
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x103fc
+
+3413823
+start excute
+mem_addr = 0x7ffffbf
+instruction:	 SD 2, 20, 48
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10400
+
+8081ba03
+1 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0xfffffffffffff808
+instruction:	 LD 20, 3, -2040
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10404
+
+3313c23
+start excute
+mem_addr = 0x7ffffc7
+instruction:	 SD 2, 19, 56
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10408
+
+9b7
+start excute
+instruction:	 LUI 19, 0x0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1040c
+
+4913423
+start excute
+mem_addr = 0x7ffffd7
+instruction:	 SD 2, 9, 72
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10410
+
+5213023
+start excute
+mem_addr = 0x7ffffcf
+instruction:	 SD 2, 18, 64
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10414
+
+3513423
+start excute
+mem_addr = 0x7ffffb7
+instruction:	 SD 2, 21, 40
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10418
+
+1713c23
+start excute
+mem_addr = 0x7ffffa7
+instruction:	 SD 2, 23, 24
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1041c
+
+1813823
+start excute
+mem_addr = 0x7ffff9f
+instruction:	 SD 2, 24, 16
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10420
+
+4113c23
+start excute
+mem_addr = 0x7ffffe7
+instruction:	 SD 2, 1, 88
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10424
+
+4813823
+start excute
+mem_addr = 0x7ffffdf
+instruction:	 SD 2, 8, 80
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10428
+
+3613023
+start excute
+mem_addr = 0x7ffffaf
+instruction:	 SD 2, 22, 32
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1042c
+
+1913423
+start excute
+mem_addr = 0x7ffff97
+instruction:	 SD 2, 25, 8
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10430
+
+1a13023
+start excute
+mem_addr = 0x7ffff8f
+instruction:	 SD 2, 26, 0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10434
+
+50913
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 18, 10, 0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10438
+
+58b93
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 23, 11, 0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 0	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1043c
+
+1f8a0a93
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 21, 20, 504
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 0	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10440
+
+100493
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 9, 0, 1
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 0	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10444
+
+fff00c13
+1 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 24, 0, -1
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10448
+
+98993
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 19, 19, 0
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1044c
+
+1f8a3b03
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x1f8
+instruction:	 LD 22, 20, 504
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10450
+
+c0b0663
+start excute
+instruction:	 BEQ 22, 0, 204
+rrx0: 0	rrx1: 66000	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1051c
+
+5813083
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffffe7
+instruction:	 LD 1, 2, 88
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 0	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10520
+
+5013403
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffffdf
+instruction:	 LD 8, 2, 80
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 1	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10524
+
+4813483
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffffd7
+instruction:	 LD 9, 2, 72
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 0	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10528
+
+4013903
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffffcf
+instruction:	 LD 18, 2, 64
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 0	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1052c
+
+3813983
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffffc7
+instruction:	 LD 19, 2, 56
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 0	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10530
+
+3013a03
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffffbf
+instruction:	 LD 20, 2, 48
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 504	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10534
+
+2813a83
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffffb7
+instruction:	 LD 21, 2, 40
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 0	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10538
+
+2013b03
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffffaf
+instruction:	 LD 22, 2, 32
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 0	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1053c
+
+1813b83
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffffa7
+instruction:	 LD 23, 2, 24
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 18446744073709551615	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10540
+
+1013c03
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffff9f
+instruction:	 LD 24, 2, 16
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 0	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10544
+
+813c83
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffff97
+instruction:	 LD 25, 2, 8
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 0	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10548
+
+13d03
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+enter 0x03
+start this inst..
+mem_addr = 0x7ffff8f
+instruction:	 LD 26, 2, 0
+rrx0: 0	rrx1: 1	rrx2: 0x7ffff8f	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x1054c
+
+6010113
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 ADDI 2, 2, 96
+rrx0: 0	rrx1: 1	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
+PC: 0x10550
+
+8067
+0 fffffffffffff800
+finish decode!
+start excute
+excute-I:
+instruction:	 JALR 0, 1, 0
+rrx0: 0	rrx1: 1	rrx2: 0x7ffffef	rrx3: 0x0	rrx4: 0	rrx5: 0	rrx6: 0	rrx7: 0	
+rrx8: 8	rrx9: 9	rrx10: 0	rrx11: 0	rrx12: 0	rrx13: 0	rrx14: 15	rrx15: 0	
+rrx16: 0	rrx17: 0	rrx18: 18	rrx19: 19	rrx20: 20	rrx21: 21	rrx22: 22	rrx23: 23	
+rrx24: 24	rrx25: 25	rrx26: 26	rrx27: 0	rrx28: 0	rrx29: 0	rrx30: 0	rrx31: 0	
 PC: 0x0
 
 0
