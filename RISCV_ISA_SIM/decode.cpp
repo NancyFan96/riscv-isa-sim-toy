@@ -278,10 +278,7 @@ void instruction::execute_O()
             if(verbose) print_ins("LUI", getrd(), immediate);
             break;
         case 0x17://AUIPC
-            reg32 newPC;
-            newPC = (reg32)(sim_regs.getPC()+immediate);
-            sim_regs.setPC(newPC);
-            sim_regs.writeReg(getrd(),(reg64)newPC);
+            sim_regs.writeReg(getrd(),(signed64)sim_regs.getPC()+immediate);
             if(verbose) print_ins("AUIPC", getrd(), immediate);
             break;
         default:;
@@ -299,7 +296,7 @@ void instruction::execute_R()
             case 0x01: //b001 sll
                 sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) << (sim_regs.readReg(getrs2())&0x3f));
                 if(verbose) print_ins("SLL", getrd(), getrs1(), getrs2());
-               break;
+                break;
             case 0x02: //b010 slt
                 if((long int)sim_regs.readReg(getrs1()) < (long int)sim_regs.readReg(getrs2()))
                     sim_regs.writeReg(getrd(), 1);
@@ -544,7 +541,7 @@ void instruction::execute_I(){
                     ALUZ32 = ((signed32)sim_regs.readReg(getrs1())) << shamt;
                     sim_regs.writeReg(getrd(), ALUZ32);
                     if(verbose) print_ins("SLLIW", getrd(), getrs1(), shamt);
-                   break;
+                    break;
                 case 5:             // SRLIW, SRAIW rd, rs1, shamt
                     shamt = immediate & ONES(4, 0);
                     if(immediate & ~ONES(4,0)) //SRAIW
@@ -601,7 +598,7 @@ void instruction::execute_UX(){
     switch(getfunc3())
     {
         case 0://BEQ
-            if((signed64)getrs1() == (signed64)getrs2())
+            if((signed64)sim_regs.readReg(getrs1())  == (signed64)sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate);
@@ -610,7 +607,7 @@ void instruction::execute_UX(){
             if(verbose) print_ins("BEQ", getrs1(), getrs2(), immediate);
             break;
         case 1://BNE
-            if((signed64)getrs1() != (signed64)getrs2())
+            if((signed64)sim_regs.readReg(getrs1())  != (signed64)sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate);
@@ -619,38 +616,38 @@ void instruction::execute_UX(){
             if(verbose) print_ins("BNE", getrs1(), getrs2(), immediate);
             break;
         case 4://BLT
-            if((signed64)getrs1() < (signed64)getrs2())
+            if((signed64)sim_regs.readReg(getrs1())  < (signed64)sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate);
-                sim_regs.setPC(newPC); 
+                sim_regs.setPC(newPC);
             }
             if(verbose) print_ins("BLT", getrs1(), getrs2(), immediate);
             break;
         case 5://BGE
-            if((signed64)getrs1() >= (signed64)getrs2())
+            if((signed64)sim_regs.readReg(getrs1())  >= (signed64)sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate);
-                sim_regs.setPC(newPC); 
+                sim_regs.setPC(newPC);
             }
             if(verbose) print_ins("BGE", getrs1(), getrs2(), immediate);
             break;
         case 6://BLTU
-            if(getrs1() < getrs2())
+            if(sim_regs.readReg(getrs1())  < sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate);
-                sim_regs.setPC(newPC); 
+                sim_regs.setPC(newPC);
             }
             if(verbose) print_ins("BLTU", getrs1(), getrs2(), immediate);
             break;
         case 7://BGEU
-            if(getrs1() >= getrs2())
+            if(sim_regs.readReg(getrs1())  >= sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate);
-                sim_regs.setPC(newPC); 
+                sim_regs.setPC(newPC);
             }
             if(verbose) print_ins("BGEU", getrs1(), getrs2(), immediate);
             break;
