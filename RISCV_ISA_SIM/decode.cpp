@@ -110,6 +110,7 @@ bool instruction::setIMM(ins inst){
              shamt SRAI SRLI SLLI*/
         case I_TYPE:
             immediate = ((inst&ONES(31,20)) >> 20) | (IMM_SIGN(inst)*ONES(63, 11));
+            printf("%d %lx\n", (IMM_SIGN(inst)), ONES(63, 11) );
             return true;
             /*S type
              31-----25-------------11---7
@@ -159,6 +160,7 @@ bool instruction::decode(ins inst){
             func3 = ((inst&FUNCT3) >> 12);
             rd = ((inst&RD) >> 7);
             rs1 = ((inst&RS1) >> 15);
+            printf("finish decode!\n");
             return true;
             /*rs2,rs1,func3*/
         case S_TYPE:
@@ -265,6 +267,7 @@ void instruction::execute(){
         case 0x03:      // b0000011,LB,LH,LW,LBU,LHU,LWU,LD
         case 0x67:      // b1100111,JALR
         case 0x6F:      // b1101111,JAL
+            printf("excute-I:\n");
             execute_I();
             break;
         case 0x3B:      // b0111011,ADDW,SUBW,SLLW,SRLW,SRAW
@@ -287,7 +290,7 @@ void instruction::execute_O()
             if(verbose) print_ins("LUI", getrd(), immediate);
             break;
         case 0x17://AUIPC
-            sim_regs.writeReg(getrd(),(signed64)sim_regs.getPC()+immediate);
+            sim_regs.writeReg(getrd(),(signed64)sim_regs.getPC()+immediate-4);//!!!
             if(verbose) print_ins("AUIPC", getrd(), immediate);
             break;
         default:;
@@ -425,42 +428,51 @@ void instruction::execute_I(){
             // LB, LH, LW, LBU, LHU rd, rs1, imm
             // LWU, LD rd, rs1, imm
             memAddress mem_addr;
+            printf("enter 0x03\n");
             switch (getfunc3()) {
                 case 0:             // LB rd, rs1, imm
                     mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
+                    printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
                     if(verbose) print_ins("LB", getrd(), getrs1(), immediate);
                     break;
                 case 1:             // LH rd, rs1, imm
                     mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
+                    printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
                     if(verbose) print_ins("LH", getrd(), getrs1(), immediate);
                     break;
                 case 2:             // LW rd, rs1, imm
                     mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
+                    printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
                     if(verbose) print_ins("LW", getrd(), getrs1(), immediate);
                     break;
                 case 4:             // LBU rd, rs1, imm
                     immediate = immediate & ~ONES(63, 12);
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
+                    printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
                     if(verbose) print_ins("LBU", getrd(), getrs1(), immediate);
                     break;
                 case 5:             // LHU rd, rs1, imm
                     immediate = immediate & ~ONES(63, 12);
                     mem_addr =  sim_regs.readReg(getrs1())+ immediate;
+                    printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
                     if(verbose) print_ins("LHU", getrd(), getrs1(), immediate);
                     break;
                 case 6:             // LWU rd, rs1, imm
                     immediate = immediate & ~ONES(63, 12);
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
+                    printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
                     if(verbose) print_ins("LWU", getrd(), getrs1(), immediate);
                     break;
                 case 3:             // LD rd, rs1, imm
+                    printf("start this inst..\n");
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
+                    printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_64(mem_addr));
                     if(verbose) print_ins("LD", getrd(), getrs1(), immediate);
                     break;
@@ -580,22 +592,26 @@ void instruction::execute_SX(){
     switch(getfunc3())
     {
         case 0://SB rs1, rs2, imm
-            mem_addr = (signed64)sim_regs.readReg(getrs2())+ immediate;
-            sim_mem.set_memory_8(mem_addr, (reg8)getrs1());
+            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
+            printf("mem_addr = 0x%lx\n", mem_addr);
+            sim_mem.set_memory_8(mem_addr, (reg8)getrs2());
             if(verbose) print_ins("SB", getrs1(), getrs2(), immediate);
             break;
         case 1://SH
-            mem_addr = (signed64)sim_regs.readReg(getrs2())+ immediate;
-            sim_mem.set_memory_16(mem_addr, (reg16)getrs1());
+            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
+            printf("mem_addr = 0x%lx\n", mem_addr);
+            sim_mem.set_memory_16(mem_addr, (reg16)getrs2());
             if(verbose) print_ins("SH", getrs1(), getrs2(), immediate);
             break;
         case 2://SW
-            mem_addr = (signed64)sim_regs.readReg(getrs2())+ immediate;
-            sim_mem.set_memory_32(mem_addr, (reg32)getrs1());
+            mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
+            printf("mem_addr = 0x%lx\n", mem_addr);
+            sim_mem.set_memory_32(mem_addr, (reg32)getrs2());
             if(verbose) print_ins("SW", getrs1(), getrs2(), immediate);
             break;
-        case 3://SD
+        case 3://SD rs1, rs2, imm
             mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
+            printf("mem_addr = 0x%lx\n", mem_addr);
             sim_mem.set_memory_64(mem_addr, (reg64)getrs2());
             if(verbose) print_ins("SD", getrs1(), getrs2(), immediate);
             break;
@@ -610,7 +626,7 @@ void instruction::execute_UX(){
             if((signed64)sim_regs.readReg(getrs1())  == (signed64)sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
-                newPC = (reg32)(sim_regs.getPC()+immediate);
+                newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
             }
             if(verbose) print_ins("BEQ", getrs1(), getrs2(), immediate);
@@ -619,7 +635,7 @@ void instruction::execute_UX(){
             if((signed64)sim_regs.readReg(getrs1())  != (signed64)sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
-                newPC = (reg32)(sim_regs.getPC()+immediate);
+                newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
             }
             if(verbose) print_ins("BNE", getrs1(), getrs2(), immediate);
@@ -628,7 +644,7 @@ void instruction::execute_UX(){
             if((signed64)sim_regs.readReg(getrs1())  < (signed64)sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
-                newPC = (reg32)(sim_regs.getPC()+immediate);
+                newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
             }
             if(verbose) print_ins("BLT", getrs1(), getrs2(), immediate);
@@ -637,7 +653,7 @@ void instruction::execute_UX(){
             if((signed64)sim_regs.readReg(getrs1())  >= (signed64)sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
-                newPC = (reg32)(sim_regs.getPC()+immediate);
+                newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
             }
             if(verbose) print_ins("BGE", getrs1(), getrs2(), immediate);
@@ -646,7 +662,7 @@ void instruction::execute_UX(){
             if(sim_regs.readReg(getrs1())  < sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
-                newPC = (reg32)(sim_regs.getPC()+immediate);
+                newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
             }
             if(verbose) print_ins("BLTU", getrs1(), getrs2(), immediate);
@@ -655,7 +671,7 @@ void instruction::execute_UX(){
             if(sim_regs.readReg(getrs1())  >= sim_regs.readReg(getrs2()))
             {
                 reg32 newPC;
-                newPC = (reg32)(sim_regs.getPC()+immediate);
+                newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
             }
             if(verbose) print_ins("BGEU", getrs1(), getrs2(), immediate);

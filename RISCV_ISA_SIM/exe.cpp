@@ -75,7 +75,6 @@ bool load_program(char const *file_name)
     sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size);         //locate to section .text
     memAddress program_entry_offset=(memAddress)(sec_header->sh_addr);                  //runtime virtual address aka. program entry address 0x10000
     //unsigned int code_size=(unsigned int)sec_header->sh_size;
-    //EXIT_POINT = program_entry_offset+code_size;                                       //set EXIT_POINT
     byte*  cur_p_mem=sim_mem.get_memory_p_address(program_entry_offset);        //copy segment from program entry offset
     
     
@@ -157,10 +156,11 @@ bool load_program(char const *file_name)
     /* ---- init regs ------*/
     if((byte *)main_virtual_address==NULL)
         printf("main virtual address invalid!\n");
-    sim_regs.setPC(main_virtual_address);                                       //set PC register
+    //sim_regs.setPC(main_virtual_address);                                       //set PC register
+    sim_regs.setPC(program_entry_offset);
     sim_regs.writeReg(zero, 0);
     sim_regs.writeReg(sp, STACK_TOP);
-    sim_regs.writeReg(ra, 65604); //0x10044
+    //sim_regs.writeReg(ra, 65604); //0x10044
     printf("sp = %lx\n", sim_regs.readReg(sp));
     
     
@@ -219,14 +219,11 @@ int main(int argc, char * argv[]){
     //reg32 lastPC = -1;
     //reg32 curPC = -1;
     while(1){
-        //if(sim_regs.getPC()==65604){
-        //    _exit = true;
-        //    break;
-       // }
         ins inst = fetch();
         printf("%x\n", inst);//debug
         instruction fetched_inst;
         if(fetched_inst.decode(inst) == true){
+            printf("start excute\n");
             fetched_inst.execute();
             if(_exit)
                 break;

@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
 
+#include <string.h>
 #include "system.h"
 #include "memory.hpp"
 
@@ -15,6 +16,7 @@ memory sim_mem;
 memory::memory()//initiaiize
 {
     mem_zero=(byte *)malloc(sizeof(char)*MEM_SIZE);
+    memset(mem_zero,0,MEM_SIZE);
 }
 
 byte* memory::get_memory_p_address(memAddress offset)
