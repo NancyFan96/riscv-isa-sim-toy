@@ -22,7 +22,8 @@
 #define SB_TYPE  3
 #define U_TYPE   4
 #define UJ_TYPE  5
-#define SCALL    6
+#define R4_TYPE  6
+#define SCALL    7
 
 /*          create a binary MASK like           */
 /*     value:  000... 00000111...1111000...000  */
@@ -33,11 +34,13 @@
 
 /* masks */                                          // bit LEN
 #define OPCODE     ONES(6,0)      // 7
+#define FUNCT2     ONES(26,25)    // 2
 #define FUNCT3     ONES(14,12)    // 3
 #define FUNCT7     ONES(31,25)    // 7
 #define RD         ONES(11,7)     // 5
 #define RS1        ONES(19,15)    // 5
 #define RS2        ONES(24,20)    // 5
+#define RS3        ONES(31,27)    // 5
 #define SHAMT      ONES(25,20)    // 6, RV64I
 #define IMM_SIGN(inst)   ((inst>>31)&1)               // sign of immediate
 
@@ -58,12 +61,16 @@ public:
     // bit3 set if rd is valid
     // bit4 set if rs1 is valid
     // bit5 set if rs2 is valid
+    // bit6 set if func2 is valid
+    // bit7 set if rs3 is valid
     imm immediate;
+    xcode func2;            // inst[25-26]
     xcode func3;            // inst[12-14]
     xcode func7;            // inst[25-31]
     regID rd;               // inst[7-11]
     regID rs1;              // inst[15-19]
     regID rs2;              // inst[20-24]
+    regID rs3;              // inst[27-31]
     
 public:
     instruction();
@@ -74,9 +81,11 @@ public:
     inline imm getImm();
     inline xcode getfunc3();
     inline xcode getfunc7();
+    inline xcode getfunc2();
     inline regID getrd();
     inline regID getrs1();
     inline regID getrs2();
+    inline regID getrs3();
     
     void execute();
     void execute_R64();
@@ -85,6 +94,8 @@ public:
     void execute_SX();
     void execute_UX();
     void execute_O();
+    void execute_R4();
+    void execute_FExt();
     
     void print_ins(const char* inst_name, regID rd, regID rs1, regID rs2);
     void print_ins(const char* inst_name, regID r1, regID r2, imm imm0);

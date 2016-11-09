@@ -71,7 +71,7 @@ bool  memory::set_memory_32(memAddress addr, reg32 value)
 bool  memory::set_memory_64(memAddress addr, reg64 value)
 {
     byte* v_addr=get_memory_p_address(addr);
-    printf("0x%lx\n", (reg64)v_addr);
+    //printf("0x%lx\n", (reg64)v_addr);
     if(v_addr==NULL)
     {
         printf("unvalid memory address\n");
@@ -79,22 +79,22 @@ bool  memory::set_memory_64(memAddress addr, reg64 value)
     }
     reg64* p_u64=(reg64*)v_addr;
     *p_u64=value;
-    printf("*v_addr = 0x%x\n", *v_addr);
-    printf("*p_u64 = 0x%lx\n", *p_u64);
+    //printf("*v_addr = 0x%x\n", *v_addr);
+    //printf("*p_u64 = 0x%lx\n", *p_u64);
     return true;
 }
 reg64 memory::get_memory_64(memAddress addr)
 {
     byte* v_addr=get_memory_p_address(addr);
-    printf("0x%lx\n", (reg64)v_addr);
-    printf("*v_addr = 0x%x", *v_addr);
+    //printf("0x%lx\n", (reg64)v_addr);
+    //printf("*v_addr = 0x%x", *v_addr);
     if(v_addr==NULL)
     {
         printf("invalid memory address\n");
         return -1;
     }
     reg64* p_u64=(reg64*)v_addr;
-    printf("*p_u64 = 0x%lx\n", *p_u64);
+    //printf("*p_u64 = 0x%lx\n", *p_u64);
     return (*p_u64);
     
 }

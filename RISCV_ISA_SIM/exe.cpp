@@ -18,10 +18,10 @@
 
 using namespace std;
 
-#ifdef GDB
 static memAddress breakpoint;
 static bool ONESTEP = false;
-#endif
+static bool GDB_MODE =false;
+static bool FIRST_INST = false;
 
 bool verbose = false;
 bool debug = false;
@@ -55,13 +55,13 @@ bool load_program(char const *file_name)
     file_buffer=(unsigned char*)malloc(sizeof(unsigned char)*file_size);    //read file into file_buffer
     if(fread(file_buffer,sizeof(char),file_size,file_in)<file_size)
     {
-        printf("fail to read the entire file!\n");
+        printf("Fail to read the entire file!\n");
         return false;
         
     }
     else
     {
-        printf("read file successfully!\n");
+        printf("Read file successfully!\n");
     }
     
     /*copy segments in ELF file to simulator memory*/
@@ -97,7 +97,7 @@ bool load_program(char const *file_name)
         seg_header=(Elf64_Phdr*)((unsigned char*)seg_header+seg_header_entry_size);//next segment entry
         
     }
-    printf("end of segment copy\n");
+    //printf("end of segment copy\n");
     
     Elf64_Half  sec_num=elf_header->e_shnum;//number of sections
     sec_header=(Elf64_Shdr*)((unsigned char*)elf_header+elf_header->e_shoff);//locate to first section
@@ -134,8 +134,8 @@ bool load_program(char const *file_name)
                     test_name[name_cnt]='\0';//get symbol name
                     if(strcmp(test_name,"main")==0)
                     {
-                        printf("main found!\n");
-                        printf("main virtual address is:%lx\n",st_value);
+                        //printf("main found!\n");
+                        //printf("main virtual address is:%lx\n",st_value);
                         main_virtual_address=(memAddress)st_value;//st_value is an unsigned long int
                         break;
                     }
@@ -161,7 +161,6 @@ bool load_program(char const *file_name)
     sim_regs.writeReg(zero, 0);
     sim_regs.writeReg(sp, STACK_TOP);
     //sim_regs.writeReg(ra, 65604); //0x10044
-    printf("sp = %lx\n", sim_regs.readReg(sp));
     
     
     
@@ -181,6 +180,72 @@ ins fetch(){
     return inst;
 }
 
+//gdb mode execute function
+void gdb_mode_func(void)
+{
+    char cmd[10];
+    memAddress break_addr=0;
+    memAddress debug_mem=0;
+    reg32 mem_content=0;
+    printf("breakpoint is %lx\n",breakpoint);
+    if(ONESTEP)
+        printf("step mode\n");
+    printf("(gdb)>");
+    scanf("%s",cmd);        //read command
+    fflush(stdin);          //clean stdin buffer
+    
+    switch (cmd[0])
+    {
+        case 'b':
+            printf("(gdb)>set breakpoint address\n");
+            ONESTEP=false;              //quit step mode
+            scanf("%lx",&break_addr);   //set breakpoint addresss
+            breakpoint=break_addr;
+            break;
+            
+        case 'c':
+            printf("continue running\n");
+            break;
+            
+        case 's':
+            printf("set step mode\n");
+            ONESTEP=true;
+            break;
+            
+            //print content in memory
+        case 'm':
+            printf("(gdb)>set memory address\n");
+            scanf("%lx",&debug_mem);
+            for(int row=0;row<4;++row){
+                for(int col=0;col<4;++col){
+                    mem_content=sim_mem.get_memory_32(debug_mem);
+                    printf("0x%08x",mem_content);
+                    printf("    ");
+                    debug_mem+=4;
+                }
+                printf("\n");
+            }
+            
+            
+            break;
+            
+        case 'q':
+            printf("quit gdb mode\n");
+            GDB_MODE=false;
+            break;
+            
+            
+            
+        default:
+            printf("invalid command\n");
+            printf("quit gdb mode\n");
+            GDB_MODE=false;
+            break;
+    }
+    
+    
+}
+
 
 int main(int argc, char * argv[]){
     /*--------- prase ---------*/
@@ -190,40 +255,54 @@ int main(int argc, char * argv[]){
         return 0;
     }
     if(argc == 3) {
-#ifdef GDB
+        /*-------gbd mode--------*/
         if (strcmp(argv[2], "--debug") == 0){
             printf("Debug mode\n\n");
-            breakpoint = sim_regs.getPC();
-            verbose = true;
+            FIRST_INST = true;
+            GDB_MODE=true;
+            //verbose = true;
         }
-#endif
+        
         if (strcmp(argv[2], "--verbose") == 0)
             verbose = true;
     }
     const char * file_name = argv[1];
-    
     /*---------END prase ---------*/
     
-    printf("spid = %d, sp = %lx\n", sp, sim_regs.readReg(sp));
 
     if(load_program(file_name)==true){
-        cout << "EXCUTE "<< file_name <<"..." << endl;
+        printf("\nsp = %lx\n", sim_regs.readReg(sp));
+        printf("PC = %lx...\n",sim_regs.getPC());
+        cout << "EXCUTE "<< file_name <<"...\n" << endl;
     }
     else{
         cout << "LOAD ERROR!" << endl;
         return -1;
     }
-    printf("sp = %lx\n", sim_regs.readReg(sp));
-    sim_regs.readReg();
-
-    //reg32 lastPC = -1;
-    //reg32 curPC = -1;
+    
     while(1){
         ins inst = fetch();
-        printf("%x\n", inst);//debug
+        if(verbose)
+            printf("%x\n", inst);//debug
+        
+        /*-----------gdb mode------------*/
+        if (GDB_MODE&&FIRST_INST) {
+            printf("gdb first entry\n");
+            breakpoint=sim_regs.getPC()-4;      //break point <- current PC; fetched but not executed!
+            gdb_mode_func();                    //enter gdb mode function
+            FIRST_INST=false;
+        }
+        if(GDB_MODE&&!FIRST_INST){
+            if(ONESTEP)
+                breakpoint=sim_regs.getPC()-4;
+            if(breakpoint==sim_regs.getPC()-4){     //breakpoint==current PC or step mode
+                gdb_mode_func();
+            }
+        }
+        
         instruction fetched_inst;
         if(fetched_inst.decode(inst) == true){
-            printf("start excute\n");
+            //printf("start excute\n");
             fetched_inst.execute();
             if(IS_TO_EXIT)
                 break;

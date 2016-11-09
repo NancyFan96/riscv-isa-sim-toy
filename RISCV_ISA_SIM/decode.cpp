@@ -8,6 +8,8 @@
 
 #include <string.h>
 #include <unistd.h>
+#include <fenv.h>
+#include <math.h>
 #include "system.h"
 #include "decode.hpp"
 #include "register.hpp"
@@ -30,22 +32,27 @@ instruction::instruction()
 void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs2){
     printf("instruction:\t %s %d, %d, %d\n", inst_name, rd, rs1, rs2);
     sim_regs.readReg();
+    sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name, regID r1, regID r2, imm imm0){
     printf("instruction:\t %s %d, %d, %ld\n", inst_name, r1, r2, imm0);
     sim_regs.readReg();
+    sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name, regID rx, imm imm0){
     printf("instruction:\t %s %d, 0x%lx\n", inst_name, rx, imm0);
     sim_regs.readReg();
+    sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name, regID rx){
     printf("instruction:\t %s %d\n", inst_name, rx);
     sim_regs.readReg();
+    sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name){
     printf("instruction:\t %s\n", inst_name);
     sim_regs.readReg();
+    sim_regs.readFloatReg();
 }
 
 bool instruction::getType(ins inst){
@@ -59,6 +66,7 @@ bool instruction::getType(ins inst){
     {
         case 0x3B:      // b0111011
         case 0x33:      // b0110011
+        case 0x53:      // b1010011 -- F extension
             optype =  R_TYPE;
             tag = 62;   // b111110 | 32+16+8+4+2
             return true;
@@ -67,12 +75,14 @@ bool instruction::getType(ins inst){
         case 0x03:      // b0000011
         case 0x13:      // b0010011
         case 0x1B:
+        case 0x07:      // -- F extension
             //case 0x73:      // b1110011
             optype =  I_TYPE;
             tag = 27;    // b011011 | 16+8+2+1
             return true;
             
         case 0x23:      // b0100011
+        case 0x27:      // b0100111 -- F extension
             optype =  S_TYPE;
             tag = 51;    // b110011 | 32+16+2+1
             return true;
@@ -92,6 +102,12 @@ bool instruction::getType(ins inst){
             optype =  UJ_TYPE;
             tag = 9;    // b001001
             return true;
+        case 0x43:
+        case 0x47:
+        case 0x4B:
+        case 0x4F:
+            optype = R4_TYPE;
+            tag = 250;     // b11111010
         default:
             return false;
     }
@@ -101,17 +117,17 @@ bool instruction::getType(ins inst){
 bool instruction::setIMM(ins inst){
     switch(optype)
     {
-            /*R type
+            /*R,R4,SCALL type
              no immediate*/
         case R_TYPE:
         case SCALL:
+        case R4_TYPE:
             return true;
             /*I type
              31----------20 imm[0]~imm[11]
              shamt SRAI SRLI SLLI*/
         case I_TYPE:
             immediate = ((inst&ONES(31,20)) >> 20) | (IMM_SIGN(inst)*ONES(63, 11));
-            printf("%d %lx\n", (IMM_SIGN(inst)), ONES(63, 11) );
             return true;
             /*S type
              31-----25-------------11---7
@@ -149,6 +165,14 @@ bool instruction::decode(ins inst){
         case SCALL:
             return true;
             /* rs2,rs1,rd,func7,func3*/
+        case R4_TYPE:
+            func3 = ((inst&FUNCT3) >> 12);
+            func2 = ((inst&FUNCT2) >> 25);
+            rd = ((inst&RD) >> 7);
+            rs1 = ((inst&RS1) >> 15);
+            rs2 = ((inst&RS2) >> 20);
+            rs3 = ((inst&RS3) >> 27);
+            return true;
         case R_TYPE:
             func3 = ((inst&FUNCT3) >> 12);
             func7 = ((inst&FUNCT7) >> 25);
@@ -161,7 +185,6 @@ bool instruction::decode(ins inst){
             func3 = ((inst&FUNCT3) >> 12);
             rd = ((inst&RD) >> 7);
             rs1 = ((inst&RS1) >> 15);
-            printf("finish decode!\n");
             return true;
             /*rs2,rs1,func3*/
         case S_TYPE:
@@ -194,6 +217,13 @@ imm instruction:: getImm(){
     else{
         printf("Warning: Invalid immediate in instruction is used!\n");
         return immediate;
+    }
+}
+xcode instruction:: getfunc2(){
+    if(tag&64)   return func2;
+    else{
+        printf("Warning: Invalid func2 in instruction is used!\n");
+        return func2;
     }
 }
 
@@ -234,6 +264,13 @@ regID instruction:: getrs2(){
         return rs2;
     }
 }
+regID instruction:: getrs3(){
+    if(tag&128)   return rs3;
+    else{
+        printf("Warning: Invalid rs3 in instruction is used!\n");
+        return rs3;
+    }
+}
 
 
 // only valid instruction will enter this function
@@ -242,22 +279,35 @@ void instruction::execute(){
         if(sim_regs.readReg(a7) == 93 && sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             // exit_program
             IS_TO_EXIT = true;
-            print_ins("Prog Exited!");
+            if(verbose) print_ins("Prog Exited!");
+            else
+                printf("Prog Exited!");
         }
         if(sim_regs.readReg(a7) == 63 && sim_regs.readReg(a3) == 0){
             // read
+            printf("read.. ");
 			int fd = (int)sim_regs.readReg(a0);
 			void * buf = (void*)sim_regs.readReg(a1);
 			size_t count = (size_t)sim_regs.readReg(a2);
 			read(fd, buf, count);
+            printf("read\n");
         }
         if(sim_regs.readReg(a7) == 64 && sim_regs.readReg(a3) == 0){
             // write
+            printf("write.. ");
 			int fd = (int)sim_regs.readReg(a0);
 			void * buf = (void*)sim_regs.readReg(a1);
 			size_t count = (size_t)sim_regs.readReg(a2);
 			write(fd, buf, count);
+            printf("write\n");
         }
+        return;
+    }
+    
+    if(optype == R4_TYPE){
+        /*------RV64F-I.-----*/
+        execute_R4();
+        printf("Warning: R4 hasn't been finished\n");
         return;
     }
     switch(opcode){
@@ -277,7 +327,6 @@ void instruction::execute(){
         case 0x03:      // b0000011,LB,LH,LW,LBU,LHU,LWU,LD
         case 0x67:      // b1100111,JALR
         case 0x6F:      // b1101111,JAL
-            printf("excute-I:\n");
             execute_I();
             break;
         case 0x3B:      // b0111011,ADDW,SUBW,SLLW,SRLW,SRAW
@@ -286,7 +335,162 @@ void instruction::execute(){
         case 0x63:      // b1100011,BEQ,BNE,BLT,BGE,BLTU,BGEU
             execute_UX();
             break;
+            
+            /*------RV64F-II.-----*/
+        case 0x07:
+        case 0x27:
+        case 0x53:
+            execute_FExt();
+            break;
         default:;
+    }
+    
+}
+
+void instruction::execute_R4(){
+    
+}
+
+void instruction::execute_FExt(){
+    if(opcode == 0x07){
+        // FLW, FLD rd, rs1, imm, from mem to rd
+        memAddress mem_addr;
+        if(getfunc3()==2){//FLW
+            mem_addr = sim_regs.readReg(getrs1())+immediate;
+            sim_regs.writeFloatReg(getrd(), (f32)sim_mem.get_memory_32(mem_addr));
+            if(verbose) print_ins("FLW", getrd(), getrs1(), immediate);
+        }
+        else if(getfunc3()==3){
+            mem_addr = sim_regs.readReg(getrs1())+immediate;
+            sim_regs.writeFloatReg(getrd(), (f64)sim_mem.get_memory_64(mem_addr));
+            if(verbose) print_ins("FLD", getrd(), getrs1(), immediate);
+        }
+        else{
+            printf("undefined instruction with opcode = 0x07\n");
+        }
+    }
+    else if(opcode == 0x27){
+        // FSW, FSW rs1, rs2, imm, from rs2 to mem
+        memAddress mem_addr;
+        if(getfunc3()==2){//FLW
+            mem_addr = sim_regs.readReg(getrs1())+immediate;
+            sim_mem.set_memory_32(mem_addr, (f32)sim_regs.readFloatReg(getrs2()));
+            if(verbose) print_ins("FSW", getrs1(), getrs2(), immediate);
+        }
+        else if(getfunc3()==3){
+            mem_addr = sim_regs.readReg(getrs1())+immediate;
+            sim_mem.set_memory_64(mem_addr, sim_regs.readFloatReg(getrs2()));
+            if(verbose) print_ins("FSD", getrs1(), getrs2(), immediate);
+        }
+        else{
+            printf("undefined instruction with opcode = 0x27\n");
+        }
+    }
+    else if(opcode == 0x53){
+        //int roundingmode = 0 | getfunc3();
+        //fesetenv((fenv_t)roundingmode);
+        // XXX rd, rs1, rs2
+        switch (getfunc7()) {
+            case 0:
+                // FADD.S
+                sim_regs.writeFloatReg(getrd(), (f32)sim_regs.readFloatReg(getrs1())+(f32)sim_regs.readFloatReg(getrs2()));
+                if(verbose) print_ins("FADD.S", getrd(), getrs1(), getrs2());
+                break;
+            case 1:
+                // FADD.D
+                sim_regs.writeFloatReg(getrd(), (f64)sim_regs.readFloatReg(getrs1())+(f64)sim_regs.readFloatReg(getrs2()));
+                if(verbose) print_ins("FADD.D", getrd(), getrs1(), getrs2());
+                break;
+            case 4:
+                // FSUB.S
+                sim_regs.writeFloatReg(getrd(), (f32)sim_regs.readFloatReg(getrs1())-(f32)sim_regs.readFloatReg(getrs2()));
+                if(verbose) print_ins("FSUB.S", getrd(), getrs1(), getrs2());
+                break;
+            case 5:
+                // FSUB.D
+                sim_regs.writeFloatReg(getrd(), (f64)sim_regs.readFloatReg(getrs1())-(f64)sim_regs.readFloatReg(getrs2()));
+                if(verbose) print_ins("FSUB.D", getrd(), getrs1(), getrs2());
+                break;
+            case 8:
+                // FMUL.S
+                sim_regs.writeFloatReg(getrd(), (f32)sim_regs.readFloatReg(getrs1())*(f32)sim_regs.readFloatReg(getrs2()));
+                if(verbose) print_ins("FMUL.S", getrd(), getrs1(), getrs2());
+                break;
+            case 9:
+                // FMUL.D
+                sim_regs.writeFloatReg(getrd(), (f64)sim_regs.readFloatReg(getrs1())*(f64)sim_regs.readFloatReg(getrs2()));
+                if(verbose) print_ins("FMUL.D", getrd(), getrs1(), getrs2());
+                break;
+            case 12:
+                // FDIV.S
+                sim_regs.writeFloatReg(getrd(), (f32)sim_regs.readFloatReg(getrs1())/(f32)sim_regs.readFloatReg(getrs2()));
+                if(verbose) print_ins("FDIV.S", getrd(), getrs1(), getrs2());
+                break;
+            case 13:
+                // FDIV.D
+                sim_regs.writeFloatReg(getrd(), (f64)sim_regs.readFloatReg(getrs1())/(f64)sim_regs.readFloatReg(getrs2()));
+                if(verbose) print_ins("FDIV.D", getrd(), getrs1(), getrs2());
+                break;
+            case 0x50:
+                // FEQ.S, FLT.S, FLE.S
+                if(getfunc3()==2){//FEQ
+                    if((f32)sim_regs.readFloatReg(getrs1())==(f32)sim_regs.readFloatReg(getrs2()))
+                        sim_regs.writeReg(getrd(), 1);
+                    else
+                        sim_regs.writeReg(getrd(), 0);
+                    if(verbose) print_ins("FEQ.D", getrd(), getrs1(), getrs2());
+                }
+                else if(getfunc3()==1){//FLT
+                    if((f32)sim_regs.readFloatReg(getrs1())<(f32)sim_regs.readFloatReg(getrs2()))
+                        sim_regs.writeReg(getrd(), 1);
+                    else
+                        sim_regs.writeReg(getrd(), 0);
+                    if(verbose) print_ins("FLT.D", getrd(), getrs1(), getrs2());
+                }
+                else if(getfunc3()==0){//FLE
+                    if((f32)sim_regs.readFloatReg(getrs1())<=(f32)sim_regs.readFloatReg(getrs2()))
+                        sim_regs.writeReg(getrd(), 1);
+                    else
+                        sim_regs.writeReg(getrd(), 0);
+                    if(verbose) print_ins("FLE.D", getrd(), getrs1(), getrs2());
+                }
+                else{
+                    printf("undefined instruction with opcode=0x53, func7=0x50\n");
+                }
+                break;
+            case 0x51:
+                // FEQ.D, FLT.D, FLE.D
+                if(getfunc3()==2){//FEQ
+                    if(sim_regs.readFloatReg(getrs1())==sim_regs.readFloatReg(getrs2()))
+                        sim_regs.writeReg(getrd(), 1);
+                    else
+                        sim_regs.writeReg(getrd(), 0);
+                    if(verbose) print_ins("FEQ.D", getrd(), getrs1(), getrs2());
+                }
+                else if(getfunc3()==1){//FLT
+                    if(sim_regs.readFloatReg(getrs1())<sim_regs.readFloatReg(getrs2()))
+                        sim_regs.writeReg(getrd(), 1);
+                    else
+                        sim_regs.writeReg(getrd(), 0);
+                    if(verbose) print_ins("FLT.D", getrd(), getrs1(), getrs2());
+                }
+                else if(getfunc3()==0){//FLE
+                    if(sim_regs.readFloatReg(getrs1())<=sim_regs.readFloatReg(getrs2()))
+                        sim_regs.writeReg(getrd(), 1);
+                    else
+                        sim_regs.writeReg(getrd(), 0);
+                    if(verbose) print_ins("FLE.D", getrd(), getrs1(), getrs2());
+                }
+                else{
+                    printf("undefined instruction with opcode=0x53, func7=0x51\n");
+                }
+
+            default:
+                break;
+        }
+    }
+    else{
+        printf("undefined instruction in FExt\n");
     }
     
 }
@@ -442,47 +646,47 @@ void instruction::execute_I(){
             switch (getfunc3()) {
                 case 0:             // LB rd, rs1, imm
                     mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-                    printf("mem_addr = 0x%lx\n", mem_addr);
+                    //printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
                     if(verbose) print_ins("LB", getrd(), getrs1(), immediate);
                     break;
                 case 1:             // LH rd, rs1, imm
                     mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-                    printf("mem_addr = 0x%lx\n", mem_addr);
+                    //printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
                     if(verbose) print_ins("LH", getrd(), getrs1(), immediate);
                     break;
                 case 2:             // LW rd, rs1, imm
                     mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-                    printf("mem_addr = 0x%lx\n", mem_addr);
+                    //printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
                     if(verbose) print_ins("LW", getrd(), getrs1(), immediate);
                     break;
                 case 4:             // LBU rd, rs1, imm
                     immediate = immediate & ~ONES(63, 12);
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
-                    printf("mem_addr = 0x%lx\n", mem_addr);
+                    //printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
                     if(verbose) print_ins("LBU", getrd(), getrs1(), immediate);
                     break;
                 case 5:             // LHU rd, rs1, imm
                     immediate = immediate & ~ONES(63, 12);
                     mem_addr =  sim_regs.readReg(getrs1())+ immediate;
-                    printf("mem_addr = 0x%lx\n", mem_addr);
+                    //printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
                     if(verbose) print_ins("LHU", getrd(), getrs1(), immediate);
                     break;
                 case 6:             // LWU rd, rs1, imm
                     immediate = immediate & ~ONES(63, 12);
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
-                    printf("mem_addr = 0x%lx\n", mem_addr);
+                    //printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
                     if(verbose) print_ins("LWU", getrd(), getrs1(), immediate);
                     break;
                 case 3:             // LD rd, rs1, imm
                     //printf("start this inst..\n");
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
-                    printf("mem_addr = 0x%lx\n", mem_addr);
+                    //printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_64(mem_addr));
                     if(verbose) print_ins("LD", getrd(), getrs1(), immediate);
                     break;
@@ -603,25 +807,25 @@ void instruction::execute_SX(){
     {
         case 0://SB rs1, rs2, imm
             mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-            printf("mem_addr = 0x%lx\n", mem_addr);
+            //printf("mem_addr = 0x%lx\n", mem_addr);
             sim_mem.set_memory_8(mem_addr, (reg8)sim_regs.readReg(getrs2()));
             if(verbose) print_ins("SB", getrs1(), getrs2(), immediate);
             break;
         case 1://SH
             mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-            printf("mem_addr = 0x%lx\n", mem_addr);
+            //printf("mem_addr = 0x%lx\n", mem_addr);
             sim_mem.set_memory_16(mem_addr, (reg16)sim_regs.readReg(getrs2()));
             if(verbose) print_ins("SH", getrs1(), getrs2(), immediate);
             break;
         case 2://SW
             mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-            printf("mem_addr = 0x%lx\n", mem_addr);
+            //printf("mem_addr = 0x%lx\n", mem_addr);
             sim_mem.set_memory_32(mem_addr, (reg32)sim_regs.readReg(getrs2()));
             if(verbose) print_ins("SW", getrs1(), getrs2(), immediate);
             break;
         case 3://SD rs1, rs2, imm
             mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
-            printf("mem_addr = 0x%lx\n", mem_addr);
+            //printf("mem_addr = 0x%lx\n", mem_addr);
             sim_mem.set_memory_64(mem_addr, (reg64)sim_regs.readReg(getrs2()));
             if(verbose) print_ins("SD", getrs1(), getrs2(), immediate);
             break;
