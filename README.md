@@ -12,9 +12,11 @@ TO DO:
 
 * start PC from \<main\>【错误】==> 必须从entry point开始，否则mac下可以，linux下segmemtation fault
 * complete static variable init (已经实现?)> THIS TWO are both about SYMBOL TABLE
-* complete ecall to realize exit√, printf\* and so on
+* complete ecall to realize exit√, printf\* and so on//进入了ecall但没有调用成功
 * need to realize MALLOC\* (已经实现？)
 * try to get some bonus（gdb? M extension）
+
+6.1 commit: Add gdb.1.0, some float extension(still have bugs
 
 5.2 commit: fixed some bugs, j,branch,store指令语义错(当前PC)，store手癌存了寄存器编号
 
