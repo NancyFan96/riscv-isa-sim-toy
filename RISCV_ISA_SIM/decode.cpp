@@ -7,6 +7,7 @@
 //
 
 #include <string.h>
+#include <unistd.h>
 #include "system.h"
 #include "decode.hpp"
 #include "register.hpp"
@@ -240,14 +241,22 @@ void instruction::execute(){
     if(optype == SCALL){
         if(sim_regs.readReg(a7) == 93 && sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             // exit_program
-            _exit = true;
+            IS_TO_EXIT = true;
             print_ins("Prog Exited!");
         }
         if(sim_regs.readReg(a7) == 63 && sim_regs.readReg(a3) == 0){
             // read
+			int fd = (int)sim_regs.readReg(a0);
+			void * buf = (void*)sim_regs.readReg(a1);
+			size_t count = (size_t)sim_regs.readReg(a2);
+			read(fd, buf, count);
         }
         if(sim_regs.readReg(a7) == 64 && sim_regs.readReg(a3) == 0){
             // write
+			int fd = (int)sim_regs.readReg(a0);
+			void * buf = (void*)sim_regs.readReg(a1);
+			size_t count = (size_t)sim_regs.readReg(a2);
+			write(fd, buf, count);
         }
         return;
     }

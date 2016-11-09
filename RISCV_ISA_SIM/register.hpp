@@ -56,17 +56,27 @@
 class registers {
 public:
     byte* PC;
+    f64 fcdr;
     reg64 rrx[32];
+    f64 frx[32];
     
 public:
     registers();
-    void readReg();          // for debug                      //
+    void readReg();                                 // for debug      
     reg64 readReg(regID regDst);                    //
     bool writeReg(regID regDst, reg64 value);       // if success return true, else return false
-    //bool writeReg(regID regDst, regID regSrc);      // if success return true, else return false
+    //bool writeReg(regID regDst, regID regSrc);    // if success return true, else return false
     reg64 getPC();                                  //
     bool setPC(reg64 newPC);                        // if success return true, else return false
     void incPC();                                   // PC to next instruction
+
+    void readFloatReg();                              // for debug         
+    f64 readFloatReg(regID regDst);                   //
+    bool writeFloatReg(regID regDst, f64 value);      // if success return true, else return false
+    //bool writeReg(regID regDst, regID regSrc);      // if success return true, else return false
+    f64 getFCDR();                                    //
+    bool setFCDR(f64 newFCDR);                        // if success return true, else return false
+
 };
 /* ------- END define registers file ------- */
 

@@ -25,7 +25,7 @@ static bool ONESTEP = false;
 
 bool verbose = false;
 bool debug = false;
-bool _exit = false;
+bool IS_TO_EXIT = false;
 
 void help()
 {
@@ -225,7 +225,7 @@ int main(int argc, char * argv[]){
         if(fetched_inst.decode(inst) == true){
             printf("start excute\n");
             fetched_inst.execute();
-            if(_exit)
+            if(IS_TO_EXIT)
                 break;
         }
         else{

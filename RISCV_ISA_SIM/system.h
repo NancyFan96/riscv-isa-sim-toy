@@ -32,6 +32,9 @@ typedef unsigned short int  reg16;
 typedef unsigned char       reg8;
 typedef unsigned char       regID;
 
+typedef float	f32;
+typedef double	f64;
+
 typedef signed long int     signed64;
 typedef signed int          signed32;
 typedef signed short int    signed16;

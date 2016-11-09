@@ -98,7 +98,7 @@ public:
 
 extern bool verbose;
 extern bool debug;
-extern bool _exit;
+extern bool IS_TO_EXIT;
 extern registers sim_regs;
 extern memory sim_mem;
 
