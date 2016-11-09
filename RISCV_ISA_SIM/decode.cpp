@@ -298,6 +298,7 @@ void instruction::execute(){
 			int fd = (int)sim_regs.readReg(a0);
 			void * buf = (void*)sim_regs.readReg(a1);
 			size_t count = (size_t)sim_regs.readReg(a2);
+            printf("args: fd = %d, buf_p = %lx, count(byte) = %d\n", fd, (reg64)buf, (int)count);
 			write(fd, buf, count);
             printf("write\n");
         }
@@ -316,6 +317,7 @@ void instruction::execute(){
             execute_SX();
             break;
         case 0x33:      // b0110011,ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
+                        // MUL, MULH, MULHSH, MULHU, DIV, DIVU, REM, REMU
             execute_R();
             break;
         case 0x37:      // b0110111, LUI
@@ -330,6 +332,7 @@ void instruction::execute(){
             execute_I();
             break;
         case 0x3B:      // b0111011,ADDW,SUBW,SLLW,SRLW,SRAW
+                        // MULW,DIVW, DIVUW, REMW, REMUW
             execute_R64();
             break;
         case 0x63:      // b1100011,BEQ,BNE,BLT,BGE,BLTU,BGEU
@@ -513,6 +516,8 @@ void instruction::execute_O()
 //execute R type
 void instruction::execute_R()
 {
+    /*****************NEED TO DO*******************/
+    /*// MUL, MULH, MULHSH, MULHU, DIV, DIVU, REM, REMU*/
     if(getfunc7() == 0){
         switch(getfunc3()){
             case 0x00: //b000 add
@@ -578,6 +583,9 @@ void instruction::execute_R()
 // opcode = 3B
 void instruction::execute_R64()
 {
+    /*****************NEED TO DO*******************/
+    /*// MULW,DIVW, DIVUW, REMW, REMUW*/
+    
     if(getfunc7()==0x00){
         switch(getfunc3()){
             case 0x00: //b000 addw
