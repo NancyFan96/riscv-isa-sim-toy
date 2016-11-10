@@ -297,6 +297,7 @@ void instruction::execute(){
 			size_t count = (size_t)sim_regs.readReg(a2);
 			read(fd, buf, count);
             printf("read\n");
+            if(verbose) print_ins("READ");
         }
         if(sim_regs.readReg(a7) == 64 && sim_regs.readReg(a3) == 0){
             // write
@@ -304,9 +305,10 @@ void instruction::execute(){
 			int fd = (int)sim_regs.readReg(a0);
 			void * buf = (void*)sim_regs.readReg(a1);
 			size_t count = (size_t)sim_regs.readReg(a2);
-            printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...", fd, (reg64)buf, (int)count);
+            printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...\n", fd, (reg64)buf, (int)count);
+            fflush(stdout);
 			write(fd, buf, count);
-            printf("write\n");
+            if(verbose) print_ins("WRITE");
         }
         return;
     }
