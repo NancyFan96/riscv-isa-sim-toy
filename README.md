@@ -16,6 +16,8 @@ TO DO:
 * need to realize MALLOC\* (已经实现？)
 * try to get some bonus（gdb? M extension）
 
+6.2 commit: Add M extesion, fixed gdb & ecall's args, still gdb input bugs and read&write bug
+
 6.1 commit: Add gdb.1.0, some float extension(still have bugs
 
 5.2 commit: fixed some bugs, j,branch,store指令语义错(当前PC)，store手癌存了寄存器编号
