@@ -8,7 +8,7 @@ HDR=	system.h exe.hpp memory.hpp register.hpp decode.hpp
 all: 	$(PROC)
 
 exe: 	$(SRC) $(HDR)
-	$(CC) -o $(PROC) *.cpp
+	$(CC) -o $(PROC) *.cpp -Wall
 
 
 clean:

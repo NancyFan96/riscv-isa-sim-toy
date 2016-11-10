@@ -114,7 +114,7 @@ bool load_program(char const *file_name)
     Elf64_Shdr* strtab_sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size*(sec_num-1));//locate to section header of string table
     Elf64_Off strtab_offset=strtab_sec_header->sh_offset;//read string table offset offset
     unsigned char* p_strtab=(unsigned char*)elf_header+strtab_offset;//point to the beginning of string table
-    memAddress main_virtual_address; // change
+    memAddress main_virtual_address = 0; // change
     
     for(int cnt=0;cnt<sec_num;++cnt)//for each section
     {
@@ -123,7 +123,7 @@ bool load_program(char const *file_name)
         {
             Elf64_Off symtab_offset=sec_header->sh_offset;
             Elf64_Xword   sh_size=sec_header->sh_size;
-            unsigned long int symtab_num=sh_size/sizeof(Elf64_Sym);//number of entries in symbol table
+            long int symtab_num=sh_size/sizeof(Elf64_Sym);//number of entries in symbol table
             Elf64_Sym* p_symtab=(Elf64_Sym*)((unsigned char*)elf_header+symtab_offset);//locate to the first entry
             for(int entry_cnt=0;entry_cnt<symtab_num;++entry_cnt)//for each entry
             {

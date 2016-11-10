@@ -16,6 +16,8 @@ TO DO:
 * need to realize MALLOC\* (已经实现？)
 * try to get some bonus（gdb? M extension）
 
+6.3 commit: printf can work, scanf has bugs with initalization, 指针一定要初始化！
+
 6.2 commit: Add M extesion, fixed gdb & ecall's args, still gdb input bugs and read&write bug
 
 6.1 commit: Add gdb.1.0, some float extension(still have bugs
