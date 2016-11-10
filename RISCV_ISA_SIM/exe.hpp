@@ -17,7 +17,7 @@
 
 bool load_program(const char* filename);    // if success return true, else return false
 ins fetch();                        // return instruction and PC inc
-bool exit_program();                        // if success return true, else return false
+void exit_program();                        // if success return true, else return false
 
 
 /*------------- define ELF --------------*/
@@ -122,6 +122,19 @@ typedef struct
     Elf64_Addr    st_value;               /* Symbol value  This member gives the value of the associated symbol.*/
     Elf64_Xword   st_size;                /* Symbol size */
 } Elf64_Sym;
+
+
+
+#define continue_run 0
+#define step 1
+#define set_breakpoint 2
+#define delete_breakpoint 3
+#define print_mem 4
+#define print_reg 5
+#define quit_gdb 6
+#define undefined_gdb 7
+
+
 
 #endif /* exe_hpp */
 

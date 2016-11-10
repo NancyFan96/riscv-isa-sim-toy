@@ -18,14 +18,20 @@
 
 using namespace std;
 
-static memAddress breakpoint;
-static bool ONESTEP = false;
-static bool GDB_MODE =false;
-static bool FIRST_INST = false;
+bool GDB_MODE =false;
+static int GDB_TYPE;
+static bool VALID_BREAKPOINT=false;
+static memAddress breakpoint = 0;
+static bool IS_ENTER_STEP = false;
+static bool IS_FIRST_GDB = false;
+static bool IS_NOP = false;
+static bool WAIT = false;
+
+static memAddress currentPC;
 
 bool verbose = false;
-bool debug = false;
 bool IS_TO_EXIT = false;
+bool IS_TO_DO = false;
 
 void help()
 {
@@ -44,6 +50,7 @@ bool load_program(char const *file_name)
     
     file_in=fopen(file_name,"rb");
     if (file_in==NULL) {
+        if(GDB_MODE)    printf("> ");
         printf("cannot open the file : %s \n",file_name);
         return false;
     }
@@ -55,12 +62,14 @@ bool load_program(char const *file_name)
     file_buffer=(unsigned char*)malloc(sizeof(unsigned char)*file_size);    //read file into file_buffer
     if(fread(file_buffer,sizeof(char),file_size,file_in)<file_size)
     {
+        if(GDB_MODE)    printf("> ");
         printf("Fail to read the entire file!\n");
         return false;
         
     }
     else
     {
+        if(GDB_MODE)    printf("> ");
         printf("Read file successfully!\n");
     }
     
@@ -167,56 +176,88 @@ bool load_program(char const *file_name)
     return true;
 }
 
-// Unfinished!!
-bool exit_program(){
+void exit_program(){
     free(sim_mem.mem_zero);
-    return true;
 }
 
 ins fetch(){
-    memAddress PC = sim_regs.getPC();              // 32bit
-    ins inst = sim_mem.get_memory_32(PC);
-    sim_regs.incPC();
+    ins inst;
+    if(IS_NOP){
+        inst = sim_mem.get_memory_32(currentPC);
+    }
+    else{
+        currentPC = sim_regs.getPC();
+        inst = sim_mem.get_memory_32(currentPC);
+        sim_regs.incPC();
+    }
     return inst;
 }
 
 //gdb mode execute function
-void gdb_mode_func(void)
+bool gdb_mode_func(void)
 {
-    char cmd[10];
+    char cmd[20];
     memAddress break_addr=0;
     memAddress debug_mem=0;
     reg32 mem_content=0;
-    printf("breakpoint is %lx\n",breakpoint);
-    if(ONESTEP)
-        printf("step mode\n");
-    printf("(gdb)>");
+    if(IS_FIRST_GDB)
+    {
+        printf(">\n");
+        printf("> select a mode you want to run with:\n");
+        printf("> b: set breakpoint\n");
+        printf("> c: continue running\n");
+        printf("> s: step mode\n");
+        printf("> m: print memory content\n");
+        printf("> q: quit gdb mode\n>\n>\n");
+    }
+    
+    printf("> ");
     scanf("%s",cmd);        //read command
     fflush(stdin);          //clean stdin buffer
-    
     switch (cmd[0])
     {
         case 'b':
-            printf("(gdb)>set breakpoint address\n");
-            ONESTEP=false;              //quit step mode
+            GDB_TYPE = set_breakpoint;
+            printf("> set breakpoint address\n");
+            printf("> ");
             scanf("%lx",&break_addr);   //set breakpoint addresss
+            VALID_BREAKPOINT=true;
             breakpoint=break_addr;
-            break;
-            
+            return true;
+        case 'd':
+            GDB_TYPE = delete_breakpoint;
+            printf("> delete breakpoint(%lx)\n", breakpoint);
+            VALID_BREAKPOINT = false;
+            WAIT = true;
+            IS_NOP = true;
+            return true;
         case 'c':
-            printf("continue running\n");
-            break;
-            
+            GDB_TYPE = continue_run;
+            printf("> continue running...\n");
+            return true;
         case 's':
-            printf("set step mode\n");
-            ONESTEP=true;
-            break;
-            
+            if(GDB_TYPE != step)
+                IS_ENTER_STEP = true;
+            if(IS_ENTER_STEP)
+            {
+                printf(">\n");
+                printf("> --------------------step mode--------------------\n");
+                IS_ENTER_STEP = false;
+            }
+            GDB_TYPE = step;
+            VALID_BREAKPOINT=true;
+            breakpoint=sim_regs.getPC();
+            return true;
             //print content in memory
         case 'm':
-            printf("(gdb)>set memory address\n");
+            GDB_TYPE = print_mem;
+            IS_NOP = true;
+            WAIT = true;
+            printf("> set memory address\n");
+            printf("> ");
             scanf("%lx",&debug_mem);
             for(int row=0;row<4;++row){
+                printf("> ");
                 for(int col=0;col<4;++col){
                     mem_content=sim_mem.get_memory_32(debug_mem);
                     printf("0x%08x",mem_content);
@@ -225,55 +266,52 @@ void gdb_mode_func(void)
                 }
                 printf("\n");
             }
-            
-            
-            break;
-            
+            return true;
         case 'q':
-            printf("quit gdb mode\n");
             GDB_MODE=false;
-            break;
-            
-            
-            
+            GDB_TYPE = quit_gdb;
+            verbose = false;
+            return false;
         default:
-            printf("invalid command\n");
-            printf("quit gdb mode\n");
+            printf("> invalid command\n");
             GDB_MODE=false;
-            break;
+            GDB_TYPE = undefined_gdb;
+            verbose = false;
+            return false;
     }
-    
     
 }
 
-
 int main(int argc, char * argv[]){
-    /*--------- prase ---------*/
-    if(argc < 2 || strcmp(argv[1],"--help") == 0)
-    {
+    const char * file_name;
+    
+    if(argc < 2 || argc > 3 || strcmp(argv[1],"--help") == 0){
         help();
         return 0;
     }
+    file_name = argv[1];
     if(argc == 3) {
-        /*-------gbd mode--------*/
         if (strcmp(argv[2], "--debug") == 0){
-            printf("Debug mode\n\n");
-            FIRST_INST = true;
+            printf("> (gdb mode)\n>\n");
+            IS_FIRST_GDB = true;
+            IS_NOP = true;
+            VALID_BREAKPOINT=true;
+            breakpoint=currentPC;      //break point <- current PC; fetched but not executed!
             GDB_MODE=true;
+            WAIT = true;
             //verbose = true;
         }
-        
         if (strcmp(argv[2], "--verbose") == 0)
             verbose = true;
     }
-    const char * file_name = argv[1];
-    /*---------END prase ---------*/
     
-
     if(load_program(file_name)==true){
-        printf("\nsp = %lx\n", sim_regs.readReg(sp));
-        printf("PC = %lx...\n",sim_regs.getPC());
-        cout << "EXCUTE "<< file_name <<"...\n" << endl;
+        if(GDB_MODE)    printf("> ");
+        printf("sp = %lx  PC = %lx\n", sim_regs.readReg(sp),sim_regs.getPC());
+        if(GDB_MODE)    printf("> ");
+        cout << "EXCUTE "<< file_name << endl;
+        if(GDB_MODE)    printf("> ");
+        printf("\n");
     }
     else{
         cout << "LOAD ERROR!" << endl;
@@ -282,44 +320,49 @@ int main(int argc, char * argv[]){
     
     while(1){
         ins inst = fetch();
-        if(verbose)
-            printf("%x\n", inst);//debug
+        instruction fetched_inst;
         
-        /*-----------gdb mode------------*/
-        if (GDB_MODE&&FIRST_INST) {
-            printf("gdb first entry\n");
-            breakpoint=sim_regs.getPC()-4;      //break point <- current PC; fetched but not executed!
-            gdb_mode_func();                    //enter gdb mode function
-            FIRST_INST=false;
+        if(GDB_MODE&&VALID_BREAKPOINT&&breakpoint == currentPC){
+            verbose = true;
+            WAIT = true;
+            
         }
-        if(GDB_MODE&&!FIRST_INST){
-            if(ONESTEP)
-                breakpoint=sim_regs.getPC()-4;
-            if(breakpoint==sim_regs.getPC()-4){     //breakpoint==current PC or step mode
-                gdb_mode_func();
+        
+        if(!IS_NOP){
+            if(verbose){
+                printf("> -------------AFTER LASTST INSTRUCTION(VERBOSE)--------------------\n");
+                printf("> currentPC = %lx\n", currentPC);
+                printf("> instruction = %x\n", inst);
+            }
+            if(fetched_inst.decode(inst) == true){
+                fetched_inst.execute();
+                if(IS_TO_EXIT)  break;
+            }else{
+                cout << "DECODE ERROR!" << endl;
+                return -1;
             }
         }
-        
-        instruction fetched_inst;
-        if(fetched_inst.decode(inst) == true){
-            //printf("start excute\n");
-            fetched_inst.execute();
-            if(IS_TO_EXIT)
-                break;
+        else
+            IS_NOP = false;
+
+        /*-----------gdb mode------------*/
+        if(GDB_MODE && WAIT){
+            if(gdb_mode_func()==false){
+                printf("> quit gdb mode\n\n");
+                return -1;
+            }//enter gdb mode function
+            
+            if(IS_FIRST_GDB)    IS_FIRST_GDB = false;
+            
+            if(GDB_TYPE!=print_mem && GDB_TYPE != print_reg && GDB_TYPE != delete_breakpoint){
+                verbose = false;
+                WAIT = false;
+            }
         }
-        else{
-            cout << "DECODE ERROR!" << endl;
-            return -1;
-        }
+
     }
     
-    if(exit_program() == true){
-        cout << "BYE "<< file_name<< " !"<< endl<< endl;
-        return 0;
-    }
-    else{
-        cout << "EXIT ERROR!" << endl;
-        return -1;
-    }
-
+    exit_program();
+    cout << "\nBYE "<< file_name<< " !"<< endl<< endl;
+    return 0;
 }

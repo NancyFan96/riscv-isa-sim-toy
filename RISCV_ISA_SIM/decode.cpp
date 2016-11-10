@@ -15,6 +15,8 @@
 #include "register.hpp"
 #include "memory.hpp"
 
+const float FDIFF = 0.00001;
+extern bool GDB_MODE;
 
 instruction::instruction()
 {
@@ -30,11 +32,13 @@ instruction::instruction()
 }
 
 void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs2){
+    if(GDB_MODE)    printf("> ");
     printf("instruction:\t %s %d, %d, %d\n", inst_name, rd, rs1, rs2);
     sim_regs.readReg();
     sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name, regID r1, regID r2, imm imm0){
+    if(GDB_MODE)    printf("> ");
     printf("instruction:\t %s %d, %d, %ld\n", inst_name, r1, r2, imm0);
     sim_regs.readReg();
     sim_regs.readFloatReg();
@@ -279,9 +283,11 @@ void instruction::execute(){
         if(sim_regs.readReg(a7) == 93 && sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             // exit_program
             IS_TO_EXIT = true;
-            if(verbose) print_ins("Prog Exited!");
-            else
-                printf("Prog Exited!");
+            if(verbose) print_ins("\nProg Exited!");
+            else{
+                if(GDB_MODE)    printf("> ");
+                printf("\nProg Exited!\n");
+            }
         }
         if(sim_regs.readReg(a7) == 63 && sim_regs.readReg(a3) == 0){
             // read
@@ -298,7 +304,7 @@ void instruction::execute(){
 			int fd = (int)sim_regs.readReg(a0);
 			void * buf = (void*)sim_regs.readReg(a1);
 			size_t count = (size_t)sim_regs.readReg(a2);
-            printf("args: fd = %d, buf_p = %lx, count(byte) = %d\n", fd, (reg64)buf, (int)count);
+            printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...", fd, (reg64)buf, (int)count);
 			write(fd, buf, count);
             printf("write\n");
         }
@@ -437,25 +443,25 @@ void instruction::execute_FExt(){
             case 0x50:
                 // FEQ.S, FLT.S, FLE.S
                 if(getfunc3()==2){//FEQ
-                    if((f32)sim_regs.readFloatReg(getrs1())==(f32)sim_regs.readFloatReg(getrs2()))
+                    if(((f32)sim_regs.readFloatReg(getrs1())-(f32)sim_regs.readFloatReg(getrs2()))<FDIFF)
                         sim_regs.writeReg(getrd(), 1);
                     else
                         sim_regs.writeReg(getrd(), 0);
-                    if(verbose) print_ins("FEQ.D", getrd(), getrs1(), getrs2());
+                    if(verbose) print_ins("FEQ.S", getrd(), getrs1(), getrs2());
                 }
                 else if(getfunc3()==1){//FLT
                     if((f32)sim_regs.readFloatReg(getrs1())<(f32)sim_regs.readFloatReg(getrs2()))
                         sim_regs.writeReg(getrd(), 1);
                     else
                         sim_regs.writeReg(getrd(), 0);
-                    if(verbose) print_ins("FLT.D", getrd(), getrs1(), getrs2());
+                    if(verbose) print_ins("FLT.S", getrd(), getrs1(), getrs2());
                 }
                 else if(getfunc3()==0){//FLE
                     if((f32)sim_regs.readFloatReg(getrs1())<=(f32)sim_regs.readFloatReg(getrs2()))
                         sim_regs.writeReg(getrd(), 1);
                     else
                         sim_regs.writeReg(getrd(), 0);
-                    if(verbose) print_ins("FLE.D", getrd(), getrs1(), getrs2());
+                    if(verbose) print_ins("FLE.S", getrd(), getrs1(), getrs2());
                 }
                 else{
                     printf("undefined instruction with opcode=0x53, func7=0x50\n");
@@ -464,7 +470,7 @@ void instruction::execute_FExt(){
             case 0x51:
                 // FEQ.D, FLT.D, FLE.D
                 if(getfunc3()==2){//FEQ
-                    if(sim_regs.readFloatReg(getrs1())==sim_regs.readFloatReg(getrs2()))
+                    if((sim_regs.readFloatReg(getrs1())-sim_regs.readFloatReg(getrs2()))<FDIFF)
                         sim_regs.writeReg(getrd(), 1);
                     else
                         sim_regs.writeReg(getrd(), 0);
@@ -478,7 +484,7 @@ void instruction::execute_FExt(){
                     if(verbose) print_ins("FLT.D", getrd(), getrs1(), getrs2());
                 }
                 else if(getfunc3()==0){//FLE
-                    if(sim_regs.readFloatReg(getrs1())<=sim_regs.readFloatReg(getrs2()))
+                    if((sim_regs.readFloatReg(getrs1())<sim_regs.readFloatReg(getrs2()))||(sim_regs.readFloatReg(getrs1())-sim_regs.readFloatReg(getrs2()))<FDIFF)
                         sim_regs.writeReg(getrd(), 1);
                     else
                         sim_regs.writeReg(getrd(), 0);
@@ -507,7 +513,7 @@ void instruction::execute_O()
             if(verbose) print_ins("LUI", getrd(), immediate);
             break;
         case 0x17://AUIPC
-            sim_regs.writeReg(getrd(),(signed64)sim_regs.getPC()+immediate-4);//!!!
+            sim_regs.writeReg(getrd(),(signed64)sim_regs.getPC()+immediate-4);
             if(verbose) print_ins("AUIPC", getrd(), immediate);
             break;
         default:;
@@ -516,20 +522,21 @@ void instruction::execute_O()
 //execute R type
 void instruction::execute_R()
 {
-    /*****************NEED TO DO*******************/
-    /*// MUL, MULH, MULHSH, MULHU, DIV, DIVU, REM, REMU*/
     if(getfunc7() == 0){
         switch(getfunc3()){
             case 0x00: //b000 add
-                sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1())+sim_regs.readReg(getrs2()));
+                sim_regs.writeReg(getrd(), (signed64)sim_regs.readReg(getrs1())+(signed64)sim_regs.readReg(getrs2()));
                 if(verbose) print_ins("ADD", getrd(), getrs1(), getrs2());
                 break;
             case 0x01: //b001 sll
-                sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) << (sim_regs.readReg(getrs2())&0x3f));
-                if(verbose) print_ins("SLL", getrd(), getrs1(), getrs2());
+                //sim_regs.readReg();
+                sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) << ((sim_regs.readReg(getrs2())&0x3f)));
+                //sim_regs.readReg();
+                if(verbose)
+                    print_ins("SLL", getrd(), getrs1(), getrs2());
                 break;
             case 0x02: //b010 slt
-                if((long int)sim_regs.readReg(getrs1()) < (long int)sim_regs.readReg(getrs2()))
+                if((signed64)sim_regs.readReg(getrs1()) < (signed64)sim_regs.readReg(getrs2()))
                     sim_regs.writeReg(getrd(), 1);
                 else
                     sim_regs.writeReg(getrd(), 0);
@@ -566,7 +573,7 @@ void instruction::execute_R()
     else if(getfunc7()==0x20){
         switch(getfunc3()){
             case 0x00: //b000 sub
-                sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) - sim_regs.readReg(getrs2()));
+                sim_regs.writeReg(getrd(), (signed64)sim_regs.readReg(getrs1()) - (signed64)sim_regs.readReg(getrs2()));
                 if(verbose) print_ins("SUB", getrd(), getrs1(), getrs2());
                 break;
             case 0x05: //b101 sra
@@ -578,26 +585,118 @@ void instruction::execute_R()
                 break;
         }
     }
+    else if(getfunc7()==0x01){
+        // MUL, MULH, MULHSH, MULHU, DIV, DIVU, REM, REMU
+        reg64 reg1_l = 0;
+        reg64 reg1_h = 0;
+        reg64 reg2_l = 0;
+        reg64 reg2_h = 0;
+        reg64 mul_h = 0;
+        reg64 mul_m = 0;
+        reg64 mul_l = 0;
+        signed32 neg = 0;
+        reg64 reg1 = 0,reg2 = 0;
+        switch(getfunc3()){
+            case 0x00: //b000 mul
+                sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1())*sim_regs.readReg(getrs2()));
+                if(verbose) print_ins("MUL", getrd(), getrs1(), getrs2());
+                break;
+            case 0x01: //b001 mulh ?
+                
+                if((signed64)sim_regs.readReg(getrs1()) < 0)
+                {
+                    reg1 = ~sim_regs.readReg(getrs1())+1;
+                    neg++;
+                }
+                else
+                    reg1 = sim_regs.readReg(getrs1());
+                if((signed64)sim_regs.readReg(getrs2()) < 0)
+                {
+                    reg2 = ~sim_regs.readReg(getrs2())+1;
+                    neg++;
+                }
+                else
+                    reg2 = sim_regs.readReg(getrs2());
+                reg1_l = (reg32)reg1;
+                reg1_h = reg1 >> 32;
+                reg2_l = (reg32)reg2;
+                reg2_h = reg2 >> 32;
+                mul_h = reg1_h * reg2_h;
+                mul_m = reg1_h * reg2_l + reg1_l * reg2_h;
+                mul_l = reg1_l * reg2_l;
+                if(neg == 0 || neg == 2)
+                    sim_regs.writeReg(getrd(), (reg64) (mul_h + (mul_m >> 32)));
+                else if(neg == 1)
+                {
+                    if((reg64) (mul_l + (mul_m << 32)) == 0)
+                        sim_regs.writeReg(getrd(), (reg64) (~((mul_h + (mul_m >> 32))-1)));
+                    else
+                        sim_regs.writeReg(getrd(), (reg64)(~(mul_h + (mul_m >> 32))));
+                }
+                else;
+                if(verbose) print_ins("MULH", getrd(), getrs1(), getrs2());
+                break;
+            case 0x02: //b010 mulhsu
+                reg1_l = (reg32)sim_regs.readReg(getrs1());
+                reg1_h = sim_regs.readReg(getrs1()) >> 32;
+                reg2_l = (reg32)sim_regs.readReg(getrs2());
+                reg2_h = sim_regs.readReg(getrs2()) >> 32;
+                mul_h = reg1_h * reg2_h;
+                mul_m = reg1_h * reg2_l + reg1_l * reg2_h;
+                sim_regs.writeReg(getrd(), (mul_h + (mul_m >> 32)));
+                if(verbose) print_ins("MULHSU", getrd(), getrs1(), getrs2());
+                break;
+            case 0x03: //b011 mulhu
+                reg1_l = (reg32)sim_regs.readReg(getrs1());
+                reg1_h = sim_regs.readReg(getrs1()) >> 32;
+                reg2_l = (reg32)sim_regs.readReg(getrs2());
+                reg2_h = sim_regs.readReg(getrs2()) >> 32;
+                mul_h = reg1_h * reg2_h;
+                mul_m = reg1_h * reg2_l + reg1_l * reg2_h;
+                sim_regs.writeReg(getrd(), (mul_h + (mul_m >> 32)));
+                if(verbose) print_ins("MULHU", getrd(), getrs1(), getrs2());
+                break;
+            case 0x04: //b100 div
+                sim_regs.writeReg(getrd(), (signed64)sim_regs.readReg(getrs1()) / (signed64)sim_regs.readReg(getrs2()));
+                if(verbose) print_ins("DIV", getrd(), getrs1(), getrs2());
+                break;
+            case 0x05: //b101 divu
+                sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) / (sim_regs.readReg(getrs2())&0x3f));
+                if(verbose) print_ins("DIVU", getrd(), getrs1(), getrs2());
+                break;
+            case 0x06: //b110 rem
+                sim_regs.writeReg(getrd(), (signed64)sim_regs.readReg(getrs1()) % (signed64)sim_regs.readReg(getrs2()));
+                if(verbose) print_ins("REM", getrd(), getrs1(), getrs2());
+                break;
+            case 0x07: //b111 remu
+                sim_regs.writeReg(getrd(), sim_regs.readReg(getrs1()) % sim_regs.readReg(getrs2()));
+                if(verbose) print_ins("REMU", getrd(), getrs1(), getrs2());
+                break;
+            default:
+                printf("undefined instruction with opcode=011 0011, func7=1\n");
+                break;
+        }
+    }
+    else{
+        printf("undefined instruction in R-type\n");
+    }
 }
 
 // opcode = 3B
 void instruction::execute_R64()
 {
-    /*****************NEED TO DO*******************/
-    /*// MULW,DIVW, DIVUW, REMW, REMUW*/
-    
     if(getfunc7()==0x00){
         switch(getfunc3()){
             case 0x00: //b000 addw
-                sim_regs.writeReg(getrd(), (int)sim_regs.readReg(getrs1()) + (int)sim_regs.readReg(getrs2()) );
+                sim_regs.writeReg(getrd(), (signed32)sim_regs.readReg(getrs1()) + (signed32)sim_regs.readReg(getrs2()) );
                 if(verbose) print_ins("ADDW", getrd(), getrs1(), getrs2());
                 break;
             case 0x01: //b001 sllw
-                sim_regs.writeReg(getrd(), (int)sim_regs.readReg(getrs1()) << (sim_regs.readReg(getrs2())&0x3f));
+                sim_regs.writeReg(getrd(), (signed32)sim_regs.readReg(getrs1()) << (sim_regs.readReg(getrs2())&0x3f));
                 if(verbose) print_ins("ALLW", getrd(), getrs1(), getrs2());
                 break;
             case 0x05: //b101 srlw
-                sim_regs.writeReg(getrd(), (int)sim_regs.readReg(getrs1()) >> (sim_regs.readReg(getrs2())&0x3f));
+                sim_regs.writeReg(getrd(), (signed32)sim_regs.readReg(getrs1()) >> (sim_regs.readReg(getrs2())&0x3f));
                 if(verbose) print_ins("ARLW", getrd(), getrs1(), getrs2());
                 break;
             default:
@@ -608,11 +707,11 @@ void instruction::execute_R64()
     else if(getfunc7()==0x20){
         switch(getfunc3()){
             case 0x00: //b000 subw
-                sim_regs.writeReg(getrd(), (int)sim_regs.readReg(getrs1()) - (int)sim_regs.readReg(getrs2()) );
+                sim_regs.writeReg(getrd(), (signed32)sim_regs.readReg(getrs1()) - (signed32)sim_regs.readReg(getrs2()) );
                 if(verbose) print_ins("SUBW", getrd(), getrs1(), getrs2());
                 break;
             case 0x05: //b101 sraw
-                sim_regs.writeReg(getrd(), (int)(sim_regs.readReg(getrs1())) >> (sim_regs.readReg(getrs2())&0x3f));
+                sim_regs.writeReg(getrd(), (signed32)(sim_regs.readReg(getrs1())) >> (sim_regs.readReg(getrs2())&0x3f));
                 if(verbose) print_ins("SRAW", getrd(), getrs1(), getrs2());
                 break;
             default:
@@ -620,7 +719,35 @@ void instruction::execute_R64()
                 break;
         }
     }
-    else printf("undefined instruction in R-TYPE\n");
+    else if(getfunc7()==0x01){
+        // MULW,DIVW, DIVUW, REMW, REMUW
+        switch(getfunc3()){
+            case 0x00: //b000 mulw
+                sim_regs.writeReg(getrd(), (reg64)((signed32)sim_regs.readReg(getrs1()) * (signed32)sim_regs.readReg(getrs2())) );
+                if(verbose) print_ins("MULW", getrd(), getrs1(), getrs2());
+                break;
+            case 0x04: //b100 divw
+                sim_regs.writeReg(getrd(), (reg64)((signed32)sim_regs.readReg(getrs1()) / (signed32)sim_regs.readReg(getrs2())) );
+                if(verbose) print_ins("DIVW", getrd(), getrs1(), getrs2());
+                break;
+            case 0x05: //b101 divuw
+                sim_regs.writeReg(getrd(), (reg64)((reg32)sim_regs.readReg(getrs1()) / (reg32)sim_regs.readReg(getrs2())) );
+                if(verbose) print_ins("DIVUW", getrd(), getrs1(), getrs2());
+                break;
+            case 0x06: //b110 remw
+                sim_regs.writeReg(getrd(), (reg64)((signed32)sim_regs.readReg(getrs1()) % (signed32)sim_regs.readReg(getrs2())) );
+                if(verbose) print_ins("REMW", getrd(), getrs1(), getrs2());
+                break;
+            case 0x07: //b111 remuw
+                sim_regs.writeReg(getrd(), (reg64)((reg32)sim_regs.readReg(getrs1()) % (reg32)sim_regs.readReg(getrs2())) );
+                if(verbose) print_ins("REMUW", getrd(), getrs1(), getrs2());
+                break;
+            default:
+                printf("undefined instruction with opcode =011 1011, func7=1\n");
+                break;
+        }
+    }
+    else printf("undefined instruction in R64-TYPE\n");
 }
 
 void instruction::execute_I(){
@@ -655,47 +782,43 @@ void instruction::execute_I(){
                 case 0:             // LB rd, rs1, imm
                     mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
                     //printf("mem_addr = 0x%lx\n", mem_addr);
-                    sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
+                    sim_regs.writeReg(getrd(), (signed8)sim_mem.get_memory_8(mem_addr));
                     if(verbose) print_ins("LB", getrd(), getrs1(), immediate);
                     break;
                 case 1:             // LH rd, rs1, imm
                     mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
                     //printf("mem_addr = 0x%lx\n", mem_addr);
-                    sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
+                    sim_regs.writeReg(getrd(), (signed16)sim_mem.get_memory_16(mem_addr));
                     if(verbose) print_ins("LH", getrd(), getrs1(), immediate);
                     break;
                 case 2:             // LW rd, rs1, imm
                     mem_addr = (signed64)sim_regs.readReg(getrs1())+ immediate;
                     //printf("mem_addr = 0x%lx\n", mem_addr);
-                    sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
+                    sim_regs.writeReg(getrd(), (signed32)sim_mem.get_memory_32(mem_addr));
                     if(verbose) print_ins("LW", getrd(), getrs1(), immediate);
                     break;
                 case 4:             // LBU rd, rs1, imm
-                    immediate = immediate & ~ONES(63, 12);
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     //printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_8(mem_addr));
                     if(verbose) print_ins("LBU", getrd(), getrs1(), immediate);
                     break;
                 case 5:             // LHU rd, rs1, imm
-                    immediate = immediate & ~ONES(63, 12);
                     mem_addr =  sim_regs.readReg(getrs1())+ immediate;
                     //printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_16(mem_addr));
                     if(verbose) print_ins("LHU", getrd(), getrs1(), immediate);
                     break;
                 case 6:             // LWU rd, rs1, imm
-                    immediate = immediate & ~ONES(63, 12);
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     //printf("mem_addr = 0x%lx\n", mem_addr);
                     sim_regs.writeReg(getrd(), sim_mem.get_memory_32(mem_addr));
                     if(verbose) print_ins("LWU", getrd(), getrs1(), immediate);
                     break;
                 case 3:             // LD rd, rs1, imm
-                    //printf("start this inst..\n");
                     mem_addr = sim_regs.readReg(getrs1())+ immediate;
                     //printf("mem_addr = 0x%lx\n", mem_addr);
-                    sim_regs.writeReg(getrd(), sim_mem.get_memory_64(mem_addr));
+                    sim_regs.writeReg(getrd(), (signed64)sim_mem.get_memory_64(mem_addr));
                     if(verbose) print_ins("LD", getrd(), getrs1(), immediate);
                     break;
                 default:
@@ -715,7 +838,7 @@ void instruction::execute_I(){
                     if(verbose) print_ins("ADDI", getrd(), getrs1(), immediate);
                     break;
                 case 2:             // SLTI rd, rs1, imm
-                    if(sim_regs.readReg(getrs1())<immediate)
+                    if((signed64)sim_regs.readReg(getrs1())<immediate)
                         ALUZ64 = 1;
                     else
                         ALUZ64 = 0;
@@ -777,7 +900,7 @@ void instruction::execute_I(){
                 case 0:             // ADDIW rd, rs1, imm
                     ALUZ32 = (signed32)sim_regs.readReg(getrs1())+(signed32)immediate;
                     sim_regs.writeReg(getrd(), ALUZ32);
-                    if(verbose) print_ins("ADDIW", getrd(), getrs1(), shamt);
+                    if(verbose) print_ins("ADDIW", getrd(), getrs1(), immediate);
                     break;
                 case 1:             // SLLIW rd, rs1, shamt
                     shamt = immediate & ONES(4, 0);
@@ -788,7 +911,7 @@ void instruction::execute_I(){
                 case 5:             // SRLIW, SRAIW rd, rs1, shamt
                     shamt = immediate & ONES(4, 0);
                     if(immediate & ~ONES(4,0)) //SRAIW
-                        ALUZ32 = (int)((signed32)sim_regs.readReg(getrs1()) >> shamt);
+                        ALUZ32 = ((signed32)sim_regs.readReg(getrs1()) >> shamt);
                     else                       //SRLIW
                         ALUZ32 = ((reg32)sim_regs.readReg(getrs1())) >> shamt;
                     sim_regs.writeReg(getrd(), ALUZ32);

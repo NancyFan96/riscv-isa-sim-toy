@@ -10,7 +10,7 @@
 #include "register.hpp"
 
 registers sim_regs;
-
+extern bool GDB_MODE;
 registers::registers(){
     PC = 0;
     fcdr = 0;
@@ -24,14 +24,19 @@ registers::registers(){
 void registers::readReg(){
     for(int i = 0;i<32;i++)
     {
+        if(GDB_MODE && i%8==0)    printf("> ");
+
         if(i == sp||i== gp||i == ra)
             printf("rrx%d: 0x%lx\t",i ,rrx[i]);
         else
             printf("rrx%d: %lu\t",i ,rrx[i]);
-        if(i == 7 || i == 15 || i== 23 || i== 31)
+        if(i%8==7)
             printf("\n");
     }
-    printf("PC: 0x%lx\n\n",(reg64)PC);
+    if(GDB_MODE)    printf("> ");
+    printf("PC: 0x%lx\n",(reg64)PC);
+    if(GDB_MODE)    printf("> ");
+    printf("\n");
 }
 
 reg64 registers::readReg(regID regDst){
@@ -72,13 +77,16 @@ void registers::incPC(){
 
 /* --------- F extension ---------- */
 void registers::readFloatReg(){
-    for(int i = 0;i<32;i++)
-    {
+    for(int i = 0;i<32;i++){
+        if(GDB_MODE && i%8==0)    printf("> ");
         printf("frx%d: %lf\t",i ,frx[i]);
-        if(i == 7 || i == 15 || i== 23 || i== 31)
+        if(i%8==7)
             printf("\n");
     }
-    printf("FCDR: 0x%lf\n\n",fcdr);
+    if(GDB_MODE)    printf("> ");
+    printf("FCDR: 0x%lf\n",fcdr);
+    if(GDB_MODE)    printf("> ");
+    printf("\n");
 }
 
 f64 registers::readFloatReg(regID regDst){
