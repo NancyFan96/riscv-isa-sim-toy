@@ -6,15 +6,26 @@
 
 要求实现RISCV64I 的模拟器
 
-## LOGs
 
-TO DO:
+## 当前进度
 
-* start PC from \<main\>【错误】==> 必须从entry point开始，否则mac下可以，linux下segmemtation fault
-* complete static variable init (已经实现?)> THIS TWO are both about SYMBOL TABLE
+：）
+
+**TO DO:**
+
+* complete static variable init (已经实现?)，结合scanf的问题来看并没有（不过好像是RISCV-gcc本身的问题，spike也会挂？）
+* need to realize MALLOC\* (已经实现？，相传有爆堆错误)
+* M, F extension 校对, 所有指令校对，浮点扩展的rounding mode还没管
+* 标测 quicksort, ijk, ack + drystone(编译是否要-fno-builtin?目测实现drystone还需要补充一些指令的实现)
+
+DONE:
+
+* start PC from 必须从entry point开始，否则从\<main\>【错误】==> mac下可以，linux下segmemtation fault
 * complete ecall to realize exit√, printf\* and so on//进入了ecall但没有调用成功
-* need to realize MALLOC\* (已经实现？)
-* try to get some bonus（gdb? M extension）
+
+* gdb
+
+## LOGs
 
 6.3 commit: printf can work, scanf has bugs with initalization, 指针一定要初始化！
 
@@ -56,15 +67,6 @@ tt, tiny, try用spike执行时有warning
 * 指令级模拟器代码
 * 以lab1.1中用C编写的快速排序、矩阵乘法、求Ackermann函数为测试程序 最终评测标准,通过助教提供的用户程序的模拟。
 
-## 当前进度
-
-：）
-
-*  debug啊debug
-*  stack 实现，函数调用
-*  能够显式的看到运行结果?
-*  完成系统调用
-*  一些bonus： 浮点、乘除、调试模式、可扩展性
 
 ## 文件结构
 
@@ -75,7 +77,7 @@ tt, tiny, try用spike执行时有warning
 	-- system.h
 	模拟器的通用头文件，重命名了一些数据类型
 	
-	* ```static unsigned int EXIT_POINT;```是考虑后续检查instruction 合法性？ <mark>// 待讨论</mark>
+	* 地址宽也都是64bit，但只有32位有效
 	
 	-- decode.hpp/cpp
 	 模拟器解释执行reisv可执行文件的核心
@@ -95,13 +97,12 @@ tt, tiny, try用spike执行时有warning
 	 * 注意ELF装载时，直接将其虚拟地址，作为自定义memory的index使用，因此多写地址时要注意加上基地址mem\_zero, 已定义函数get\_memory\_p\_address, 和get\_memory\_offset来转化index和实际地址
 	 
 	-- register.hpp/cpp
-	 模拟器模拟的register files，包括PC寄存器
+	 模拟器模拟的register files，包括PC寄存器，浮点寄存器
 	 
 	 包括：registers 类
 	 
 	 * 32个通用寄存器，寄存器宽都是64bit
 	 * 通用寄存器的名字都已定义在宏
-	 * PC也存在64位寄存器，但get或set时，只有32位操作 <mark>// 待讨论</mark>
 	 
 	-- exe.hpp/cpp
 	 模拟器main文件
