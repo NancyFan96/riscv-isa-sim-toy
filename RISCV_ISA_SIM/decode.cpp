@@ -363,7 +363,7 @@ void instruction::execute(){
 }
 
 void instruction::execute_R4(){
-    
+    printf("R4 excute not finished!\n");
 }
 
 void instruction::execute_FExt(){
@@ -501,6 +501,7 @@ void instruction::execute_FExt(){
                 }
 
             default:
+                printf("undefined instruction with opcode=0x53, func7 not defined\n");
                 break;
         }
     }
@@ -522,7 +523,9 @@ void instruction::execute_O()
             sim_regs.writeReg(getrd(),(signed64)sim_regs.getPC()+immediate-4);
             if(verbose) print_ins("AUIPC", getrd(), immediate);
             break;
-        default:;
+        default:
+            printf("undefined instruction in execute_O\n");
+            
     }
 }
 //execute R type
@@ -753,7 +756,8 @@ void instruction::execute_R64()
                 break;
         }
     }
-    else printf("undefined instruction in R64-TYPE\n");
+    else
+        printf("undefined instruction in R64-TYPE\n");
 }
 
 void instruction::execute_I(){
@@ -933,7 +937,8 @@ void instruction::execute_I(){
                     break;
             }
             break;
-        default:;
+        default:
+            printf("Undefined instruction in excute_I\n");
     }
     
 }
@@ -966,6 +971,8 @@ void instruction::execute_SX(){
             sim_mem.set_memory_64(mem_addr, (reg64)sim_regs.readReg(getrs2()));
             if(verbose) print_ins("SD", getrs1(), getrs2(), immediate);
             break;
+        default:
+            printf("Undefined excute in excute_SX\n");
     }
     
 }
@@ -1027,7 +1034,8 @@ void instruction::execute_UX(){
             }
             if(verbose) print_ins("BGEU", getrs1(), getrs2(), immediate);
             break;
-        default:;
+        default:
+            printf("Undefined excute in excute_SX\n");
     }
 }
 

@@ -66,40 +66,40 @@ unix:	$(UNIX_PROGS)
 msc:	$(MSC_PROGS)
 
 dry2:		$(SRC) $(HDR)
-		$(CC) $(CFLAGS) $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) $(CFLAGS) $(SRC) $(LFLAGS) -o $@ 
 
 dry2reg:	$(SRC) $(HDR)
-		$(CC) $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ 
 
 sdry2.exe:	$(SRC) $(HDR)
-		$(CC) -AS $(CFLAGS) $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) -AS $(CFLAGS) $(SRC) $(LFLAGS) -o $@ 
 
 sdry2reg.exe:	$(SRC) $(HDR)
-		$(CC) -AS $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) -AS $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ 
 
 mdry2.exe:	$(SRC) $(HDR)
-		$(CC) -AM $(CFLAGS) $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) -AM $(CFLAGS) $(SRC) $(LFLAGS) -o $@ 
 
 mdry2reg.exe:	$(SRC) $(HDR)
-		$(CC) -AM $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) -AM $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ 
 
 ldry2.exe:	$(SRC) $(HDR)
-		$(CC) -AL $(CFLAGS) $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) -AL $(CFLAGS) $(SRC) $(LFLAGS) -o $@ 
 
 ldry2reg.exe:	$(SRC) $(HDR)
-		$(CC) -AL $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) -AL $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ 
 
 cdry2.exe:	$(SRC) $(HDR)
-		$(CC) -AC $(CFLAGS) $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) -AC $(CFLAGS) $(SRC) $(LFLAGS) -o $@ 
 
 cdry2reg.exe:	$(SRC) $(HDR)
-		$(CC) -AC $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) -AC $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ 
 
 hdry2.exe:	$(SRC) $(HDR)
 		$(CC) -AH $(CFLAGS) $(SRC) $(LFLAGS) -o $@ -fno-builtin
 
 hdry2reg.exe:	$(SRC) $(HDR)
-		$(CC) -AH $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ -fno-builtin
+		$(CC) -AH $(CFLAGS) -DREG=register $(SRC) $(LFLAGS) -o $@ 
 
 shar:	dry2shar.1 dry2shar.2 dry2shar.3
 
