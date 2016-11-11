@@ -13,9 +13,9 @@
 #include <stdlib.h>
 #include "system.h"
 
-#define MEM_SIZE 1<<27           // 0x0800 0000, 128M
+#define MEM_SIZE 1<<28           // 0x1000 0000, 256M
 #define STACK_BOTTOM 0x6000000   // bottom address of stack
-#define STACK_TOP    0x7ffffff   // top address of stack
+#define STACK_TOP    0xfffffff   // top address of stack
 
 
 /* ------- define memory ------- */

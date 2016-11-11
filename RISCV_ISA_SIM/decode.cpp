@@ -143,6 +143,7 @@ bool instruction::getType(ins inst){
         case 0x4F:
             optype = R4_TYPE;
             tag = 250;     // b11111010
+            return true;
         default:
             return false;
     }
@@ -372,7 +373,6 @@ void instruction::execute(){
             struct stat * buf = (struct stat*)sim_regs.readReg(a1);
             sim_regs.writeReg(a0, (reg64)fstat(fd,buf));
         }
-        //else if(sim_regs.readReg(a7) == 153){}//times
         else
             printf("Undefined scall\n");
         return;
