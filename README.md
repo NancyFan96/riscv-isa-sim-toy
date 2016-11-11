@@ -13,10 +13,11 @@
 
 **TO DO:**
 
+* close把输出直接关了？！
 * complete static variable init (已经实现?)，结合scanf的问题来看并没有（不过好像是RISCV-gcc本身的问题，spike也会挂？）
 * need to realize MALLOC\* (已经实现？，相传有爆堆错误)
-* M, F extension 校对, 所有指令校对，浮点扩展的rounding mode还没管
-* 标测 quicksort, ijk, ack + drystone(编译是否要-fno-builtin?目测实现drystone还需要补充一些指令的实现)
+* M, F extension 校对，浮点扩展的rounding mode还没管
+* 标测 quicksort, ijk, ack + drystone(实现drystone还需要补充一些指令的实现)
 
 DONE:
 
