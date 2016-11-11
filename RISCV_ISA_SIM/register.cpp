@@ -13,7 +13,7 @@ registers sim_regs;
 extern bool GDB_MODE;
 registers::registers(){
     PC = 0;
-    fcdr = 0;
+    fcsr = 0;
     for(int i = 0;i < 32;i++){
         rrx[i] = 0;
         frx[i] = 0;
@@ -84,7 +84,7 @@ void registers::readFloatReg(){
             printf("\n");
     }
     if(GDB_MODE)    printf("> ");
-    printf("FCDR: 0x%lf\n",fcdr);
+    printf("FCSR: 0x%x\n",fcsr);
     if(GDB_MODE)    printf("> ");
     printf("\n");
 }
@@ -106,11 +106,11 @@ bool registers::writeFloatReg(regID regDst, f64 value){
     
 }
 
-f64 registers::getFCDR(){
-    return fcdr;
+reg32 registers::getFCSR(){ //luyao
+    return fcsr;
 }
 
-bool registers::setFCDR(f64 newFCDR){
-    fcdr = newFCDR;
+bool registers::setFCSR(reg32 newFCSR){ //luyao
+    fcsr = newFCSR;
     return true;
 }

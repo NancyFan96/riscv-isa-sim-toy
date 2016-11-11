@@ -56,7 +56,7 @@
 class registers {
 public:
     byte* PC;
-    f64 fcdr;
+    reg32 fcsr;
     reg64 rrx[32];
     f64 frx[32];
     
@@ -74,8 +74,8 @@ public:
     f64 readFloatReg(regID regDst);                   //
     bool writeFloatReg(regID regDst, f64 value);      // if success return true, else return false
     //bool writeReg(regID regDst, regID regSrc);      // if success return true, else return false
-    f64 getFCDR();                                    //
-    bool setFCDR(f64 newFCDR);                        // if success return true, else return false
+    reg32 getFCSR();                                    //
+    bool setFCSR(reg32 newFCSR);                        // if success return true, else return false
 
 };
 /* ------- END define registers file ------- */

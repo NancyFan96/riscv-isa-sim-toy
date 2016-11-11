@@ -78,14 +78,14 @@ public:
     bool setIMM(ins inst);          // (set immediate) Notice need switch, AND BE CAREFUL OF IMM BIT ORDER
     bool decode(ins inst);          // set rx, (func3), (func7), (and call getIMM)
     
-    inline imm getImm();
-    inline xcode getfunc3();
-    inline xcode getfunc7();
-    inline xcode getfunc2();
-    inline regID getrd();
-    inline regID getrs1();
-    inline regID getrs2();
-    inline regID getrs3();
+    imm getImm();
+    xcode getfunc3();
+    xcode getfunc7();
+    xcode getfunc2();
+    regID getrd();
+    regID getrs1();
+    regID getrs2();
+    regID getrs3();
     
     void execute();
     void execute_R64();
@@ -102,6 +102,12 @@ public:
     void print_ins(const char* inst_name, regID rx, imm imm0);
     void print_ins(const char* inst_name, regID rx);
     void print_ins(const char* inst_name);
+    
+    signed64 RNE(f64 d);
+    signed64 RTZ(f64 d);
+    signed64 RDN(f64 d);
+    signed64 RUP(f64 d);
+    signed64 RMM(f64 d);
     
 };
 

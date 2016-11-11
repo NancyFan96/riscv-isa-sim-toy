@@ -339,6 +339,11 @@ int main(int argc, char * argv[]){
                 if(IS_TO_EXIT)  break;
             }else{
                 cout << "DECODE ERROR!" << endl;
+                printf("> currentPC = %lx\n", currentPC);
+                printf("> instruction = %x\n", inst);
+                printf("current register(current instruction not run yet)...\n");
+                sim_regs.readReg();
+                sim_regs.readFloatReg();
                 return -1;
             }
         }
