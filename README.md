@@ -14,10 +14,10 @@
 **TO DO:**
 
 * close把输出直接关了？！
-* complete static variable init (已经实现?)，结合scanf的问题来看并没有（不过好像是RISCV-gcc本身的问题，spike也会挂？）
-* need to realize MALLOC\* (已经实现？，相传有爆堆错误)
-* M, F extension 校对，浮点扩展的rounding mode还没管
+* need to realize MALLOC\* (brk?,没有brk，紧邻的printf和scanf顺序错)
+* M, F extension 校对，浮点扩展的rounding mode
 * 标测 quicksort, ijk, ack + drystone(实现drystone还需要补充一些指令的实现)
+* complete static variable init (已经实现?)，结合scanf的问题来看并没有（不过好像是RISCV-gcc本身的问题，spike也会挂？）
 
 DONE:
 
@@ -27,6 +27,8 @@ DONE:
 * gdb
 
 ## LOGs
+
+7.2 commit: printf run, add some printf in dhry\_1.c, pinpoint dugs in F extension CVT and ? 
 
 6.3 commit: printf can work, scanf has bugs with initalization, 指针一定要初始化！
 
