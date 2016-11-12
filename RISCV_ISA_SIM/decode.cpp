@@ -353,25 +353,34 @@ void instruction::execute(){
         }
         else if(sim_regs.readReg(a7) == 169 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             // gettimeofday
+            /*printf("Before:\n");
+            print_ins("GETTIMEOFDAY");
             struct  timeval  *tv_p = (struct timeval *)sim_mem.get_memory_p_address(sim_regs.readReg(a0));
             sim_regs.writeReg(a0,  gettimeofday(tv_p,NULL));
+            printf("After:\n");
+            print_ins("GETTIMEOFDAY");*/
         }
         else if(sim_regs.readReg(a7) == 214 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             //sbrk
+            printf("a0=0x%lx\t", sim_regs.readReg(a0));
             void * mem_addr = sim_mem.get_memory_p_address(sim_regs.readReg(a0));
-            mem_addr = brk(mem_addr);
-            sim_regs.writeReg(a0, (reg64)mem_addr);
+            reg64 res = (reg64)brk(mem_addr);
+            sim_regs.writeReg(a0, (reg64)res);
+            printf("a0=0x%lx\n", sim_regs.readReg(a0));
+            if(verbose) print_ins("SBRK");
         }
         else if(sim_regs.readReg(a7) == 57 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
              //close
-            int fd = (int)sim_regs.readReg(a0);
-            sim_regs.writeReg(a0, close(fd));
+            //int fd = (int)sim_regs.readReg(a0);
+            //sim_regs.writeReg(a0, close(fd));
+            //if(verbose) print_ins("CLOSE");
          }
         else if(sim_regs.readReg(a7) == 80 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             //fstat
-            int fd = (int)sim_regs.readReg(a0);
-            struct stat * buf = (struct stat*)sim_regs.readReg(a1);
-            sim_regs.writeReg(a0, (reg64)fstat(fd,buf));
+            //int fd = (int)sim_regs.readReg(a0);
+            //struct stat * buf = (struct stat*)sim_regs.readReg(a1);
+            //sim_regs.writeReg(a0, (reg64)fstat(fd,buf));
+            //if(verbose) print_ins("FSTAT");
         }
         else
             printf("Undefined scall\n");

@@ -30,38 +30,37 @@ void instruction::execute_R4(){
         switch(getfunc3())
         {
             case 0: //Round to Nearest, ties to Even
-                
-                sim_regs.writeReg(getrd(),RNE(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
+                sim_regs.writeFloatReg(getrd(),RNE(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
                 break;
             case 1: //Round towards Zero
-                sim_regs.writeReg(getrd(),(int)(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
+                sim_regs.writeFloatReg(getrd(),(int)(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
                 break;
             case 2: //Round Down (towards -wuqiong)
-                sim_regs.writeReg(getrd(),(signed64)floor(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
+                sim_regs.writeFloatReg(getrd(),(signed64)floor(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
                 break;
             case 3: //Round Up (towards +wuqiong)
-                sim_regs.writeReg(getrd(),(signed64)ceil(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
+                sim_regs.writeFloatReg(getrd(),(signed64)ceil(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
                 break;
             case 4: //Round to Nearest, ties to Max Magnitude
-                sim_regs.writeReg(getrd(),(signed64)round(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
+                sim_regs.writeFloatReg(getrd(),(signed64)round(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
                 break;
             case 7:
                 switch(rm){
                     case 0: //Round to Nearest, ties to Even
                         
-                        sim_regs.writeReg(getrd(),RNE(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
+                        sim_regs.writeFloatReg(getrd(),RNE(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
                         break;
                     case 1: //Round towards Zero
-                        sim_regs.writeReg(getrd(),(int)(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
+                        sim_regs.writeFloatReg(getrd(),(int)(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
                         break;
                     case 2: //Round Down (towards -wuqiong)
-                        sim_regs.writeReg(getrd(),(signed64)floor(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
+                        sim_regs.writeFloatReg(getrd(),(signed64)floor(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
                         break;
                     case 3: //Round Up (towards +wuqiong)
-                        sim_regs.writeReg(getrd(),(signed64)ceil(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
+                        sim_regs.writeFloatReg(getrd(),(signed64)ceil(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
                         break;
                     case 4: //Round to Nearest, ties to Max Magnitude
-                        sim_regs.writeReg(getrd(),(signed64)round(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
+                        sim_regs.writeFloatReg(getrd(),(signed64)round(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
                         break;
                     case 5:
                     case 6:
