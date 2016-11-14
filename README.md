@@ -13,13 +13,16 @@
 
 **TO DO:**
 
-* close把输出直接关了？！
-* need to realize MALLOC\* (brk?,没有brk，紧邻的printf和scanf顺序错)
-* M, F extension 校对，浮点扩展的rounding mode
+* M, F extension 校对，浮点扩展的rounding mode(不用管)，fcvt还有问题
+* times()函数看起来是对了，仍待检验
 * 标测 quicksort, ijk, ack + drystone(实现drystone还需要补充一些指令的实现)
 * complete static variable init (已经实现?)，结合scanf的问题来看并没有（不过好像是RISCV-gcc本身的问题，spike也会挂？）
 
 DONE:
+
+* fload, fstore修正，需要memory类中新开用浮点指针存取的函数，不然强制转换会有问题
+* need to realize MALLOC==> brk不能直接调用linux系统函数实现，因为可能会在模拟的内存外新开访问空间，实际riscv指令不能访问到(?)
+* close把输出直接关了==>不用实现；原因猜测是riscv语义和linux不一致，后面有空再去翻系统函数源码...
 
 * start PC from 必须从entry point开始，否则从\<main\>【错误】==> mac下可以，linux下segmemtation fault
 * complete ecall to realize exit√, printf\* and so on//进入了ecall但没有调用成功
@@ -27,6 +30,8 @@ DONE:
 * gdb
 
 ## LOGs
+
+7.3 commit: fix the bugs in FLW, FLD, FSW, FSD
 
 7.2 commit: printf run, add some printf in dhry\_1.c, pinpoint dugs in F extension CVT and ? 
 

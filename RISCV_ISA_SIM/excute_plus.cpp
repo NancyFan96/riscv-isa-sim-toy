@@ -85,12 +85,12 @@ void instruction::execute_FExt(){
         memAddress mem_addr;
         if(getfunc3()==2){//FLW
             mem_addr = sim_regs.readReg(getrs1())+immediate;
-            sim_regs.writeFloatReg(getrd(), (f32)sim_mem.get_memory_32(mem_addr));
+            sim_regs.writeFloatReg(getrd(), (f32)sim_mem.get_memory_f32(mem_addr));
             if(verbose) print_ins("FLW", getrd(), getrs1(), immediate);
         }
         else if(getfunc3()==3){
             mem_addr = sim_regs.readReg(getrs1())+immediate;
-            sim_regs.writeFloatReg(getrd(), (f64)sim_mem.get_memory_64(mem_addr));
+            sim_regs.writeFloatReg(getrd(), (f64)sim_mem.get_memory_f64(mem_addr));
             if(verbose) print_ins("FLD", getrd(), getrs1(), immediate);
         }
         else{
@@ -100,14 +100,14 @@ void instruction::execute_FExt(){
     else if(opcode == 0x27){
         // FSW, FSW rs1, rs2, imm, from rs2 to mem
         memAddress mem_addr;
-        if(getfunc3()==2){//FLW
+        if(getfunc3()==2){//FSW
             mem_addr = sim_regs.readReg(getrs1())+immediate;
-            sim_mem.set_memory_32(mem_addr, (f32)sim_regs.readFloatReg(getrs2()));
+            sim_mem.set_memory_f32(mem_addr, (f32)sim_regs.readFloatReg(getrs2()));
             if(verbose) print_ins("FSW", getrs1(), getrs2(), immediate);
         }
         else if(getfunc3()==3){
             mem_addr = sim_regs.readReg(getrs1())+immediate;
-            sim_mem.set_memory_64(mem_addr, sim_regs.readFloatReg(getrs2()));
+            sim_mem.set_memory_f64(mem_addr, sim_regs.readFloatReg(getrs2()));
             if(verbose) print_ins("FSD", getrs1(), getrs2(), immediate);
         }
         else{

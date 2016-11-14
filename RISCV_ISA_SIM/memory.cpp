@@ -137,3 +137,51 @@ reg8  memory::get_memory_8(memAddress addr)
         
     }
 }
+
+f32   memory::get_memory_f32(memAddress addr)
+{
+    byte* v_addr = get_memory_p_address(addr);
+    if(v_addr==NULL)
+    {
+        printf("invalid memory address\n");
+        return -1;
+    }
+    float* p_f32 = (float*)v_addr;
+    return *p_f32;
+    
+}
+f64  memory::get_memory_f64(memAddress addr)
+{
+    byte* v_addr = get_memory_p_address(addr);
+    if(v_addr==NULL)
+    {
+        printf("invalid memory address\n");
+        return -1;
+    }
+    double* p_f64 = (double*)v_addr;
+    return *p_f64;
+}
+bool  memory::set_memory_f32(memAddress addr,f32 value)
+{
+    byte* v_addr=get_memory_p_address(addr);
+    if(v_addr==NULL)
+    {
+        printf("invalid memory address\n");
+        return false;
+    }
+    float* fp = (float*)v_addr;
+    *fp = value;
+    return true;
+}
+bool  memory::set_memory_f64(memAddress addr,f64 value)
+{
+    byte* v_addr=get_memory_p_address(addr);
+    if(v_addr==NULL)
+    {
+        printf("invalid memory address\n");
+        return false;
+    }
+    double* fp = (double*)v_addr;
+    *fp = value;
+    return true;
+}

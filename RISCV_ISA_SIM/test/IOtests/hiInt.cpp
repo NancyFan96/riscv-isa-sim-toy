@@ -2,9 +2,9 @@
 int main()
 {
 	int N;
-	scanf("N: %d", &N);
+	scanf("%d", &N);
 
-	printf("N = %d!\n", N);
+	printf("N =  %d!\n", N);
 
 	return 0;
 }

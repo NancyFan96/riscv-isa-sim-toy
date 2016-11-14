@@ -328,11 +328,11 @@ void instruction::execute(){
         }
         else if(sim_regs.readReg(a7) == 63 && sim_regs.readReg(a3) == 0){
             // read
-            printf("read.. ");
+            //printf("read.. ");
 			int fd = (int)sim_regs.readReg(a0);
 			void * buf = (void*)sim_regs.readReg(a1);
 			size_t count = (size_t)sim_regs.readReg(a2);
-            printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...\n", fd, (reg64)buf, (int)count);
+            //printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...\n", fd, (reg64)buf, (int)count);
             buf = sim_mem.get_memory_p_address((reg64)buf);
 			count = read(fd, buf, count);
             sim_regs.writeReg(a0, count);
@@ -340,12 +340,12 @@ void instruction::execute(){
         }
         else if(sim_regs.readReg(a7) == 64 && sim_regs.readReg(a3) == 0){
             // write
-            printf("write.. ");
+            //printf("write.. ");
 			int fd = (int)sim_regs.readReg(a0);
 			void * buf = (void*)sim_regs.readReg(a1);
 			size_t count = (size_t)sim_regs.readReg(a2);
             //fflush(stdout);
-            printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...\n", fd, (reg64)buf, (int)count);
+            //printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...\n", fd, (reg64)buf, (int)count);
 			buf = sim_mem.get_memory_p_address((reg64)buf);
 			count = write(fd, buf, count);
             sim_regs.writeReg(a0, count);
@@ -353,12 +353,12 @@ void instruction::execute(){
         }
         else if(sim_regs.readReg(a7) == 169 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             // gettimeofday
-            /*printf("Before:\n");
+            printf("Before:\n");
             print_ins("GETTIMEOFDAY");
             struct  timeval  *tv_p = (struct timeval *)sim_mem.get_memory_p_address(sim_regs.readReg(a0));
             sim_regs.writeReg(a0,  gettimeofday(tv_p,NULL));
             printf("After:\n");
-            print_ins("GETTIMEOFDAY");*/
+            print_ins("GETTIMEOFDAY");
         }
         else if(sim_regs.readReg(a7) == 214 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             //sbrk

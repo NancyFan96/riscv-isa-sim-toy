@@ -1,10 +1,15 @@
-#include <time.h>
+#include <sys/types.h>
+#include <sys/times.h>
 #include <stdio.h>
 
 int main()
 {
-	time_t t; t = time(NULL);
-	printf("The number of seconds since January 1, 1970 is %ld",t);
+	struct tms      time_info;
+	long            Begin_Time;
+	
+	times (&time_info);
+	Begin_Time = (long) time_info.tms_utime;
+	printf ("Begin_Time(long%lx) = %lf\n", Begin_Time, Begin_Time);
 
 	return 0;
 }

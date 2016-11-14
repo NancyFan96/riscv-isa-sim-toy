@@ -38,6 +38,12 @@ public:
     reg16 get_memory_16(memAddress offset);
     reg8  get_memory_8(memAddress offset);
     
+    /* ----------------add float point instruction ----------------*/
+    f32   get_memory_f32(memAddress offset);                //get float point from memory
+    f64   get_memory_f64(memAddress offset);
+    bool  set_memory_f32(memAddress addr,f32 value);
+    bool  set_memory_f64(memAddress addr,f64 value);
+    
 };
 
 extern memory sim_mem;
