@@ -274,10 +274,11 @@ bool gdb_mode_func(void)
             return false;
         default:
             printf("> invalid command\n");
-            GDB_MODE=false;
+            //GDB_MODE=false;
             GDB_TYPE = undefined_gdb;
+            IS_NOP = true;
             verbose = false;
-            return false;
+            return true;
     }
     
 }
