@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DBD932D31DCC9B0C003A7E99 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBD932D21DCC9B0C003A7E99 /* main.cpp */; };
+		DB8ABB9C1DD5B27D00D735F2 /* decode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8ABB911DD5B27D00D735F2 /* decode.cpp */; };
+		DB8ABB9D1DD5B27D00D735F2 /* excute_plus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8ABB931DD5B27D00D735F2 /* excute_plus.cpp */; };
+		DB8ABB9E1DD5B27D00D735F2 /* exe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8ABB941DD5B27D00D735F2 /* exe.cpp */; };
+		DB8ABB9F1DD5B27D00D735F2 /* execute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8ABB961DD5B27D00D735F2 /* execute.cpp */; };
+		DB8ABBA01DD5B27D00D735F2 /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8ABB971DD5B27D00D735F2 /* memory.cpp */; };
+		DB8ABBA11DD5B27D00D735F2 /* register.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8ABB991DD5B27D00D735F2 /* register.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +28,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DB8ABB911DD5B27D00D735F2 /* decode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = decode.cpp; sourceTree = "<group>"; };
+		DB8ABB921DD5B27D00D735F2 /* decode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = decode.hpp; sourceTree = "<group>"; };
+		DB8ABB931DD5B27D00D735F2 /* excute_plus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = excute_plus.cpp; sourceTree = "<group>"; };
+		DB8ABB941DD5B27D00D735F2 /* exe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exe.cpp; sourceTree = "<group>"; };
+		DB8ABB951DD5B27D00D735F2 /* exe.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = exe.hpp; sourceTree = "<group>"; };
+		DB8ABB961DD5B27D00D735F2 /* execute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = execute.cpp; sourceTree = "<group>"; };
+		DB8ABB971DD5B27D00D735F2 /* memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory.cpp; sourceTree = "<group>"; };
+		DB8ABB981DD5B27D00D735F2 /* memory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = memory.hpp; sourceTree = "<group>"; };
+		DB8ABB991DD5B27D00D735F2 /* register.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = register.cpp; sourceTree = "<group>"; };
+		DB8ABB9A1DD5B27D00D735F2 /* register.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = register.hpp; sourceTree = "<group>"; };
+		DB8ABB9B1DD5B27D00D735F2 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
 		DBD932CF1DCC9B0C003A7E99 /* RISCV_ISA_SIM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RISCV_ISA_SIM; sourceTree = BUILT_PRODUCTS_DIR; };
-		DBD932D21DCC9B0C003A7E99 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +72,17 @@
 		DBD932D11DCC9B0C003A7E99 /* RISCV_ISA_SIM */ = {
 			isa = PBXGroup;
 			children = (
-				DBD932D21DCC9B0C003A7E99 /* main.cpp */,
+				DB8ABB911DD5B27D00D735F2 /* decode.cpp */,
+				DB8ABB921DD5B27D00D735F2 /* decode.hpp */,
+				DB8ABB931DD5B27D00D735F2 /* excute_plus.cpp */,
+				DB8ABB941DD5B27D00D735F2 /* exe.cpp */,
+				DB8ABB951DD5B27D00D735F2 /* exe.hpp */,
+				DB8ABB961DD5B27D00D735F2 /* execute.cpp */,
+				DB8ABB971DD5B27D00D735F2 /* memory.cpp */,
+				DB8ABB981DD5B27D00D735F2 /* memory.hpp */,
+				DB8ABB991DD5B27D00D735F2 /* register.cpp */,
+				DB8ABB9A1DD5B27D00D735F2 /* register.hpp */,
+				DB8ABB9B1DD5B27D00D735F2 /* system.h */,
 			);
 			path = RISCV_ISA_SIM;
 			sourceTree = "<group>";
@@ -119,7 +144,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBD932D31DCC9B0C003A7E99 /* main.cpp in Sources */,
+				DB8ABBA01DD5B27D00D735F2 /* memory.cpp in Sources */,
+				DB8ABB9E1DD5B27D00D735F2 /* exe.cpp in Sources */,
+				DB8ABB9C1DD5B27D00D735F2 /* decode.cpp in Sources */,
+				DB8ABB9D1DD5B27D00D735F2 /* excute_plus.cpp in Sources */,
+				DB8ABBA11DD5B27D00D735F2 /* register.cpp in Sources */,
+				DB8ABB9F1DD5B27D00D735F2 /* execute.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +276,7 @@
 				DBD932D81DCC9B0C003A7E99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
