@@ -27,6 +27,7 @@ public:
     
 public:
     memory();
+    void readMem(memAddress mem_addr);
     byte* get_memory_p_address(memAddress offset);           // return mem_zero + offset, offset is directly from ELF
     memAddress get_memory_offset(byte *my_mem_Paddr);       // return my_mem_address - offset
     bool  set_memory_8(memAddress addr, reg8 value);         // if success return true, else return false

@@ -14,20 +14,22 @@
 #include "register.hpp"
 #include "memory.hpp"
 #include "decode.hpp"
-#include "exe.hpp"
+#include "sim.hpp"
 
 using namespace std;
 
 bool GDB_MODE =false;
-static int GDB_TYPE;
+int GDB_TYPE;
+bool WAIT = false;
+memAddress breakpoint = 0;
+memAddress currentPC;
+ins inst;
+
 static bool VALID_BREAKPOINT=false;
-static memAddress breakpoint = 0;
 static bool IS_ENTER_STEP = false;
 static bool IS_FIRST_GDB = false;
 static bool IS_NOP = false;
-static bool WAIT = false;
 
-static memAddress currentPC;
 
 bool verbose = false;
 bool IS_TO_EXIT = false;
@@ -199,7 +201,7 @@ bool gdb_mode_func(void)
     char cmd[20];
     memAddress break_addr=0;
     memAddress debug_mem=0;
-    reg32 mem_content=0;
+    //reg32 mem_content=0;
     if(IS_FIRST_GDB)
     {
         printf(">\n");
@@ -245,8 +247,8 @@ bool gdb_mode_func(void)
                 IS_ENTER_STEP = false;
             }
             GDB_TYPE = step;
-            VALID_BREAKPOINT=true;
-            breakpoint=sim_regs.getPC();
+            verbose = true;
+            WAIT = true;
             return true;
             //print content in memory
         case 'm':
@@ -256,7 +258,8 @@ bool gdb_mode_func(void)
             printf("> set memory address\n");
             printf("> ");
             scanf("%lx",&debug_mem);
-            for(int row=0;row<4;++row){
+            sim_mem.readMem(debug_mem);
+            /*for(int row=0;row<4;++row){
                 printf("> ");
                 for(int col=0;col<4;++col){
                     mem_content=sim_mem.get_memory_32(debug_mem);
@@ -265,7 +268,15 @@ bool gdb_mode_func(void)
                     debug_mem+=4;
                 }
                 printf("\n");
-            }
+            }*/
+            return true;
+        case 'r':
+            GDB_MODE = print_reg;
+            IS_NOP = true;
+            WAIT = true;
+            printf("> Now registers are as follows\n");
+            sim_regs.readReg();
+            sim_regs.readFloatReg();
             return true;
         case 'q':
             GDB_MODE=false;
@@ -302,8 +313,11 @@ int main(int argc, char * argv[]){
             WAIT = true;
             //verbose = true;
         }
-        if (strcmp(argv[2], "--verbose") == 0)
+        if (strcmp(argv[2], "--verbose") == 0){
             verbose = true;
+            GDB_MODE = false;
+            IS_NOP = false;
+        }
     }
     
     if(load_program(file_name)==true){
@@ -320,24 +334,18 @@ int main(int argc, char * argv[]){
     }
     
     while(1){
-        ins inst = fetch();
+        inst = fetch();
         instruction fetched_inst;
         
-        if(GDB_MODE&&VALID_BREAKPOINT&&breakpoint == currentPC){
+        if((GDB_MODE&&GDB_TYPE==step)||(GDB_MODE&&VALID_BREAKPOINT&&breakpoint == sim_regs.getPC())){
             verbose = true;
             WAIT = true;
-            
         }
         
         if(!IS_NOP){
-            if(verbose){
-                printf("> -------------AFTER LASTST INSTRUCTION(VERBOSE)--------------------\n");
-                printf("> currentPC = %lx\n", currentPC);
-                printf("> instruction = %x\n", inst);
-            }
             if(fetched_inst.decode(inst) == true){
                 fetched_inst.execute();
-                if(IS_TO_EXIT)  break;
+                if(IS_TO_EXIT) break;
             }else{
                 cout << "DECODE ERROR!" << endl;
                 printf("> currentPC = %lx\n", currentPC);
@@ -347,6 +355,15 @@ int main(int argc, char * argv[]){
                 sim_regs.readFloatReg();
                 return -1;
             }
+            if(verbose){
+                breakpoint = sim_regs.getPC();
+                printf("> breakpoint = %lx\n", breakpoint);
+            }
+            /*if(GDB_MODE&&VALID_BREAKPOINT&&breakpoint == sim_regs.getPC()){
+                verbose = true;
+                WAIT = true;
+                
+            }*/
         }
         else
             IS_NOP = false;
@@ -360,7 +377,7 @@ int main(int argc, char * argv[]){
             
             if(IS_FIRST_GDB)    IS_FIRST_GDB = false;
             
-            if(GDB_TYPE!=print_mem && GDB_TYPE != print_reg && GDB_TYPE != delete_breakpoint){
+            if(GDB_TYPE!=print_mem && GDB_TYPE != print_reg && GDB_TYPE != delete_breakpoint && GDB_TYPE == step){
                 verbose = false;
                 WAIT = false;
             }

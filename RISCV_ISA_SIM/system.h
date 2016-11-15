@@ -48,4 +48,17 @@ typedef unsigned char       insType;
 typedef unsigned long int   memAddress;
 
 
+
+#define continue_run 0
+#define step 1
+#define set_breakpoint 2
+#define delete_breakpoint 3
+#define print_mem 4
+#define print_reg 5
+#define quit_gdb 6
+#define undefined_gdb 7
+
+
+
+
 #endif /* system_h */

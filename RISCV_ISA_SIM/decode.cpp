@@ -20,6 +20,9 @@
 
 extern const float FDIFF;
 extern bool GDB_MODE;
+extern memAddress currentPC;
+extern reg32 inst;
+
 
 instruction::instruction()
 {
@@ -35,29 +38,42 @@ instruction::instruction()
 }
 
 void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs2){
-    if(GDB_MODE)    printf("> ");
-    printf("instruction:\t %s %d, %d, %d\n", inst_name, rd, rs1, rs2);
+    printf("> -------------AFTER LASTST INSTRUCTION(VERBOSE)--------------------\n");
+    printf("> lastPC = %lx\n", currentPC);
+    printf("> instruction = %x\n", inst);
+    printf("> instruction:\t %s %d, %d, %d\n", inst_name, rd, rs1, rs2);
     sim_regs.readReg();
     sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name, regID r1, regID r2, imm imm0){
-    if(GDB_MODE)    printf("> ");
-    printf("instruction:\t %s %d, %d, %ld\n", inst_name, r1, r2, imm0);
+    printf("> -------------AFTER LASTST INSTRUCTION(VERBOSE)--------------------\n");
+    printf("> lastPC = %lx\n", currentPC);
+    printf("> instruction = %x\n", inst);
+    printf("> instruction:\t %s %d, %d, %ld\n", inst_name, r1, r2, imm0);
     sim_regs.readReg();
     sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name, regID rx, imm imm0){
-    printf("instruction:\t %s %d, 0x%lx\n", inst_name, rx, imm0);
+    printf("> -------------AFTER LASTST INSTRUCTION(VERBOSE)--------------------\n");
+    printf("> lastPC = %lx\n", currentPC);
+    printf("> instruction = %x\n", inst);
+    printf("> instruction:\t %s %d, 0x%lx\n", inst_name, rx, imm0);
     sim_regs.readReg();
     sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name, regID rx){
-    printf("instruction:\t %s %d\n", inst_name, rx);
+    printf("> -------------AFTER LASTST INSTRUCTION(VERBOSE)--------------------\n");
+    printf("> lastPC = %lx\n", currentPC);
+    printf("> instruction = %x\n", inst);
+    printf("> instruction:\t %s %d\n", inst_name, rx);
     sim_regs.readReg();
     sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name){
-    printf("instruction:\t %s\n", inst_name);
+    printf("> -------------AFTER LASTST INSTRUCTION(VERBOSE)--------------------\n");
+    printf("> lastPC = %lx\n", currentPC);
+    printf("> instruction = %x\n", inst);
+    printf("> instruction:\t %s\n", inst_name);
     sim_regs.readReg();
     sim_regs.readFloatReg();
 }
@@ -316,10 +332,10 @@ void instruction::execute(){
         if(sim_regs.readReg(a7) == 93 && sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             // exit_program
             IS_TO_EXIT = true;
-            if(verbose) print_ins("\nProg Exited!");
+            if(verbose) print_ins("\n\nProg Exited!\n");
             else{
                 if(GDB_MODE)    printf("> ");
-                printf("\nProg Exited!\n");
+                printf("\n\nProg Exited!\n");
             }
         }
         else if(sim_regs.readReg(a7) == 62 &&  sim_regs.readReg(a3) == 0){

@@ -19,6 +19,20 @@ memory::memory()//initiaiize
     memset(mem_zero,0,MEM_SIZE);
 }
 
+
+void memory::readMem(memAddress mem_addr){
+    for(int row=0;row<4;++row){
+        printf("> ");
+        for(int col=0;col<4;++col){
+            reg32 mem_content=sim_mem.get_memory_32(mem_addr);
+            printf("0x%08x",mem_content);
+            printf("    ");
+            mem_addr+=4;
+        }
+        printf("\n");
+    }
+}
+
 byte* memory::get_memory_p_address(memAddress offset)
 {
     return (mem_zero+offset);

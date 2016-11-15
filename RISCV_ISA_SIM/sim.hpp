@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
 
-#ifndef exe_hpp
-#define exe_hpp
+#ifndef sim_hpp
+#define sim_hpp
 
 #include "system.h"
 #include "decode.hpp"
@@ -125,18 +125,7 @@ typedef struct
 
 
 
-#define continue_run 0
-#define step 1
-#define set_breakpoint 2
-#define delete_breakpoint 3
-#define print_mem 4
-#define print_reg 5
-#define quit_gdb 6
-#define undefined_gdb 7
-
-
-
-#endif /* exe_hpp */
+#endif /* sim_hpp */
 
 
 /*------------ END define ELF --------------*/

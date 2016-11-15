@@ -1,13 +1,13 @@
 CC = g++
-PROC = exe
+PROC = sim
 
-SRC=	exe.cpp memory.cpp register.cpp decode.cpp
-HDR=	system.h exe.hpp memory.hpp register.hpp decode.hpp
+SRC=	sim.cpp memory.cpp register.cpp decode.cpp execute.cpp execute_plus.cpp
+HDR=	system.h sim.hpp memory.hpp register.hpp decode.hpp
 
 
 all: 	$(PROC)
 
-exe: 	$(SRC) $(HDR)
+sim: 	$(SRC) $(HDR)
 	$(CC) -o $(PROC) *.cpp -Wall
 
 

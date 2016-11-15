@@ -20,6 +20,10 @@
 
 extern const float FDIFF;
 extern bool GDB_MODE;
+extern int GDB_TYPE;
+extern memAddress breakpoint;
+extern bool WAIT;
+
 
 void instruction::execute_O()
 {
@@ -272,20 +276,37 @@ void instruction::execute_R64()
 
 void instruction::execute_I(){
     // contain opcode, func3, rd, rs1, imm
+    reg32 newPC;
     switch (opcode) {
         case 0x6F: //JAL rd,imm
-            reg32 newPC;
+            if(GDB_MODE &&!(GDB_TYPE==step)){
+                verbose = false;
+                WAIT = false;
+            }
             sim_regs.writeReg(getrd(), sim_regs.getPC()); //PC+4?
             newPC = (reg32)(sim_regs.getPC()+immediate-4);
             sim_regs.setPC(newPC);
+            if(GDB_MODE && breakpoint == newPC){
+                verbose = true;
+                WAIT = true;
+            }
             if(verbose) print_ins("JAL", getrd(), immediate);
             break;
         case 0x67: // b110 0111
             // JALR rd, rs1, imm
             switch (getfunc3()){
                 case 0:
+                    if(GDB_MODE &&!(GDB_TYPE==step)){
+                        verbose = false;
+                        WAIT = false;
+                    }
                     sim_regs.writeReg(getrd(), sim_regs.getPC());
-                    sim_regs.setPC((reg32)((sim_regs.readReg(getrs1())+immediate)&~1));
+                    newPC = (reg32)((sim_regs.readReg(getrs1())+immediate)&~1);
+                    sim_regs.setPC(newPC);
+                    if(GDB_MODE &&!(GDB_TYPE==step)){
+                        verbose = true;
+                        WAIT = true;
+                    }
                     if(verbose) print_ins("JALR", getrd(), getrs1(), immediate);
                     break;
                 default:
@@ -488,6 +509,10 @@ void instruction::execute_SX(){
 }
 //BEQ,BNE,BLT,BGE,BLTU,BGEU rs1,rs2,imm
 void instruction::execute_UX(){
+    if(GDB_MODE &&!(GDB_TYPE==step)){
+        verbose = false;
+        WAIT = false;
+    }
     switch(getfunc3())
     {
         case 0://BEQ
@@ -496,6 +521,10 @@ void instruction::execute_UX(){
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
+                if(GDB_MODE && breakpoint == newPC){
+                    verbose = true;
+                    WAIT = true;
+                }
             }
             if(verbose) print_ins("BEQ", getrs1(), getrs2(), immediate);
             break;
@@ -505,6 +534,10 @@ void instruction::execute_UX(){
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
+                if(GDB_MODE && breakpoint == newPC){
+                    verbose = true;
+                    WAIT = true;
+                }
             }
             if(verbose) print_ins("BNE", getrs1(), getrs2(), immediate);
             break;
@@ -514,6 +547,10 @@ void instruction::execute_UX(){
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
+                if(GDB_MODE && breakpoint == newPC){
+                    verbose = true;
+                    WAIT = true;
+                }
             }
             if(verbose) print_ins("BLT", getrs1(), getrs2(), immediate);
             break;
@@ -523,6 +560,10 @@ void instruction::execute_UX(){
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
+                if(GDB_MODE && breakpoint == newPC){
+                    verbose = true;
+                    WAIT = true;
+                }
             }
             if(verbose) print_ins("BGE", getrs1(), getrs2(), immediate);
             break;
@@ -532,6 +573,10 @@ void instruction::execute_UX(){
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
+                if(GDB_MODE && breakpoint == newPC){
+                    verbose = true;
+                    WAIT = true;
+                }
             }
             if(verbose) print_ins("BLTU", getrs1(), getrs2(), immediate);
             break;
@@ -541,6 +586,10 @@ void instruction::execute_UX(){
                 reg32 newPC;
                 newPC = (reg32)(sim_regs.getPC()+immediate-4);//!!
                 sim_regs.setPC(newPC);
+                if(GDB_MODE && breakpoint == newPC){
+                    verbose = true;
+                    WAIT = true;
+                }
             }
             if(verbose) print_ins("BGEU", getrs1(), getrs2(), immediate);
             break;
