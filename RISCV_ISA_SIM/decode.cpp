@@ -33,6 +33,12 @@ instruction::instruction()
     rs1 = 0;
     rs2 = 0;
 }
+void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs2, regID rs3){
+    if(GDB_MODE)    printf("> ");
+    printf("instruction:\t %s %d, %d, %d, %d\n", inst_name, rd, rs1, rs2, rs3);
+    sim_regs.readReg();
+    sim_regs.readFloatReg();
+}
 
 void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs2){
     if(GDB_MODE)    printf("> ");
@@ -46,6 +52,13 @@ void instruction::print_ins(const char* inst_name, regID r1, regID r2, imm imm0)
     sim_regs.readReg();
     sim_regs.readFloatReg();
 }
+void instruction::print_ins(const char* inst_name, regID r1, regID r2){
+    if(GDB_MODE)    printf("> ");
+    printf("instruction:\t %s %d, %d\n", inst_name, r1, r2);
+    sim_regs.readReg();
+    sim_regs.readFloatReg();
+}
+
 void instruction::print_ins(const char* inst_name, regID rx, imm imm0){
     printf("instruction:\t %s %d, 0x%lx\n", inst_name, rx, imm0);
     sim_regs.readReg();

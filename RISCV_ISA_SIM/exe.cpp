@@ -267,6 +267,13 @@ bool gdb_mode_func(void)
                 printf("\n");
             }
             return true;
+        case 'r':
+            GDB_TYPE = print_reg;
+            IS_NOP = true;
+            WAIT = true;
+            sim_regs.readReg();
+            sim_regs.readFloatReg();
+            return true;
         case 'q':
             GDB_MODE=false;
             GDB_TYPE = quit_gdb;

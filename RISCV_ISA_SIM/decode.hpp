@@ -97,8 +97,10 @@ public:
     void execute_R4();
     void execute_FExt();
     
+    void print_ins(const char* inst_name, regID rd, regID rs1, regID rs2, regID rs3);
     void print_ins(const char* inst_name, regID rd, regID rs1, regID rs2);
     void print_ins(const char* inst_name, regID r1, regID r2, imm imm0);
+    void print_ins(const char* inst_name, regID r1, regID r2);
     void print_ins(const char* inst_name, regID rx, imm imm0);
     void print_ins(const char* inst_name, regID rx);
     void print_ins(const char* inst_name);

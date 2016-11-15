@@ -23,58 +23,14 @@ extern bool GDB_MODE;
 
 void instruction::execute_R4(){
     //FMADD.D rs1 * rs2 + rs3;
-    xcode rm = ((sim_regs.getFCSR()&FUNCT3) >> 12);
-    if(getfunc2() == 1)
-    {
-        
-        switch(getfunc3())
-        {
-            case 0: //Round to Nearest, ties to Even
-                sim_regs.writeFloatReg(getrd(),RNE(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
-                break;
-            case 1: //Round towards Zero
-                sim_regs.writeFloatReg(getrd(),(int)(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
-                break;
-            case 2: //Round Down (towards -wuqiong)
-                sim_regs.writeFloatReg(getrd(),(signed64)floor(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
-                break;
-            case 3: //Round Up (towards +wuqiong)
-                sim_regs.writeFloatReg(getrd(),(signed64)ceil(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
-                break;
-            case 4: //Round to Nearest, ties to Max Magnitude
-                sim_regs.writeFloatReg(getrd(),(signed64)round(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
-                break;
-            case 7:
-                switch(rm){
-                    case 0: //Round to Nearest, ties to Even
-                        
-                        sim_regs.writeFloatReg(getrd(),RNE(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
-                        break;
-                    case 1: //Round towards Zero
-                        sim_regs.writeFloatReg(getrd(),(int)(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
-                        break;
-                    case 2: //Round Down (towards -wuqiong)
-                        sim_regs.writeFloatReg(getrd(),(signed64)floor(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
-                        break;
-                    case 3: //Round Up (towards +wuqiong)
-                        sim_regs.writeFloatReg(getrd(),(signed64)ceil(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
-                        break;
-                    case 4: //Round to Nearest, ties to Max Magnitude
-                        sim_regs.writeFloatReg(getrd(),(signed64)round(sim_regs.readFloatReg(getrs1())*sim_regs.readFloatReg(getrs2()) + sim_regs.readFloatReg(getrs3())));
-                        break;
-                    case 5:
-                    case 6:
-                    case 7://
-                        printf("undefined instruction in R4.Invaild rounding mode!\n");
-                        break;
-                }
-                break;
-            default:
-                printf("undefined instruction in R4.Invaild rounding mode!\n");
-                
-        }
+    if(getfunc2() == 1){
+        f64 f64Z = sim_regs.readFloatReg(getrs1())* sim_regs.readFloatReg(getrs2())+ sim_regs.readFloatReg(getrs3());
+        sim_regs.writeFloatReg(getrd(), f64Z);
+        if(verbose) print_ins("FMDD.D", getrd(), getrs1(), getrs2(), getrs3());
     }
-    
+    else{
+        printf("Warning: undefined instruction in R4 type\n");
+    }
     
 }
 
@@ -115,8 +71,6 @@ void instruction::execute_FExt(){
         }
     }
     else if(opcode == 0x53){
-        //int roundingmode = 0 | getfunc3();
-        //fesetenv((fenv_t)roundingmode);
         // XXX rd, rs1, rs2
         xcode rm = ((sim_regs.getFCSR()&FUNCT3) >> 12);
         switch (getfunc7()) {
@@ -215,10 +169,13 @@ void instruction::execute_FExt(){
                 }
                 break;
             case 0x60:
-                //FCVT.L.S rs1,rs2 FCVT.W.S single float -> 32/64 signed integer //notice: set fcsr
+                //FCVT.L.S rd,rs1 FCVT.W.S single float -> 32/64 signed integer //notice: set fcsr
                 
                 if(getrs2() == 0)
                 {//w.s
+                    //if(verbose)
+                        print_ins("FCVT.W.S", getrd(), getrs1());
+                    printf("before above!\n");
                     switch(getfunc3())
                     {
                         case 0: //Round to Nearest, ties to Even
@@ -271,6 +228,9 @@ void instruction::execute_FExt(){
                 }
                 else if(getrs2() == 2) //l.s
                 {
+                   // if(verbose)
+                        print_ins("FCVT.L.S", getrd(), getrs1());
+                    printf("before above!\n");
                     switch(getfunc3())
                     {
                         case 0: //Round to Nearest, ties to Even
@@ -326,9 +286,14 @@ void instruction::execute_FExt(){
                 if(getrs2() == 0) //s.w
                 {
                     sim_regs.writeFloatReg(getrd(),(f32)sim_regs.readReg(getrs1()));
+                    //if(verbose)
+                        print_ins("FCVT.S.W", getrd(), getrs1());
                 }
-                else if(getrs2() == 2) //s.l
+                else if(getrs2() == 2){ //s.l
                     sim_regs.writeFloatReg(getrd(),(f32)sim_regs.readReg(getrs1()));
+                    //if(verbose)
+                        print_ins("FCVT.S.L", getrd(), getrs1());
+                }
                 break;
             case 0x11:
                 //FSGNJ.D FSGNJN.D
@@ -336,21 +301,32 @@ void instruction::execute_FExt(){
                     sim_regs.writeFloatReg(getrd(),sim_regs.readFloatReg(getrs1()));
                 else if(getfunc3() == 1)
                     sim_regs.writeFloatReg(getrd(),0.0-sim_regs.readFloatReg(getrs1()));
+                printf("FSGNJ\n");
                 break;
             case 0x20:
                 //FCVT.S.D rs1,rs2 double-precision -> single-precision
-                if(getrs2() == 1)
+                if(getrs2() == 1){
                     sim_regs.writeFloatReg(getrd(),(f32)sim_regs.readFloatReg(getrs1()));
+                    //if(verbose)
+                        print_ins("FCVT.S.D", getrd(), getrs1());
+                }
                 break;
             case 0x21:
                 //FCVT.D.S rs1,rs2 single-precision -> double-precision never round
-                if(getrs2() == 0)
+                if(getrs2() == 0){
                     sim_regs.writeFloatReg(getrd(),(f32)sim_regs.readFloatReg(getrs1()));
+                    //if(verbose)
+                        print_ins("FCVT.D.S", getrd(), getrs1());
+                }
                 break;
             case 0x61:
                 //FCVT.W.D FCVT.WU.D  double-precision -> 32 (un)signed integer
                 if(getrs2() == 0)//FCVT.W.D
                 {
+                    //if(verbose)
+                    print_ins("FCVT.W.D", getrd(), getrs1());
+                    printf("before above!\n");
+
                     switch(getfunc3())
                     {
                         case 0: //Round to Nearest, ties to Even
@@ -402,6 +378,10 @@ void instruction::execute_FExt(){
                 }
                 if(getrs2() == 1)//FCVT.WU.D
                 {
+                    //if(verbose)
+                        print_ins("FCVT.WU.D", getrd(), getrs1());
+                    printf("before above!\n");
+
                     switch(getfunc3())
                     {
                         case 0: //Round to Nearest, ties to Even
@@ -454,22 +434,37 @@ void instruction::execute_FExt(){
                 break;
             case 0x69:
                 //FCVT.D.W FCVT.D.WU 32/64 (un)signed integer -> double-precision//is unaffected by round
-                if(getrs2() == 0)//FCVT.D.W
+                if(getrs2() == 0){//FCVT.D.W
                     sim_regs.writeFloatReg(getrd(),(f32)sim_regs.readReg(getrs1()));
-                if(getrs2() == 1)//FCVT.D.WU
+                    //if(verbose)
+                    print_ins("FCVT.D.W", getrd(), getrs1());
+                }
+                if(getrs2() == 1){//FCVT.D.WU
                     sim_regs.writeFloatReg(getrd(),(f32)sim_regs.readReg(getrs1()));
+                    //if(verbose)
+                        print_ins("FCVT.D.WU", getrd(), getrs1());
+                }
                 break;
             case 0x71: //round = 000
                 //FMV.X.D  floating-point register rs1 -> IEEE 754-2008 integer register rd; rs1 single
-                if(getrs2() == 0)
-                    sim_regs.writeReg(getrd(),RNE(sim_regs.readFloatReg(getrs1())));
+                if(getrs2() == 0){
+                    f64 f_value =  sim_regs.readFloatReg(getrs1());      //read float point from float reg
+                    f64* fptr = (f64*)malloc(sizeof(f64)*1);
+                    *fptr = f_value;
+                    reg64 value = *((reg64*)fptr);
+                    sim_regs.writeReg(getrd(),value);
+                }
+                
                 break;
             case 0x79: //round = 000
                 //FMV.D.X IEEE 754-2008 integer register rs1 -> the floating-point register rd.
-                if(getrs2() == 0)
-                    sim_regs.writeFloatReg(getrd(),(f32)sim_regs.readReg(getrs1()));
-                break;
-            default:
+                if(getrs2() == 0){
+                    reg64 int_value = sim_regs.readReg(getrs1());
+                    reg64* intp = (reg64 *)malloc(sizeof(reg64)*1);
+                    *intp = int_value;
+                    f64 value = *((f64*)intp);
+                    sim_regs.writeFloatReg(getrd(),value);
+                }
                 break;
         }
     }

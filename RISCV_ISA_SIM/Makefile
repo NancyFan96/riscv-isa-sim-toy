@@ -1,7 +1,7 @@
 CC = g++
 PROC = exe
 
-SRC=	exe.cpp memory.cpp register.cpp decode.cpp
+SRC=	exe.cpp memory.cpp register.cpp decode.cpp execute.cpp excute_plus.cpp
 HDR=	system.h exe.hpp memory.hpp register.hpp decode.hpp
 
 
