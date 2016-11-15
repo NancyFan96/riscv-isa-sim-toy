@@ -13,6 +13,8 @@
 
 **TO DO:**
 
+* fmv 语义错
+* gdb 输入检查错
 * M, F extension 校对，浮点扩展的rounding mode(不用管)，fcvt还有问题
 * times()函数看起来是对了，仍待检验
 * 标测 quicksort, ijk, ack + drystone(实现drystone还需要补充一些指令的实现)
@@ -30,6 +32,8 @@ DONE:
 * gdb
 
 ## LOGs
+
+7.4 commit: fix some bugs in gdb, 现在断点是平时所用断点,查找到浮点错误是fmv语义错，另一个可能是float和double类型有问题
 
 7.3 commit: fix the bugs in FLW, FLD, FSW, FSD
 
