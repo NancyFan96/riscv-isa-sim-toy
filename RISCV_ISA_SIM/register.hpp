@@ -65,15 +65,15 @@ public:
     void readReg();                                 // for debug      
     reg64 readReg(regID regDst);                    //
     bool writeReg(regID regDst, reg64 value);       // if success return true, else return false
-    //bool writeReg(regID regDst, regID regSrc);    // if success return true, else return false
     reg64 getPC();                                  //
     bool setPC(reg64 newPC);                        // if success return true, else return false
     void incPC();                                   // PC to next instruction
 
     void readFloatReg();                              // for debug         
-    f64 readFloatReg(regID regDst);                   //
-    bool writeFloatReg(regID regDst, f64 value);      // if success return true, else return false
-    //bool writeReg(regID regDst, regID regSrc);      // if success return true, else return false
+    f64 readFloatRegD(regID regDst);                   //
+    f32 readFloatRegS(regID regDst);
+    bool writeFloatRegD(regID regDst, f64 value);      // if success return true, else return false
+    bool writeFloatRegS(regID regDst, f32 value);      // if success return true, else return false
     reg32 getFCSR();                                    //
     bool setFCSR(reg32 newFCSR);                        // if success return true, else return false
 

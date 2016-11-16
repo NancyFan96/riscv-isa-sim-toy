@@ -46,8 +46,7 @@ reg64 registers::readReg(regID regDst){
 bool registers::writeReg(regID regDst, reg64 value){
     if(regDst <0 || regDst > 31 )
         return false;
-    if(regDst == 0)
-    {
+    if(regDst == 0){
         //printf("Warning: $zero was tried to be written\n");
         return true;
     }
@@ -89,15 +88,19 @@ void registers::readFloatReg(){
     printf("\n");
 }
 
-f64 registers::readFloatReg(regID regDst){
+f64 registers::readFloatRegD(regID regDst){
     return frx[regDst];
 }
 
-bool registers::writeFloatReg(regID regDst, f64 value){
+f32 registers::readFloatRegS(regID regDst){
+    f32 * value_f32_ptr = (f32 *)(&(frx[regDst]));
+    return *(value_f32_ptr);
+}
+
+bool registers::writeFloatRegD(regID regDst, f64 value){
     if(regDst <0 || regDst > 31 )
         return false;
-    if(regDst == 0)
-    {
+    if(regDst == 0){
         //printf("Warning: $zero was tried to be written\n");
         return true;
     }
@@ -105,6 +108,19 @@ bool registers::writeFloatReg(regID regDst, f64 value){
     return true;
     
 }
+bool registers::writeFloatRegS(regID regDst, f32 value){
+    if(regDst <0 || regDst > 31 )
+        return false;
+    if(regDst == 0){
+        //printf("Warning: $zero was tried to be written\n");
+        return true;
+    }
+    f32 * value_f32_ptr = (f32 *)(&(frx[regDst]));
+    * value_f32_ptr = value;
+    return true;
+    
+}
+
 
 reg32 registers::getFCSR(){ //luyao
     return fcsr;

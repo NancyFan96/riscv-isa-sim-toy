@@ -276,10 +276,16 @@ main ()
                         / ((float) HZ * ((float) Number_Of_Runs));
     Dhrystones_Per_Second = ((float) HZ * (float) Number_Of_Runs)
                         / (float) User_Time;
+	printf("NOT Define TIME!!\n");//debug
 #endif
-	printf ("User_Time(long0x%lx) = %f, Number_of_Runs(int%d)=%f\n", User_Time, User_Time, Number_Of_Runs, Number_Of_Runs);//debug
-	printf ("Microseconds(long0x%lx), Dhrystones per Second(long0x%lx)\n", Microseconds, Dhrystones_Per_Second);//debug
-
+	printf ("\n\nI am debug info :)\n\nUser_Time = %f\nMic_secs_Per_Second=%f\nHZ = %f\nNumber_Of_Runs = %f\n", (float)User_Time, (float)Mic_secs_Per_Second, (float)HZ,  (float)Number_Of_Runs);
+	printf("User_Time = End_Time - Begin_Time;\n");
+	printf("	End_Time = %ld(0x%lx), Begin_Time = %ld(0x%lx)\n",End_Time,End_Time,Begin_Time,Begin_Time);
+	printf("Microseconds = (float) User_Time * Mic_secs_Per_Second / ((float) HZ * ((float) Number_Of_Runs))\n");
+    printf("Dhrystones_Per_Second = ((float) HZ * (float) Number_Of_Runs)/ (float) User_Time;\n");	
+	printf ("Microseconds (long 0x%lx), Dhrystones per Second (long 0x%lx)\n", Microseconds, Dhrystones_Per_Second);//debug
+	printf ("\nEnd of debug info\n\n");
+    
 	printf ("Microseconds for one run through Dhrystone: ");
     printf ("%6.1f \n", Microseconds);
     printf ("Dhrystones per Second:                      ");
