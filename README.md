@@ -13,15 +13,16 @@
 
 **TO DO:**
 
-* fmv 语义错
 * gdb 输入检查错
-* M, F extension 校对，浮点扩展的rounding mode(不用管)，fcvt还有问题
-* times()函数看起来是对了，仍待检验
-* 标测 quicksort, ijk, ack + drystone(实现drystone还需要补充一些指令的实现)
-* complete static variable init (已经实现?)，结合scanf的问题来看并没有（不过好像是RISCV-gcc本身的问题，spike也会挂？）
+* 计时，与本机ISA差10^6~7，是否合情？
+* 标测 quicksort, ijk, ack + drystone
+* 统计指令数
+* scanf的问题来看并没有,但dhrystone里的输入有换行问题（不是大问题，spike直接输入不显示呢）
 
 DONE:
 
+* Float register关于float和double的读写要分开用不同的函数，编码不同
+* F ext校对！（心酸
 * fload, fstore修正，需要memory类中新开用浮点指针存取的函数，不然强制转换会有问题
 * need to realize MALLOC==> brk不能直接调用linux系统函数实现，因为可能会在模拟的内存外新开访问空间，实际riscv指令不能访问到(?)
 * close把输出直接关了==>不用实现；原因猜测是riscv语义和linux不一致，后面有空再去翻系统函数源码...
