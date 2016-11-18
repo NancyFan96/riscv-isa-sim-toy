@@ -143,7 +143,7 @@ void instruction::execute_FExt(){
             case 0x51:
                 // FEQ.D, FLT.D, FLE.D
                 if(getfunc3()==2){//FEQ
-                    if((sim_regs.readFloatRegD(getrs1())-sim_regs.readFloatRegD(getrs2()))<FDIFF)
+                    if(((sim_regs.readFloatRegD(getrs1())-sim_regs.readFloatRegD(getrs2()))<FDIFF)&&((sim_regs.readFloatRegD(getrs2())-sim_regs.readFloatRegD(getrs1()))<FDIFF))
                         sim_regs.writeReg(getrd(), 1);
                     else
                         sim_regs.writeReg(getrd(), 0);

@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <time.h>
 #include <math.h>
 
-//#define DEBUG
+
 
 
 void ijk(int **A, int **B, int **C, int m, int n, int t){
@@ -20,42 +19,39 @@ void ijk(int **A, int **B, int **C, int m, int n, int t){
 
 int main()
 {
-	int N = 16;
-
+	int m = 0,n = 0,t = 0;
+	scanf("%d", &m);
+	scanf("%d", &n);
+	scanf("%d", &t);
 	int **A, **B, **C;
-	N = sqrt(N/2);
-	A = new int*[N];
-	B = new int*[N];
-	C = new int*[N];
+	A = new int*[m];
+	B = new int*[n];
+	C = new int*[m];
 
-	for(int i = 0; i < N; i++){
-		A[i] = new int[N];
-		for(int j = 0; j < N; j++)
-			//scanf("%d", &A[i][j]);
-			A[i][j] = i+j;
+	for(int i = 0; i < m; i++){
+		A[i] = new int[n];
+		for(int j = 0; j < n; j++)
+			scanf("%d", &A[i][j]);
 	}
-	for(int i = 0; i < N; i++){
-		B[i] = new int[N];
-		for(int j = 0; j < N; j++)
-			//scanf("%d", &B[i][j]);
-			B[i][j] = i-j;
+	for(int i = 0; i < n; i++){
+		B[i] = new int[t];
+		for(int j = 0; j < t; j++)
+			scanf("%d", &B[i][j]);
 	}
-	for(int i = 0; i < N; i++){
-		C[i] = new int[N];
+	for(int i = 0; i < m; i++){
+		C[i] = new int[m];
 	}
 
 
-	ijk(A, B, C, N, N, N);
+	ijk(A, B, C, m, n, t);
 
-//#ifdef DEBUG
-	/*
+
+
 	for(int i = 0; i < m; i++){
 		for(int j = 0; j < t; j++)
-			printf("%d ", C[i][j])
+			printf("%d ", C[i][j]);
 		printf("\n");
 	}
-	*/
-//#endif
 
 	return 0;
 }

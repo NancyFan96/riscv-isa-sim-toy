@@ -73,8 +73,7 @@ typedef struct
 
 
 /*Section header helps to reference every section
- It describes size and location for each section
- 从链接的角度描述ELF文件*/
+ It describes size and location for each section*/
 
 typedef struct
 {
@@ -91,9 +90,7 @@ typedef struct
 } Elf64_Shdr;
 
 
-/* Program segment header.
- 从链接的角度来描述ELF文件，告诉系统如何建立一个内存映像
- 可重定位文件不需要这个头表*/
+/* Program segment header.*/
 typedef struct
 {
     Elf64_Word    p_type;                 /* Segment type */

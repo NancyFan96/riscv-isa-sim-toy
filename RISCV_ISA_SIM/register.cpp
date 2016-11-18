@@ -20,7 +20,7 @@ registers::registers(){
     }
 }
 
-// for debug
+
 void registers::readReg(){
     for(int i = 0;i<32;i++)
     {
@@ -63,10 +63,6 @@ bool registers::setPC(reg64 newPC){
     PC = (byte *)newPC;
     return true;
 
-    //else{
-    //    printf("PC invalid! Oops!\n");
-    //   return false;
-    //}
 }
 
 // PC to next instruction

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <time.h>
+
 
 
 
@@ -35,19 +35,21 @@ void quickSort(int arr[], int left, int right) {
 int main(int argc, char * argv[])
 {
     int n = 10; 
-    int list[10] = {2,4,56,3,2,76,3,9,23,6};
+    int *list;
 
 
-    //scanf("%d", &n);
-    //list = (int*)malloc(sizeof(int)*n);
-    //for(int i = 0; i < n; i++){
-      //  scanf("%d", &list[i]);
-	//list[i] = n-i;
-   // }
+    scanf("%d", &n);
+    list = (int*)malloc(sizeof(int)*n);
+    for(int i = 0; i < n; i++){
+        scanf("%d", &list[i]);
+	
+    }
 
     quickSort(list, 0, n - 1);
 
-
-
+    for(int i = 0; i < n; i++){
+        printf("%d ", list[i]);
+    }
+    printf("\n");
     return 0;
 }

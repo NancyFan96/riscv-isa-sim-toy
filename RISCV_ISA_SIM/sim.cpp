@@ -1,10 +1,22 @@
 //
-//  exe.cpp
+//  sim.cpp
 //  RISCV_ISA_SIM
 //
-//  Created by Nancy Fan on 16/11/5.
+//  Created by Nancy Fan, Kejing Yang,Yao Lu on 16/11/5.
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
+
+/*-------------------------------------------------
+ sim.cpp contains several parts of RISCV simulator.
+ 1. load_program - read an ELF file and load program.
+ 2. fetch - fetch an instruction
+ 3. decode - decode an instruction
+ 4. execute - simulate instruction executing process
+ 5. exit - program exits
+ 
+ An extra GDB mode is also provided.
+ 
+ --------------------------------------------------*/
 
 #include <iostream>
 #include <stdlib.h>
@@ -14,11 +26,16 @@
 #include "register.hpp"
 #include "memory.hpp"
 #include "decode.hpp"
-#include "exe.hpp"
+#include "sim.hpp"
 
 using namespace std;
 
 bool GDB_MODE =false;
+bool verbose = false;
+bool IS_TO_EXIT = false;
+bool IS_TO_DO = false;
+long int COUNT_INS = 0;
+
 static int GDB_TYPE;
 static bool VALID_BREAKPOINT=false;
 static memAddress breakpoint = 0;
@@ -28,16 +45,15 @@ static bool IS_NOP = false;
 static bool WAIT = false;
 
 static memAddress currentPC;
+static memAddress main_virtual_address = 0;
 
-bool verbose = false;
-bool IS_TO_EXIT = false;
-bool IS_TO_DO = false;
+extern long int COUNTS[HOW_MANY_INSTS]; // CHANGE
 
 void help()
 {
     printf("This is a simulator to execute riscv ELF!\n");
-    printf("    Usage: ./exe <filename> [--verbose|--debug]\n");
-    printf("           ./exe --help\n");
+    printf("    Usage: ./sim <filename> [--verbose|--debug]\n");
+    printf("           ./sim --help\n");
     printf("Multiple ELFs is NOT supported!\n\n");
     
 }
@@ -75,60 +91,52 @@ bool load_program(char const *file_name)
     
     /*copy segments in ELF file to simulator memory*/
     
-    //define data type
     Elf64_Ehdr* elf_header;
     elf_header=(Elf64_Ehdr*)file_buffer;
-    Elf64_Shdr* sec_header=(Elf64_Shdr*)((unsigned char*)elf_header+elf_header->e_shoff);//locate to first section
+    Elf64_Shdr* sec_header=(Elf64_Shdr*)((unsigned char*)elf_header+elf_header->e_shoff);                       //locate to first section
     Elf64_Half sec_header_entry_size=elf_header->e_shentsize;
     
-    sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size);         //locate to section .text
-    memAddress program_entry_offset=(memAddress)(sec_header->sh_addr);                  //runtime virtual address aka. program entry address 0x10000
-    //unsigned int code_size=(unsigned int)sec_header->sh_size;
-    byte*  cur_p_mem=sim_mem.get_memory_p_address(program_entry_offset);        //copy segment from program entry offset
+    sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size);                                 //locate to section .text
+    memAddress program_entry_offset=(memAddress)(sec_header->sh_addr);                                          //runtime virtual address
+    byte*  cur_p_mem=sim_mem.get_memory_p_address(program_entry_offset);
+    Elf64_Half seg_num=elf_header->e_phnum;                                                                     //number of segments
+
     
+    Elf64_Phdr* seg_header = (Elf64_Phdr*)((unsigned char*)elf_header + elf_header->e_phoff);                   //locate to the first entry of program header table
+    Elf64_Half  seg_header_entry_size=elf_header->e_phentsize;                                                  //Program header table entry size
     
-    Elf64_Half seg_num=elf_header->e_phnum;//number of segments
-    
-    //printf("number of segments: %u :\n",seg_num);
-    
-    Elf64_Phdr* seg_header = (Elf64_Phdr*)((unsigned char*)elf_header + elf_header->e_phoff);//locate to the first entry of program header table
-    Elf64_Half  seg_header_entry_size=elf_header->e_phentsize;//Program header table entry size
-    
-    for(int cnt=0;cnt<seg_num;++cnt)//copy each segment
+    for(int cnt=0;cnt<seg_num;++cnt)
     {
         unsigned char* seg_in_file=(unsigned char*)elf_header+seg_header->p_offset;
-        Elf64_Xword seg_size_in_mem=seg_header->p_memsz;//segment size
-        memcpy(cur_p_mem,seg_in_file,seg_size_in_mem);//copy segment to sim_mem
+        Elf64_Xword seg_size_in_mem=seg_header->p_memsz;                                                        //segment size
+        memcpy(cur_p_mem,seg_in_file,seg_size_in_mem);                                                          //copy segment to sim_mem
         cur_p_mem =(byte*)cur_p_mem + seg_size_in_mem;
-        
-        //printf("segment size is: %ld\n",seg_size_in_mem);
-        
-        seg_header=(Elf64_Phdr*)((unsigned char*)seg_header+seg_header_entry_size);//next segment entry
+        seg_header=(Elf64_Phdr*)((unsigned char*)seg_header+seg_header_entry_size);                             //next segment entry
         
     }
-    //printf("end of segment copy\n");
+    /*------------- end of segments copy----------------*/
     
-    Elf64_Half  sec_num=elf_header->e_shnum;//number of sections
-    sec_header=(Elf64_Shdr*)((unsigned char*)elf_header+elf_header->e_shoff);//locate to first section
+    Elf64_Half  sec_num=elf_header->e_shnum;                                                                    //number of sections
+    sec_header=(Elf64_Shdr*)((unsigned char*)elf_header+elf_header->e_shoff);                                   //locate to first section
     sec_header_entry_size=elf_header->e_shentsize;
-    Elf64_Shdr* strtab_sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size*(sec_num-1));//locate to section header of string table
-    Elf64_Off strtab_offset=strtab_sec_header->sh_offset;//read string table offset offset
-    unsigned char* p_strtab=(unsigned char*)elf_header+strtab_offset;//point to the beginning of string table
-    memAddress main_virtual_address = 0; // change
+    Elf64_Shdr* strtab_sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size*(sec_num-1));  //locate to section header of string table
+    Elf64_Off strtab_offset=strtab_sec_header->sh_offset;                                                       //read string table offset offset
+    unsigned char* p_strtab=(unsigned char*)elf_header+strtab_offset;                                           //point to the beginning of string table
     
-    for(int cnt=0;cnt<sec_num;++cnt)//for each section
+    
+    for(int cnt=0;cnt<sec_num;++cnt)                                                                            //for each section
     {
         Elf64_Word section_type=sec_header->sh_type;
-        if(section_type==2)//if section type==SYMTAB
+        if(section_type==2)                                                                                     //if section type==SYMTAB
         {
             Elf64_Off symtab_offset=sec_header->sh_offset;
             Elf64_Xword   sh_size=sec_header->sh_size;
-            long int symtab_num=sh_size/sizeof(Elf64_Sym);//number of entries in symbol table
-            Elf64_Sym* p_symtab=(Elf64_Sym*)((unsigned char*)elf_header+symtab_offset);//locate to the first entry
-            for(int entry_cnt=0;entry_cnt<symtab_num;++entry_cnt)//for each entry
+            long int symtab_num=sh_size/sizeof(Elf64_Sym);                                                      //number of entries in symbol table
+            Elf64_Sym* p_symtab=(Elf64_Sym*)((unsigned char*)elf_header+symtab_offset);                         //locate to the first entry
+            for(int entry_cnt=0;entry_cnt<symtab_num;++entry_cnt)
             {
-                Elf64_Word    st_name=p_symtab->st_name;//index to string table
-                Elf64_Addr    st_value=p_symtab->st_value;//virtual address for 'main' entry
+                Elf64_Word    st_name=p_symtab->st_name;
+                Elf64_Addr    st_value=p_symtab->st_value;
                 if(st_name!=0)
                 {
                     unsigned char* p_name=p_strtab+st_name;
@@ -140,12 +148,10 @@ bool load_program(char const *file_name)
                         p_name++;
                         name_cnt++;
                     }
-                    test_name[name_cnt]='\0';//get symbol name
+                    test_name[name_cnt]='\0';
                     if(strcmp(test_name,"main")==0)
                     {
-                        //printf("main found!\n");
-                        //printf("main virtual address is:%lx\n",st_value);
-                        main_virtual_address=(memAddress)st_value;//st_value is an unsigned long int
+                        main_virtual_address=(memAddress)st_value;
                         break;
                     }
                     
@@ -157,22 +163,17 @@ bool load_program(char const *file_name)
         sec_header=(Elf64_Shdr*)((unsigned char*)sec_header+sec_header_entry_size);//next section
     }
     
-    
-    
-    fclose(file_in);//close ELF file
-    free(file_buffer);//free buffer
+
+    fclose(file_in);                                //close ELF file
+    free(file_buffer);                              //free buffer
     
     /* ---- init regs ------*/
     if((byte *)main_virtual_address==NULL)
         printf("main virtual address invalid!\n");
-    //sim_regs.setPC(main_virtual_address);                                       //set PC register
-    sim_regs.setPC(program_entry_offset);
+    sim_regs.setPC(program_entry_offset);          //start from program entry
     sim_regs.writeReg(zero, 0);
     sim_regs.writeReg(sp, STACK_TOP);
-    //sim_regs.writeReg(ra, 65604); //0x10044
-    
-    
-    
+
     return true;
 }
 
@@ -203,18 +204,37 @@ bool gdb_mode_func(void)
     if(IS_FIRST_GDB)
     {
         printf(">\n");
+        printf("> main function start at %lx\n",main_virtual_address);
         printf("> select a mode you want to run with:\n");
-        printf("> b: set breakpoint\n");
-        printf("> c: continue running\n");
-        printf("> s: step mode\n");
-        printf("> m: print memory content\n");
-        printf("> q: quit gdb mode\n>\n>\n");
+        printf("> break: set breakpoint\n");
+        printf("> delete: delete breakpoint\n");
+        printf("> continue: continue running\n");
+        printf("> step: step mode\n");
+        printf("> memory: print memory content\n");
+        printf("> register: print register file info\n");
+        printf("> quit: quit gdb mode\n>\n>\n");
     }
     
     printf("> ");
     scanf("%s",cmd);        //read command
     fflush(stdin);          //clean stdin buffer
-    switch (cmd[0])
+    char cmd_char = 'a';
+    if (strcmp(cmd,"break")==0)
+        cmd_char = 'b';
+    else if(strcmp(cmd,"delete")==0)
+        cmd_char = 'd';
+    else if(strcmp(cmd,"continue")==0)
+        cmd_char = 'c';
+    else if(strcmp(cmd,"step")==0)
+        cmd_char = 's';
+    else if(strcmp(cmd,"memory")==0)
+        cmd_char = 'm';
+    else if(strcmp(cmd,"register")==0)
+        cmd_char = 'r';
+    else if(strcmp(cmd,"quit")==0)
+        cmd_char = 'q';
+    
+    switch (cmd_char)
     {
         case 'b':
             GDB_TYPE = set_breakpoint;
@@ -248,7 +268,6 @@ bool gdb_mode_func(void)
             VALID_BREAKPOINT=true;
             breakpoint=sim_regs.getPC();
             return true;
-            //print content in memory
         case 'm':
             GDB_TYPE = print_mem;
             IS_NOP = true;
@@ -307,10 +326,14 @@ int main(int argc, char * argv[]){
             breakpoint=currentPC;      //break point <- current PC; fetched but not executed!
             GDB_MODE=true;
             WAIT = true;
-            //verbose = true;
         }
-        if (strcmp(argv[2], "--verbose") == 0)
+        else if (strcmp(argv[2], "--verbose") == 0)
             verbose = true;
+        else{
+            printf("\nINVALID COMMAND!\n");
+            help();
+            return 0;
+        }
     }
     
     if(load_program(file_name)==true){
@@ -325,7 +348,8 @@ int main(int argc, char * argv[]){
         cout << "LOAD ERROR!" << endl;
         return -1;
     }
-    
+
+    memset(COUNTS, 0, sizeof(long int)*HOW_MANY_INSTS);
     while(1){
         ins inst = fetch();
         instruction fetched_inst;
@@ -376,6 +400,9 @@ int main(int argc, char * argv[]){
     }
     
     exit_program();
+
+    // 这里打一张COUNTS的表 CHANGE
+
     cout << "\nBYE "<< file_name<< " !"<< endl<< endl;
     return 0;
 }

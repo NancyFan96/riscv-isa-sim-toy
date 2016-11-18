@@ -25,6 +25,12 @@
 #define R4_TYPE  6
 #define SCALL    7
 
+
+/* define all the instructions that have been compelted */
+// CHANGE
+#define FMADD_D 0
+//#define ..., 所有指令参见decode.cpp/printf_ins部分
+
 /*          create a binary MASK like           */
 /*     value:  000... 00000111...1111000...000  */
 /*  position:  31...       x  ...   y ...  210  */
@@ -120,6 +126,8 @@ extern bool debug;
 extern bool IS_TO_EXIT;
 extern registers sim_regs;
 extern memory sim_mem;
+extern long int COUNT_INS;
+
 
 #endif /* decode_hpp */
 

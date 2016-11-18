@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include<time.h>
+
 int ack(int m, int n)
 {
     if (m == 0)
@@ -14,11 +14,13 @@ int ack(int m, int n)
 
 int main()
 {
-    int m = 2, n = 1, ans = 0;
+    int m = 0, n = 0, ans = 0;
 
-    //scanf("%d",&m);
-    //scanf("%d",&n);        
+    scanf("%d",&m);
+    scanf("%d",&n);        
 
     ans = ack(m, n);
+
+    printf("%d\n",ans); 
     return 0;
 }

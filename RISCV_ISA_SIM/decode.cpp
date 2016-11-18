@@ -18,8 +18,12 @@
 #include "register.hpp"
 #include "memory.hpp"
 
+
+
 extern const float FDIFF;
 extern bool GDB_MODE;
+
+long int COUNTS[HOW_MANY_INSTS];
 
 instruction::instruction()
 {
@@ -34,25 +38,37 @@ instruction::instruction()
     rs2 = 0;
 }
 void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs2, regID rs3){
+    // FMADD.D
     if(GDB_MODE)    printf("> ");
     printf("instruction:\t %s %d, %d, %d, %d\n", inst_name, rd, rs1, rs2, rs3);
     sim_regs.readReg();
     sim_regs.readFloatReg();
+    if(strcmp(inst_name, "FMADD.D") == 0) COUNTS[FMADD_D]++;
 }
 
 void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs2){
+    // 建议都另外写小函数识别计数 
+    // 要补全decode.hpp里面的define， define里面.都改为_, 如FMADD.D 就是FMADD_D
+    // 改一下system.h里面HOW_MANY_INSTS的值，是大致的指令总数
+    // 在sim.cpp的“BYE”之前打印COUNTS表
+    // 即可在--verbose下查看指令数统计结果
+    // ADD, SLL, SLT, SLTU, XOR, SRL, OR, AND, SUB, SRA, MUL, MULH, MULHSH, MULHU, DIV, DIVU, REM, REMU, ADDW, SLLW, SRLW, SUBW, SRAW, MULW,DIVW, DIVUW, REMW, REMUW
+    // FADD.S FADD.D FSUB.S FSUB.D FMUL.S FMUL.D FDIV.S FDIV.D FEQ.S, FLT.S, FLE.S FEQ.D, FLT.D, FLE.D
     if(GDB_MODE)    printf("> ");
     printf("instruction:\t %s %d, %d, %d\n", inst_name, rd, rs1, rs2);
     sim_regs.readReg();
     sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name, regID r1, regID r2, imm imm0){
+    // JALR, LB, LH, LW, LBU, LHU, LWU, LD, ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI, ADDIW, SLLIW, SRLIW, SRAIW, SB,SH,SW,SD, BEQ,BNE,BLT,BGE,BLTU,BGEU
+    // FLW, FLD, FSW, FSD
     if(GDB_MODE)    printf("> ");
     printf("instruction:\t %s %d, %d, %ld\n", inst_name, r1, r2, imm0);
     sim_regs.readReg();
     sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name, regID r1, regID r2){
+    //FSGNJ.D FSGNJN.D FCVT.S.D FCVT.D.S FCVT.W.S FCVT.WU.S FCVT.W.D FCVT.WU.D FCVT.S.W FCVT.S.WU FCVT.D.W FCVT.D.WU FMV.X.D FMV.D.X
     if(GDB_MODE)    printf("> ");
     printf("instruction:\t %s %d, %d\n", inst_name, r1, r2);
     sim_regs.readReg();
@@ -60,6 +76,7 @@ void instruction::print_ins(const char* inst_name, regID r1, regID r2){
 }
 
 void instruction::print_ins(const char* inst_name, regID rx, imm imm0){
+    // LUI, AUIPC, JAL
     printf("instruction:\t %s %d, 0x%lx\n", inst_name, rx, imm0);
     sim_regs.readReg();
     sim_regs.readFloatReg();
@@ -70,6 +87,7 @@ void instruction::print_ins(const char* inst_name, regID rx){
     sim_regs.readFloatReg();
 }
 void instruction::print_ins(const char* inst_name){
+    // READ ERITE GETTIMEOFDAY
     printf("instruction:\t %s\n", inst_name);
     sim_regs.readReg();
     sim_regs.readFloatReg();
@@ -325,7 +343,7 @@ regID instruction:: getrs3(){
 // only valid instruction will enter this function
 void instruction::execute(){
     if(optype == SCALL){
-        // _exit, read, write, gettimeofday, sbrk, fstat, lseek, close
+        // _exit, read, write, gettimeofday, sbrk, (fstat), (lseek), (close)
         if(sim_regs.readReg(a7) == 93 && sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             // exit_program
             IS_TO_EXIT = true;
@@ -342,52 +360,46 @@ void instruction::execute(){
         else if(sim_regs.readReg(a7) == 63 && sim_regs.readReg(a3) == 0){
             // read
             //printf("read.. ");
-			int fd = (int)sim_regs.readReg(a0);
-			void * buf = (void*)sim_regs.readReg(a1);
-			size_t count = (size_t)sim_regs.readReg(a2);
+            int fd = (int)sim_regs.readReg(a0);
+            void * buf = (void*)sim_regs.readReg(a1);
+            size_t count = (size_t)sim_regs.readReg(a2);
             //printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...\n", fd, (reg64)buf, (int)count);
             buf = sim_mem.get_memory_p_address((reg64)buf);
-			count = read(fd, buf, count);
+            count = read(fd, buf, count);
             sim_regs.writeReg(a0, count);
             if(verbose) print_ins("READ");
         }
         else if(sim_regs.readReg(a7) == 64 && sim_regs.readReg(a3) == 0){
             // write
             //printf("write.. ");
-			int fd = (int)sim_regs.readReg(a0);
-			void * buf = (void*)sim_regs.readReg(a1);
-			size_t count = (size_t)sim_regs.readReg(a2);
+            int fd = (int)sim_regs.readReg(a0);
+            void * buf = (void*)sim_regs.readReg(a1);
+            size_t count = (size_t)sim_regs.readReg(a2);
             //fflush(stdout);
             //printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...\n", fd, (reg64)buf, (int)count);
-			buf = sim_mem.get_memory_p_address((reg64)buf);
-			count = write(fd, buf, count);
+            buf = sim_mem.get_memory_p_address((reg64)buf);
+            count = write(fd, buf, count);
             sim_regs.writeReg(a0, count);
             if(verbose) print_ins("WRITE");
         }
         else if(sim_regs.readReg(a7) == 169 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             // gettimeofday
-            printf("Before:\n");
-            print_ins("GETTIMEOFDAY");
             struct  timeval  *tv_p = (struct timeval *)sim_mem.get_memory_p_address(sim_regs.readReg(a0));
             sim_regs.writeReg(a0,  gettimeofday(tv_p,NULL));
-            printf("After:\n");
-            print_ins("GETTIMEOFDAY");
+            //time_t * tm = (time_t *)sim_mem.get_memory_p_address(sim_regs.readReg(a0));
+            //sim_regs.writeReg(a0,  time(tm));
+            if(verbose) print_ins("GETTIMEOFDAY");
         }
         else if(sim_regs.readReg(a7) == 214 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             //sbrk
+            //byte * mem_addr = sim_mem.get_memory_p_address(sim_regs.readReg(a0));
+            //sim_regs.writeReg(a0, (reg64)mem_addr);
         }
         else if(sim_regs.readReg(a7) == 57 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
-             //close
-            //int fd = (int)sim_regs.readReg(a0);
-            //sim_regs.writeReg(a0, close(fd));
-            //if(verbose) print_ins("CLOSE");
-         }
+            //close
+        }
         else if(sim_regs.readReg(a7) == 80 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
             //fstat
-            //int fd = (int)sim_regs.readReg(a0);
-            //struct stat * buf = (struct stat*)sim_regs.readReg(a1);
-            //sim_regs.writeReg(a0, (reg64)fstat(fd,buf));
-            //if(verbose) print_ins("FSTAT");
         }
         else
             printf("Undefined scall\n");
@@ -405,7 +417,7 @@ void instruction::execute(){
             execute_SX();
             break;
         case 0x33:      // b0110011,ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
-                        // MUL, MULH, MULHSH, MULHU, DIV, DIVU, REM, REMU
+            // MUL, MULH, MULHSH, MULHU, DIV, DIVU, REM, REMU
             execute_R();
             break;
         case 0x37:      // b0110111, LUI
@@ -420,7 +432,7 @@ void instruction::execute(){
             execute_I();
             break;
         case 0x3B:      // b0111011,ADDW,SUBW,SLLW,SRLW,SRAW
-                        // MULW,DIVW, DIVUW, REMW, REMUW
+            // MULW,DIVW, DIVUW, REMW, REMUW
             execute_R64();
             break;
         case 0x63:      // b1100011,BEQ,BNE,BLT,BGE,BLTU,BGEU
@@ -437,4 +449,3 @@ void instruction::execute(){
     }
     
 }
-
