@@ -2,7 +2,7 @@
 //  exe.hpp
 //  RISCV_ISA_SIM
 //
-//  Created by Nancy Fan on 16/11/5.
+//  Created by Nancy Fan, Kejing Yang,Yao Lu Wang on 16/11/5.
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
 
@@ -13,35 +13,27 @@
 #include "decode.hpp"
 #include "register.hpp"
 #include "memory.hpp"
+#include <map>
+#include <string>
+
 
 
 bool load_program(const char* filename);    // if success return true, else return false
-ins fetch();                        // return instruction and PC inc
+ins fetch();                                // return instruction and PC inc
 void exit_program();                        // if success return true, else return false
 
 
 /*------------- define ELF --------------*/
-//
-//  load_program.hpp
-//
-//
-//  Created by 杨可静 on 11/5/16.
-//
-//
-
-
-#include <stdio.h>
-
 //standard ELF TYPES
 //64-bit only
-typedef unsigned long int   Elf64_Addr;//type of addresses u64
-typedef unsigned short int  Elf64_Half;//u16
-typedef unsigned long int   Elf64_Off;//type of file offsets u64
-typedef int                 Elf64_Sword;//s32
-typedef unsigned int        Elf64_Word;//u32
-typedef unsigned long int   Elf64_Xword;//u64
-typedef signed long int     Elf64_Sxword;//s64
-typedef unsigned short int  Elf64_Section;//u16
+typedef unsigned long int   Elf64_Addr;     //type of addresses u64
+typedef unsigned short int  Elf64_Half;     //u16
+typedef unsigned long int   Elf64_Off;      //type of file offsets u64
+typedef int                 Elf64_Sword;    //s32
+typedef unsigned int        Elf64_Word;     //u32
+typedef unsigned long int   Elf64_Xword;    //u64
+typedef signed long int     Elf64_Sxword;   //s64
+typedef unsigned short int  Elf64_Section;  //u16
 
 /*ELF file header.
  This appears at the start of every ELF file
@@ -130,6 +122,11 @@ typedef struct
 #define print_reg 5
 #define quit_gdb 6
 #define undefined_gdb 7
+
+
+
+//initialize map
+std::map<std::string,int> COUNTS;
 
 
 

@@ -9,30 +9,104 @@
 
 ## 当前进度
 
-：）
 
-**TO DO:**
+DONE ：）
 
-* gdb 输入检查错
-* 计时，与本机ISA差10^6~7，是否合情？
-* 标测 quicksort, ijk, ack + drystone
-* 统计指令数
-* scanf的问题来看并没有,但dhrystone里的输入有换行问题（不是大问题，spike直接输入不显示呢）
+## QuikStart
 
-DONE:
+### Help info
+
+```
+    This is a simulator to execute riscv ELF!
+        Usage: ./sim <filename> [--verbose|--debug]
+               ./sim --help
+    Multiple ELFs is NOT supported!
+```
+
+## 文件结构
+
+- README.md 
+- ....xcodeproj, sim 中间调试文件
+- RISCV_ISA_SIM
+
+```
+├── readme.md   
+├── src/    
+│   ├── system.h 					# THIS IS RISCV R64IFM
+│   ├── sim.hpp 					# Contains several parts of RISCV simulator and MAIN function
+│   ├── sim.cpp     				# Details can be referred below
+│   ├── decode.hpp 					# Decode instructions, get meaningful part like rd, rs, imm
+│   ├── decode.cpp 					
+│   ├── execute.cpp 				# Execution for RISCV64I, RISCV64M (only for std tests)
+│   ├── execute_F.cpp 				# Execution for RISCV64F (only for std tests)
+│   ├── register.hpp 				# Read and write functions for Registers
+│   ├── register.cpp
+│   ├── memory.hpp 					# Read and write functions for Memory
+│   ├── memory.cpp
+│   ├── Makefile					# would create executable file -- sim
+│   ├── test/ 
+│   	├── Itest/ 
+│   	├── IOtest/ 
+│   	├── Ftest/ 
+│   	├── stdtest/ 
+│   		├── dhry2.1/ 
+│   		├── ijk 				# input: m, n, t, A[][], B[][]
+│   		├── ijk.cpp
+│   		├── qs 					# input: size, A[]
+│   		├── quickSort.cpp 
+│   		├── ack					# input: m, n
+│   		├── ackermann.cpp 
+│   	├── time 
+│   	├── time.cpp 
+│   	├── time.objdump
+
+```
+- What sim.cpp CONTAINS?
+
+* sim.cpp contains several parts of RISCV simulator.
+ 0. help - print some help info to use this simulator
+ 1. load_program - read an ELF file and load program.
+ 2. fetch - fetch an instruction
+ 3. decode - decode an instruction
+ 4. execute - simulate instruction executing process
+ 5. exit_program - program exits, free the simulator memory space
+ 6. FLAG verbose - if set, print verbose info
+ 
+* An extra GDB mode is also provided. This include
+ 1. gdb_mode_func - wait and process a gdb instruction
+ 2. Sepecial FLAGS like
+    -- VALID_BREAKPOINT
+    -- IS_ENTER_STEP
+    -- IS_FIRST_GDB
+    -- IS_NOP
+    -- WAIT
+ 
+* An extra count function is also provided. This include
+ 1. print_ins_cnt_init - set clear
+ 2. print_ins_cnt - print result table
+ This function count every single instruction that has been executed
+ and their ratio of the entire program
+
+
+
+
+
+## LOGs
+
+### 重要记录
 
 * Float register关于float和double的读写要分开用不同的函数，编码不同
 * F ext校对！（心酸
 * fload, fstore修正，需要memory类中新开用浮点指针存取的函数，不然强制转换会有问题
 * need to realize MALLOC==> brk不能直接调用linux系统函数实现，因为可能会在模拟的内存外新开访问空间，实际riscv指令不能访问到(?)
 * close把输出直接关了==>不用实现；原因猜测是riscv语义和linux不一致，后面有空再去翻系统函数源码...
-
 * start PC from 必须从entry point开始，否则从\<main\>【错误】==> mac下可以，linux下segmemtation fault
-* complete ecall to realize exit√, printf\* and so on//进入了ecall但没有调用成功
-
+* complete ecall to realize exit√, printf\* and so on
 * gdb
 
-## LOGs
+### 部分提交记录
+
+8.2 commit: final versioin
 
 7.4 commit: fix some bugs in gdb, 现在断点是平时所用断点,查找到浮点错误是fmv语义错，另一个可能是float和double类型有问题
 
@@ -79,47 +153,5 @@ tt, tiny, try用spike执行时有warning
 * 实验报告(模板见附件3)
 * 指令级模拟器代码
 * 以lab1.1中用C编写的快速排序、矩阵乘法、求Ackermann函数为测试程序 最终评测标准,通过助教提供的用户程序的模拟。
-
-
-## 文件结构
-
-- README.md 
-- ....xcodeproj
-- RISCV_ISA_SIM
-
-	-- system.h
-	模拟器的通用头文件，重命名了一些数据类型
-	
-	* 地址宽也都是64bit，但只有32位有效
-	
-	-- decode.hpp/cpp
-	 模拟器解释执行reisv可执行文件的核心
-	 
-	 包括：instruction 类
-	 
-	 * instruction 结构
-	 * 指令执行的decode,excute(== excute+mem+writeback)
-	 
-	-- memory.hpp/cpp
-	 模拟器模拟的内存结构，装载进了ELF文件，<mark>高地址处预备实现stack</mark>
-	 
-	 包括：memory 类
-	 
-	 * memory 宽为32bit	
-	 * 主要函数功能为load、store
-	 * 注意ELF装载时，直接将其虚拟地址，作为自定义memory的index使用，因此多写地址时要注意加上基地址mem\_zero, 已定义函数get\_memory\_p\_address, 和get\_memory\_offset来转化index和实际地址
-	 
-	-- register.hpp/cpp
-	 模拟器模拟的register files，包括PC寄存器，浮点寄存器
-	 
-	 包括：registers 类
-	 
-	 * 32个通用寄存器，寄存器宽都是64bit
-	 * 通用寄存器的名字都已定义在宏
-	 
-	-- exe.hpp/cpp
-	 模拟器main文件
-	 
-	 包括：load_program, fetch, exit\_program, main和help等
 
 

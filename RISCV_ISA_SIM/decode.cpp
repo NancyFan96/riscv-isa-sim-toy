@@ -2,28 +2,19 @@
 //  decode.cpp
 //  RISCV_ISA_SIM
 //
-//  Created by Nancy Fan on 16/11/4.
+//  Decode instructions, get meaningful part like rd, rs, imm
+//
+//  Created by Nancy Fan, Kejing Yang,Yao Lu Wang  on 16/11/4.
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
 
 #include <string.h>
-#include <unistd.h>
-#include <time.h>
-#include <sys/time.h>
-#include<sys/stat.h>
-#include <fenv.h>
 #include <math.h>
 #include "system.h"
 #include "decode.hpp"
 #include "register.hpp"
 #include "memory.hpp"
 
-
-
-extern const float FDIFF;
-extern bool GDB_MODE;
-
-long int COUNTS[HOW_MANY_INSTS];
 
 instruction::instruction()
 {
@@ -43,7 +34,6 @@ void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs
     printf("instruction:\t %s %d, %d, %d, %d\n", inst_name, rd, rs1, rs2, rs3);
     sim_regs.readReg();
     sim_regs.readFloatReg();
-    if(strcmp(inst_name, "FMADD.D") == 0) COUNTS[FMADD_D]++;
 }
 
 void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs2){
@@ -58,6 +48,7 @@ void instruction::print_ins(const char* inst_name, regID rd, regID rs1, regID rs
     printf("instruction:\t %s %d, %d, %d\n", inst_name, rd, rs1, rs2);
     sim_regs.readReg();
     sim_regs.readFloatReg();
+    
 }
 void instruction::print_ins(const char* inst_name, regID r1, regID r2, imm imm0){
     // JALR, LB, LH, LW, LBU, LHU, LWU, LD, ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI, ADDIW, SLLIW, SRLIW, SRAIW, SB,SH,SW,SD, BEQ,BNE,BLT,BGE,BLTU,BGEU
@@ -91,35 +82,8 @@ void instruction::print_ins(const char* inst_name){
     printf("instruction:\t %s\n", inst_name);
     sim_regs.readReg();
     sim_regs.readFloatReg();
+    
 }
-
-signed64 instruction::RNE(f64 d){
-    if((signed64)d % 2 == 0){
-        if(d > 0.0)
-            return (signed64)round(d) - 1;
-        else
-            return (signed64)round(d) + 1;
-    }
-    else
-        return (signed64)round(d);
-}
-
-signed64 instruction::RTZ(f64 d){
-    return (signed64)d;
-}
-
-signed64 instruction::RDN(f64 d){
-    return (signed64)floor(d);
-}
-
-signed64 instruction::RUP(f64 d){
-    return (signed64)ceil(d);
-}
-
-signed64 instruction::RMM(f64 d){
-    return (signed64)ceil(d);
-}
-
 
 bool instruction::getType(ins inst){
     if(inst == 0x73){
@@ -340,112 +304,3 @@ regID instruction:: getrs3(){
 }
 
 
-// only valid instruction will enter this function
-void instruction::execute(){
-    if(optype == SCALL){
-        // _exit, read, write, gettimeofday, sbrk, (fstat), (lseek), (close)
-        if(sim_regs.readReg(a7) == 93 && sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
-            // exit_program
-            IS_TO_EXIT = true;
-            if(verbose) print_ins("\nProg Exited!");
-            else{
-                if(GDB_MODE)    printf("> ");
-                printf("\nProg Exited!\n");
-            }
-        }
-        else if(sim_regs.readReg(a7) == 62 &&  sim_regs.readReg(a3) == 0){
-            //lseek
-            sim_regs.writeReg(a0, lseek((int)sim_regs.readReg(a0), (off_t)sim_regs.readReg(a1), (int)sim_regs.readReg(a2)));
-        }
-        else if(sim_regs.readReg(a7) == 63 && sim_regs.readReg(a3) == 0){
-            // read
-            //printf("read.. ");
-            int fd = (int)sim_regs.readReg(a0);
-            void * buf = (void*)sim_regs.readReg(a1);
-            size_t count = (size_t)sim_regs.readReg(a2);
-            //printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...\n", fd, (reg64)buf, (int)count);
-            buf = sim_mem.get_memory_p_address((reg64)buf);
-            count = read(fd, buf, count);
-            sim_regs.writeReg(a0, count);
-            if(verbose) print_ins("READ");
-        }
-        else if(sim_regs.readReg(a7) == 64 && sim_regs.readReg(a3) == 0){
-            // write
-            //printf("write.. ");
-            int fd = (int)sim_regs.readReg(a0);
-            void * buf = (void*)sim_regs.readReg(a1);
-            size_t count = (size_t)sim_regs.readReg(a2);
-            //fflush(stdout);
-            //printf("args: fd = %d, buf_p = %lx, count(byte) = %d ...\n", fd, (reg64)buf, (int)count);
-            buf = sim_mem.get_memory_p_address((reg64)buf);
-            count = write(fd, buf, count);
-            sim_regs.writeReg(a0, count);
-            if(verbose) print_ins("WRITE");
-        }
-        else if(sim_regs.readReg(a7) == 169 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
-            // gettimeofday
-            struct  timeval  *tv_p = (struct timeval *)sim_mem.get_memory_p_address(sim_regs.readReg(a0));
-            sim_regs.writeReg(a0,  gettimeofday(tv_p,NULL));
-            //time_t * tm = (time_t *)sim_mem.get_memory_p_address(sim_regs.readReg(a0));
-            //sim_regs.writeReg(a0,  time(tm));
-            if(verbose) print_ins("GETTIMEOFDAY");
-        }
-        else if(sim_regs.readReg(a7) == 214 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
-            //sbrk
-            //byte * mem_addr = sim_mem.get_memory_p_address(sim_regs.readReg(a0));
-            //sim_regs.writeReg(a0, (reg64)mem_addr);
-        }
-        else if(sim_regs.readReg(a7) == 57 &&  sim_regs.readReg(a1) == 0 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
-            //close
-        }
-        else if(sim_regs.readReg(a7) == 80 && sim_regs.readReg(a2) == 0 && sim_regs.readReg(a3) == 0){
-            //fstat
-        }
-        else
-            printf("Undefined scall\n");
-        return;
-    }
-    
-    if(optype == R4_TYPE){
-        /*------RV64F-I.-----*/
-        execute_R4();
-        return;
-    }
-    switch(opcode){
-            /*---- RV32I-----*/
-        case 0x23:      // b0100011,SB,SH,SW,SD
-            execute_SX();
-            break;
-        case 0x33:      // b0110011,ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
-            // MUL, MULH, MULHSH, MULHU, DIV, DIVU, REM, REMU
-            execute_R();
-            break;
-        case 0x37:      // b0110111, LUI
-        case 0x17:      // b0010111, AUIPC
-            execute_O();//other
-            break;
-        case 0x1B:      // b0011011,ADDIW,SLLIW,SRLIW,SRAIW
-        case 0x13:      // b0010011,SLLI,SRLI,SRAI,ADDI,SLTI,SLTIU,XORI,ORI,ANDI,SLLI,SRLI,SRAI
-        case 0x03:      // b0000011,LB,LH,LW,LBU,LHU,LWU,LD
-        case 0x67:      // b1100111,JALR
-        case 0x6F:      // b1101111,JAL
-            execute_I();
-            break;
-        case 0x3B:      // b0111011,ADDW,SUBW,SLLW,SRLW,SRAW
-            // MULW,DIVW, DIVUW, REMW, REMUW
-            execute_R64();
-            break;
-        case 0x63:      // b1100011,BEQ,BNE,BLT,BGE,BLTU,BGEU
-            execute_UX();
-            break;
-            
-            /*------RV64F-II.-----*/
-        case 0x07:
-        case 0x27:
-        case 0x53:
-            execute_FExt();
-            break;
-        default:;
-    }
-    
-}

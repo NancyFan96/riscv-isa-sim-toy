@@ -2,7 +2,7 @@
 //  register.hpp
 //  RISCV_ISA_SIM
 //
-//  Created by Nancy Fan on 16/11/4.
+//  Created by Nancy Fan, Kejing Yang,Yao Lu Wang on 16/11/4.
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
 

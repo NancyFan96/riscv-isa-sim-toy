@@ -2,7 +2,9 @@
 //  register.cpp
 //  RISCV_ISA_SIM
 //
-//  Created by Nancy Fan on 16/11/4.
+//  Read and write function for registers
+//
+//  Created by Nancy Fan, Kejing Yang,Yao Lu Wang on 16/11/4.
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
 
@@ -26,7 +28,7 @@ void registers::readReg(){
     {
         if(GDB_MODE && i%8==0)    printf("> ");
 
-        if(i == sp||i== gp||i == ra)
+        if(i == sp||i== gp||i == ra ||i == fp)
             printf("rrx%d: 0x%lx\t",i ,rrx[i]);
         else
             printf("rrx%d: %lu\t",i ,rrx[i]);

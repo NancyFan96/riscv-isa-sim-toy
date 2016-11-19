@@ -2,7 +2,9 @@
 //  decode.hpp
 //  RISCV_ISA_SIM
 //
-//  Created by Nancy Fan on 16/11/4.
+//  Decode instructions, get meaningful part like rd, rs, imm
+//
+//  Created by Nancy Fan, Kejing Yang,Yao Lu Wang  on 16/11/4.
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
 
@@ -26,49 +28,39 @@
 #define SCALL    7
 
 
-/* define all the instructions that have been compelted */
-// CHANGE
-#define FMADD_D 0
-//#define ..., 所有指令参见decode.cpp/printf_ins部分
-
-/*          create a binary MASK like           */
-/*     value:  000... 00000111...1111000...000  */
-/*  position:  31...       x  ...   y ...  210  */
-/*  for all k if (31>=x>=k>=y>=0), bit(k) = 1,  */
-/*                      otherwise, bit(k) = 0   */
+/*          create a binary MASK like
+ *     value:  000... 00000111...1111000...000
+ *  position:  31...       x  ...   y ...  210
+ *  for all k if (31>=x>=k>=y>=0), bit(k) = 1,
+ *                      otherwise, bit(k) = 0
+ */
 #define ONES(x,y)       (reg64) ((((unsigned long)1<<x)-1)+((unsigned long)1<<x) -(((unsigned long)1<<y)-1))
-
-/* masks */                                          // bit LEN
-#define OPCODE     ONES(6,0)      // 7
-#define FUNCT2     ONES(26,25)    // 2
-#define FUNCT3     ONES(14,12)    // 3
-#define FUNCT7     ONES(31,25)    // 7
-#define RD         ONES(11,7)     // 5
-#define RS1        ONES(19,15)    // 5
-#define RS2        ONES(24,20)    // 5
-#define RS3        ONES(31,27)    // 5
-#define SHAMT      ONES(25,20)    // 6, RV64I
-#define IMM_SIGN(inst)   ((inst>>31)&1)               // sign of immediate
-
-
-/*------------------------- END define useful functions --------------------------*/
+#define OPCODE          ONES(6,0)      // 7
+#define FUNCT2          ONES(26,25)    // 2
+#define FUNCT3          ONES(14,12)    // 3
+#define FUNCT7          ONES(31,25)    // 7
+#define RD              ONES(11,7)     // 5
+#define RS1             ONES(19,15)    // 5
+#define RS2             ONES(24,20)    // 5
+#define RS3             ONES(31,27)    // 5
+#define SHAMT           ONES(25,20)    // 6, RV64I
+#define IMM_SIGN(inst)  ((inst>>31)&1) // sign bit of immediate
 
 
 
-/* ------- define riscv instruction  ------- */
 /* ------- RV64I BASE INTEGER INSTRUCTION SET -------*/
 class instruction {
 public:
     xcode opcode;           // inst[0-6]
     insType optype;
     byte tag;               // bit0 set if immediate is valid,
-    // bit1 set if func3 is valid,
-    // bit2 set if func7 is valid，
-    // bit3 set if rd is valid
-    // bit4 set if rs1 is valid
-    // bit5 set if rs2 is valid
-    // bit6 set if func2 is valid
-    // bit7 set if rs3 is valid
+                            // bit1 set if func3 is valid,
+                            // bit2 set if func7 is valid，
+                            // bit3 set if rd is valid
+                            // bit4 set if rs1 is valid
+                            // bit5 set if rs2 is valid
+                            // bit6 set if func2 is valid
+                            // bit7 set if rs3 is valid
     imm immediate;
     xcode func2;            // inst[25-26]
     xcode func3;            // inst[12-14]
@@ -84,6 +76,7 @@ public:
     bool setIMM(ins inst);          // (set immediate) Notice need switch, AND BE CAREFUL OF IMM BIT ORDER
     bool decode(ins inst);          // set rx, (func3), (func7), (and call getIMM)
     
+    // These gets are designed to avoid using invalid parts of instruction
     imm getImm();
     xcode getfunc3();
     xcode getfunc7();
@@ -110,13 +103,6 @@ public:
     void print_ins(const char* inst_name, regID rx, imm imm0);
     void print_ins(const char* inst_name, regID rx);
     void print_ins(const char* inst_name);
-    
-    signed64 RNE(f64 d);
-    signed64 RTZ(f64 d);
-    signed64 RDN(f64 d);
-    signed64 RUP(f64 d);
-    signed64 RMM(f64 d);
-    
 };
 
 /* ------- END define riscv instruction  ------- */
@@ -127,6 +113,7 @@ extern bool IS_TO_EXIT;
 extern registers sim_regs;
 extern memory sim_mem;
 extern long int COUNT_INS;
+extern bool GDB_MODE;
 
 
 #endif /* decode_hpp */

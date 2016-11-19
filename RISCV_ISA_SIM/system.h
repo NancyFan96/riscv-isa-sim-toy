@@ -2,6 +2,8 @@
 //  system.h
 //  RISCV_ISA_SIM
 //
+//  THIS IS RISCV R64IFM
+//
 //  Created by Nancy Fan on 16/11/4.
 //  Copyright © 2016年 Nancy Fan. All rights reserved.
 //
@@ -9,18 +11,11 @@
 #ifndef system_h
 #define system_h
 
-#ifndef stdio
-#define stdio
 #include <stdio.h>
-#endif
-
-
-
-//THIS IS RISCV R64IFM
 
 #define RRXLEN 64		// the rrx registers are all 64 bits wide
 const float FDIFF = 0.00001;
-const int HOW_MANY_INSTS = 40;
+const int HOW_MANY_INSTS = 120;
 
 
 typedef unsigned long int   dword;
