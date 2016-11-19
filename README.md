@@ -61,9 +61,10 @@ DONE ：）
 │   	├── time.objdump
 
 ```
-- What sim.cpp CONTAINS?
+### What sim.cpp CONTAINS?
 
 * sim.cpp contains several parts of RISCV simulator.
+ 
  0. help - print some help info to use this simulator
  1. load_program - read an ELF file and load program.
  2. fetch - fetch an instruction
