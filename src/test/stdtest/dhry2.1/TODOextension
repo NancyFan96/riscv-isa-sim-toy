@@ -1,0 +1,59 @@
+   108b4:	d027f753          	fcvt.s.l	fa4,a5
+   108b8:	d00bf6d3          	fcvt.s.w	fa3,s7
+   108c0:	0807a787          	flw	fa5,128(a5) # 24080 <__wctomb+0x10>
+   108c4:	10f6f7d3          	fmul.s	fa5,fa3,fa5
+   108c8:	420706d3          	fcvt.d.s	fa3,fa4
+   108d0:	0787b607          	fld	fa2,120(a5) # 24078 <__wctomb+0x8>
+   108d4:	12c6f6d3          	fmul.d	fa3,fa3,fa2
+   108d8:	42078653          	fcvt.d.s	fa2,fa5
+   108dc:	1ac6f6d3          	fdiv.d	fa3,fa3,fa2
+   108e0:	4016f6d3          	fcvt.s.d	fa3,fa3
+   108e4:	9ad1a027          	fsw	fa3,-1632(gp) # 241d0 <Microseconds>
+   108e8:	18e7f7d3          	fdiv.s	fa5,fa5,fa4
+   108ec:	9af1a227          	fsw	fa5,-1628(gp) # 241d4 <Dhrystones_Per_Second>
+   108fc:	9a01a787          	flw	fa5,-1632(gp) # 241d0 <Microseconds>
+   10904:	420787d3          	fcvt.d.s	fa5,fa5
+   10908:	e20785d3          	fmv.x.d	a1,fa5
+   10920:	9a41a787          	flw	fa5,-1628(gp) # 241d4 <Dhrystones_Per_Second>
+   10924:	420787d3          	fcvt.d.s	fa5,fa5
+   10928:	e20785d3          	fmv.x.d	a1,fa5
+
+
+printf里的：
+   11770:	16813c27          	fsd	fs0,376(sp)
+   11a84:	17813407          	fld	fs0,376(sp)
+   1219c:	0007b787          	fld	fa5,0(a5)
+   121a8:	04f13c27          	fsd	fa5,88(sp)
+   121b4:	f20c8553          	fmv.d.x	fa0,s9
+   121c4:	f20007d3          	fmv.d.x	fa5,zero
+   121c8:	f20c8753          	fmv.d.x	fa4,s9
+   121cc:	a2f717d3          	flt.d	a5,fa4,fa5
+   12394:	f20007d3          	fmv.d.x	fa5,zero
+   12398:	05813707          	fld	fa4,88(sp)
+   1239c:	a2f726d3          	feq.d	a3,fa4,fa5
+   12424:	f20007d3          	fmv.d.x	fa5,zero
+   12428:	05813707          	fld	fa4,88(sp)
+   1242c:	a2f72753          	feq.d	a4,fa4,fa5
+   12ab8:	05813507          	fld	fa0,88(sp)
+   12af0:	f2070453          	fmv.d.x	fs0,a4
+   12b14:	228405d3          	fmv.d	fa1,fs0
+   12b60:	f20007d3          	fmv.d.x	fa5,zero
+   12b68:	a2f426d3          	feq.d	a3,fs0,fa5
+   13114:	228405d3          	fmv.d	fa1,fs0
+   13164:	22841453          	fneg.d	fs0,fs0
+
+scanf:
+   134c8:	2c813c27          	fsd	fs0,728(sp)
+
+   14de0:	d21487d3          	fcvt.d.wu	fa5,s1
+   14e1c:	0af77653          	fsub.d	fa2,fa4,fa5
+   14e30:	d2080753          	fcvt.d.w	fa4,a6
+   14e34:	7ad677c3          	fmadd.d	fa5,fa2,fa3,fa5
+   14e38:	0a87b687          	fld	fa3,168(a5) # 240a8 <mask+0x20>
+   14e3c:	7ad777c3          	fmadd.d	fa5,fa4,fa3,fa5
+   14e40:	f2000753          	fmv.d.x	fa4,zero
+   14e44:	a2e797d3          	flt.d	a5,fa5,fa4
+   14e48:	c2079bd3          	fcvt.w.d	s7,fa5,rtz
+
+
+
