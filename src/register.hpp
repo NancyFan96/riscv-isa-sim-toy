@@ -18,7 +18,7 @@
 
 
 /* ------- define registers file ------- */
-#define zero 0  //	rrx[0]    zero    Hard-wired zero
+#define rzero 0  //	rrx[0]    zero    Hard-wired zero
 #define ra 1    //	rrx[1]    ra      Return address
 #define sp 2    //	rrx[2]    sp      Stack pointer
 #define gp 3    //	rrx[3]    gp      Global pointer

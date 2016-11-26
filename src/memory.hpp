@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <fstream>
+#include <iostream>
 #include "system.h"
 
 #define MEM_SIZE 1<<28           // 0x1000 0000, 256M
@@ -22,6 +24,7 @@
 class memory {
 public:
     byte * mem_zero;                    // 8bit
+    std::ofstream trace_out;            //trace file
     
 public:
     memory();

@@ -190,7 +190,7 @@ bool load_program(char const *file_name)
         printf("main virtual address invalid!\n");
     printf("main_virtual_address = 0x%lx\n", (reg64)main_virtual_address);
     sim_regs.setPC(program_entry_offset);          //start from program entry
-    sim_regs.writeReg(zero, 0);
+    sim_regs.writeReg(rzero, 0);
     sim_regs.writeReg(sp, STACK_TOP);
 
     return true;
@@ -514,7 +514,8 @@ int main(int argc, char * argv[]){
                     printf("currentPC = 0x%lx\n", currentPC);
                 }
                 fetched_inst.execute();
-                COUNT_INS++;
+                if(IS_DYCOUNT) {COUNT_INS++;}
+                //else printf("no count\n");
                 if(IS_TO_EXIT){
                     IS_DYCOUNT = false;
                     break;

@@ -33,7 +33,7 @@ DONE ：）
 ├── readme.md   
 ├── src/    
 │   ├── system.h 					# THIS IS RISCV R64IFM
-│   ├── sim.hpp 					# Contains several parts of RISCV simulator and MAIN function
+│   ├── sim.hpp 						# Contains several parts of RISCV simulator and MAIN function
 │   ├── sim.cpp     				# Details can be referred below
 │   ├── decode.hpp 					# Decode instructions, get meaningful part like rd, rs, imm
 │   ├── decode.cpp 					
@@ -43,14 +43,14 @@ DONE ：）
 │   ├── register.cpp
 │   ├── memory.hpp 					# Read and write functions for Memory
 │   ├── memory.cpp
-│   ├── Makefile					# would create executable file -- sim
+│   ├── Makefile						# would create executable file -- sim
 │   ├── test/ 
 │   	├── Itest/ 
 │   	├── IOtest/ 
 │   	├── Ftest/ 
 │   	├── stdtest/ 
 │   		├── dhry2.1/ 
-│   		├── ijk 				# input: m, n, t, A[][], B[][]
+│   		├── ijk 					# input: m, n, t, A[][], B[][]
 │   		├── ijk.cpp
 │   		├── qs 					# input: size, A[]
 │   		├── quickSort.cpp 
@@ -74,7 +74,7 @@ DONE ：）
  6. FLAG verbose - if set, print verbose info
  
 * An extra GDB mode is also provided. This include
- 1. gdb_mode_func - wait and process a gdb instruction
+ 1. gdb\_mode_func - wait and process a gdb instruction
  2. Sepecial FLAGS like
     -- VALID_BREAKPOINT
     -- IS_ENTER_STEP
